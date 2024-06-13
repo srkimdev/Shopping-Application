@@ -13,6 +13,11 @@
 		DC487D132C1AE4DA006B7AAF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DC487D122C1AE4DA006B7AAF /* Base */; };
 		DC487D152C1AE4DC006B7AAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC487D142C1AE4DC006B7AAF /* Assets.xcassets */; };
 		DC487D182C1AE4DC006B7AAF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DC487D172C1AE4DC006B7AAF /* Base */; };
+		DC487D212C1AE56E006B7AAF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC487D202C1AE56E006B7AAF /* Alamofire */; };
+		DC487D242C1AE57C006B7AAF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC487D232C1AE57C006B7AAF /* SnapKit */; };
+		DC487D272C1AE58B006B7AAF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DC487D262C1AE58B006B7AAF /* Kingfisher */; };
+		DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D282C1AE767006B7AAF /* OnBoardingViewController.swift */; };
+		DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,8 @@
 		DC487D142C1AE4DC006B7AAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC487D172C1AE4DC006B7AAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC487D192C1AE4DC006B7AAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC487D282C1AE767006B7AAF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC487D272C1AE58B006B7AAF /* Kingfisher in Frameworks */,
+				DC487D212C1AE56E006B7AAF /* Alamofire in Frameworks */,
+				DC487D242C1AE57C006B7AAF /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +73,8 @@
 				DC487D142C1AE4DC006B7AAF /* Assets.xcassets */,
 				DC487D162C1AE4DC006B7AAF /* LaunchScreen.storyboard */,
 				DC487D192C1AE4DC006B7AAF /* Info.plist */,
+				DC487D282C1AE767006B7AAF /* OnBoardingViewController.swift */,
+				DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */,
 			);
 			path = "Shopping Application";
 			sourceTree = "<group>";
@@ -83,6 +95,11 @@
 			dependencies = (
 			);
 			name = "Shopping Application";
+			packageProductDependencies = (
+				DC487D202C1AE56E006B7AAF /* Alamofire */,
+				DC487D232C1AE57C006B7AAF /* SnapKit */,
+				DC487D262C1AE58B006B7AAF /* Kingfisher */,
+			);
 			productName = "Shopping Application";
 			productReference = DC487D082C1AE4DA006B7AAF /* Shopping Application.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +128,11 @@
 				Base,
 			);
 			mainGroup = DC487CFF2C1AE4DA006B7AAF;
+			packageReferences = (
+				DC487D1F2C1AE56E006B7AAF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DC487D222C1AE57C006B7AAF /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DC487D252C1AE58B006B7AAF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = DC487D092C1AE4DA006B7AAF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -140,7 +162,9 @@
 			files = (
 				DC487D102C1AE4DA006B7AAF /* ViewController.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
+				DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */,
 				DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */,
+				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +322,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +331,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "srkimdev.Shopping-Application";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,8 +354,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +363,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "srkimdev.Shopping-Application";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -363,6 +395,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DC487D1F2C1AE56E006B7AAF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		DC487D222C1AE57C006B7AAF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		DC487D252C1AE58B006B7AAF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DC487D202C1AE56E006B7AAF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC487D1F2C1AE56E006B7AAF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		DC487D232C1AE57C006B7AAF /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC487D222C1AE57C006B7AAF /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		DC487D262C1AE58B006B7AAF /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC487D252C1AE58B006B7AAF /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC487D002C1AE4DA006B7AAF /* Project object */;
 }
