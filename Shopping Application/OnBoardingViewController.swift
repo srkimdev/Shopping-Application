@@ -80,9 +80,8 @@ class OnBoardingViewController: UIViewController {
     }
     
     @objc func startButtonClicked() {
-        print(#function)
+        
         let vc = ProfileSettingViewController()
-//        let nav = UINavigationController(rootViewController: vc)
         navigationController?.pushViewController(vc, animated: true)
         
     }
