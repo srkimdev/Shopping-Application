@@ -6,24 +6,89 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainSearchViewController: UIViewController {
 
+    let searchBar = UISearchBar()
+    let searchBarLine = UIView()
+    
+    let noRecentImage = UIImageView()
+    let noRecentLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureHierarchy()
+        configureLayout()
+        configureUI()
 
-        // Do any additional setup after loading the view.
+        searchBar.delegate = self
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func configureHierarchy() {
+        
+        view.addSubview(searchBar)
+        view.addSubview(searchBarLine)
+        view.addSubview(noRecentImage)
+        view.addSubview(noRecentLabel)
+        
     }
-    */
+    
+    func configureLayout() {
+        
+        searchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
+            make.height.equalTo(44)
+        }
+        
+        searchBarLine.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(4)
+            make.height.equalTo(1)
+        }
+        
+        noRecentImage.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(230)
+            make.width.equalTo(280)
+        }
+        
+        noRecentLabel.snp.makeConstraints { make in
+            make.top.equalTo(noRecentImage.snp.bottom)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(30)
+        }
+        
+    }
+    
+    func configureUI() {
+        
+        view.backgroundColor = .white
+        navigationItem.title = "dds MEANING OUT"
+        
+        searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
+        searchBar.searchBarStyle = .minimal
+        searchBarLine.backgroundColor = .systemGray5
+        
+        noRecentImage.image = UIImage(named: "empty")
+        
+        noRecentLabel.text = "최근 검색어가 없어요"
+        noRecentLabel.font = .boldSystemFont(ofSize: 15)
+        noRecentLabel.textAlignment = .center
+    }
+    
+}
 
+extension MainSearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let vc = SearchResultViewController()
+        vc.data = searchBar.text
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
 }

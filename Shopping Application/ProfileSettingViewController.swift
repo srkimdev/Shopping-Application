@@ -21,16 +21,22 @@ class ProfileSettingViewController: UIViewController {
         
         didSet {
             
-            if textFieldInput.count < 2 {
+            if textFieldInput.count < 2 || textFieldInput.count >= 10 {
                 nicknameStatusLable.text = "2글자 이상 10글자 미만으로 입력해주세요."
+            } else if textFieldInput.contains("@") {
+                nicknameStatusLable.text = "닉네임에 @는 포함할 수 없어요."
+            } else if textFieldInput.contains("#") {
+                nicknameStatusLable.text = "닉네임에 #는 포함할 수 없어요."
+            } else if textFieldInput.contains("$") {
+                nicknameStatusLable.text = "닉네임에 $는 포함할 수 없어요."
+            } else if textFieldInput.contains("%") {
+                nicknameStatusLable.text = "닉네임에 %는 포함할 수 없어요."
             } else {
-                nicknameStatusLable.text = ""
+                nicknameStatusLable.text = "사용할 수 있는 닉네임이에요"
             }
-            
             
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,14 +44,24 @@ class ProfileSettingViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureUI()
+        randomImage()
         
         clearButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        profileImageButton.addTarget(self, action: #selector(profileImageButtonClicked), for: .touchUpInside)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        randomImage()
+        
+        profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+        
     }
+    
+    override func viewDidLayoutSubviews() {
+        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+    }
+    
     
     func configureHierarchy() {
         
@@ -108,12 +124,15 @@ class ProfileSettingViewController: UIViewController {
         navigationItem.leftBarButtonItem = item
         
         view.backgroundColor = .white
+        
+        profileImage.layer.borderWidth = 3
+        profileImage.contentMode = .scaleAspectFill
 
         nicknameTextField.placeholder = "닉네임을 입력해주세요 :)"
         
         textFieldLine.backgroundColor = .systemGray4
         
-        nicknameStatusLable.text = "" //닉네임에 @ 는 포함할 수 없어요.
+        nicknameStatusLable.text = "2글자 이상 10글자 미만으로 입력해주세요."
         nicknameStatusLable.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         nicknameStatusLable.font = .boldSystemFont(ofSize: 13)
         
@@ -128,6 +147,8 @@ class ProfileSettingViewController: UIViewController {
     
     @objc func clearButtonClicked() {
         
+        
+        
     }
     
     @objc func backButtonClicked() {
@@ -138,9 +159,15 @@ class ProfileSettingViewController: UIViewController {
     
     @objc func textFieldDidChange(textField: UITextField) {
         
-        print(#function)
         guard let text = textField.text else { return }
         textFieldInput = text
+        
+    }
+    
+    @objc func profileImageButtonClicked() {
+        
+        let vc = ProfileSelectingViewController()
+        navigationController?.pushViewController(vc, animated: true)
         
     }
 

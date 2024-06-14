@@ -18,6 +18,15 @@
 		DC487D272C1AE58B006B7AAF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DC487D262C1AE58B006B7AAF /* Kingfisher */; };
 		DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D282C1AE767006B7AAF /* OnBoardingViewController.swift */; };
 		DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */; };
+		DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D2C2C1BF149006B7AAF /* ProfileSelectingViewController.swift */; };
+		DC487D2F2C1C0700006B7AAF /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D2E2C1C06FF006B7AAF /* ReusableProtocol.swift */; };
+		DC487D312C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D302C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift */; };
+		DC487D332C1C2265006B7AAF /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D322C1C2265006B7AAF /* Struct.swift */; };
+		DC487D352C1C25BC006B7AAF /* MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D342C1C25BC006B7AAF /* MainSearchViewController.swift */; };
+		DC487D372C1C29B8006B7AAF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D362C1C29B8006B7AAF /* TabBarController.swift */; };
+		DC487D392C1C2A2C006B7AAF /* MainSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D382C1C2A2C006B7AAF /* MainSettingViewController.swift */; };
+		DC487D3B2C1C2CA9006B7AAF /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D3A2C1C2CA9006B7AAF /* SearchResultViewController.swift */; };
+		DC487D3D2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +40,15 @@
 		DC487D192C1AE4DC006B7AAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC487D282C1AE767006B7AAF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
+		DC487D2C2C1BF149006B7AAF /* ProfileSelectingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectingViewController.swift; sourceTree = "<group>"; };
+		DC487D2E2C1C06FF006B7AAF /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
+		DC487D302C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectingCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC487D322C1C2265006B7AAF /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
+		DC487D342C1C25BC006B7AAF /* MainSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewController.swift; sourceTree = "<group>"; };
+		DC487D362C1C29B8006B7AAF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		DC487D382C1C2A2C006B7AAF /* MainSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingViewController.swift; sourceTree = "<group>"; };
+		DC487D3A2C1C2CA9006B7AAF /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,12 +87,21 @@
 				DC487D0B2C1AE4DA006B7AAF /* AppDelegate.swift */,
 				DC487D0D2C1AE4DA006B7AAF /* SceneDelegate.swift */,
 				DC487D0F2C1AE4DA006B7AAF /* ViewController.swift */,
+				DC487D2E2C1C06FF006B7AAF /* ReusableProtocol.swift */,
+				DC487D322C1C2265006B7AAF /* Struct.swift */,
 				DC487D112C1AE4DA006B7AAF /* Main.storyboard */,
 				DC487D142C1AE4DC006B7AAF /* Assets.xcassets */,
 				DC487D162C1AE4DC006B7AAF /* LaunchScreen.storyboard */,
 				DC487D192C1AE4DC006B7AAF /* Info.plist */,
 				DC487D282C1AE767006B7AAF /* OnBoardingViewController.swift */,
 				DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */,
+				DC487D2C2C1BF149006B7AAF /* ProfileSelectingViewController.swift */,
+				DC487D302C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift */,
+				DC487D362C1C29B8006B7AAF /* TabBarController.swift */,
+				DC487D342C1C25BC006B7AAF /* MainSearchViewController.swift */,
+				DC487D382C1C2A2C006B7AAF /* MainSettingViewController.swift */,
+				DC487D3A2C1C2CA9006B7AAF /* SearchResultViewController.swift */,
+				DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */,
 			);
 			path = "Shopping Application";
 			sourceTree = "<group>";
@@ -161,10 +188,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC487D102C1AE4DA006B7AAF /* ViewController.swift in Sources */,
+				DC487D312C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift in Sources */,
+				DC487D372C1C29B8006B7AAF /* TabBarController.swift in Sources */,
+				DC487D2F2C1C0700006B7AAF /* ReusableProtocol.swift in Sources */,
+				DC487D392C1C2A2C006B7AAF /* MainSettingViewController.swift in Sources */,
+				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
 				DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */,
 				DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
+				DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */,
+				DC487D3D2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift in Sources */,
+				DC487D3B2C1C2CA9006B7AAF /* SearchResultViewController.swift in Sources */,
+				DC487D352C1C25BC006B7AAF /* MainSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
