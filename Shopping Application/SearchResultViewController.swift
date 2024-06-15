@@ -66,33 +66,33 @@ class SearchResultViewController: UIViewController {
         accurateButton.snp.makeConstraints { make in
             make.top.equalTo(totalLabel.snp.bottom).offset(8)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
-            make.height.equalTo(30)
-//            make.width.equalTo(60)
+            make.height.equalTo(28)
+            make.width.equalTo(60)
         }
         
         dateButton.snp.makeConstraints { make in
             make.top.equalTo(totalLabel.snp.bottom).offset(8)
-            make.leading.equalTo(accurateButton.snp.trailing).offset(12)
-            make.height.equalTo(30)
+            make.leading.equalTo(accurateButton.snp.trailing).offset(8)
+            make.height.equalTo(28)
             make.width.equalTo(60)
         }
         
         priceUpButton.snp.makeConstraints { make in
             make.top.equalTo(totalLabel.snp.bottom).offset(8)
-            make.leading.equalTo(dateButton.snp.trailing).offset(12)
-            make.height.equalTo(30)
-            make.width.equalTo(60)
+            make.leading.equalTo(dateButton.snp.trailing).offset(8)
+            make.height.equalTo(28)
+            make.width.equalTo(80)
         }
         
         priceDownButton.snp.makeConstraints { make in
             make.top.equalTo(totalLabel.snp.bottom).offset(8)
-            make.leading.equalTo(priceUpButton.snp.trailing).offset(12)
-            make.height.equalTo(30)
-            make.width.equalTo(60)
+            make.leading.equalTo(priceUpButton.snp.trailing).offset(8)
+            make.height.equalTo(28)
+            make.width.equalTo(80)
         }
         
         productCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(accurateButton.snp.bottom).offset(12)
+            make.top.equalTo(accurateButton.snp.bottom).offset(4)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -101,7 +101,7 @@ class SearchResultViewController: UIViewController {
     
     func configureUI() {
         
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
         navigationItem.title = data
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
         item.tintColor = .black
@@ -113,19 +113,37 @@ class SearchResultViewController: UIViewController {
         totalLabel.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         totalLabel.font = .boldSystemFont(ofSize: 15)
         
-        accurateButton.backgroundColor = .red
         accurateButton.setTitle("정확도", for: .normal)
+        accurateButton.setTitleColor(.black, for: .normal)
+        accurateButton.titleLabel?.font = .systemFont(ofSize: 13)
         accurateButton.layer.masksToBounds = true
+        accurateButton.layer.borderWidth = 1
+        accurateButton.layer.borderColor = UIColor.lightGray.cgColor
         accurateButton.layer.cornerRadius = 15
         
-        dateButton.backgroundColor = .red
         dateButton.setTitle("날짜순", for: .normal)
+        dateButton.setTitleColor(.black, for: .normal)
+        dateButton.titleLabel?.font = .systemFont(ofSize: 13)
+        dateButton.layer.masksToBounds = true
+        dateButton.layer.borderWidth = 1
+        dateButton.layer.borderColor = UIColor.lightGray.cgColor
+        dateButton.layer.cornerRadius = 15
         
-        priceUpButton.backgroundColor = .red
         priceUpButton.setTitle("가격높은순", for: .normal)
+        priceUpButton.setTitleColor(.black, for: .normal)
+        priceUpButton.titleLabel?.font = .systemFont(ofSize: 13)
+        priceUpButton.layer.masksToBounds = true
+        priceUpButton.layer.borderWidth = 1
+        priceUpButton.layer.borderColor = UIColor.lightGray.cgColor
+        priceUpButton.layer.cornerRadius = 15
         
-        priceDownButton.backgroundColor = .red
         priceDownButton.setTitle("가격낮은순", for: .normal)
+        priceDownButton.setTitleColor(.black, for: .normal)
+        priceDownButton.titleLabel?.font = .systemFont(ofSize: 13)
+        priceDownButton.layer.masksToBounds = true
+        priceDownButton.layer.borderWidth = 1
+        priceDownButton.layer.borderColor = UIColor.lightGray.cgColor
+        priceDownButton.layer.cornerRadius = 15
         
     }
     
@@ -160,19 +178,9 @@ class SearchResultViewController: UIViewController {
         
     }
     
-    @objc func accurateButtonClicked() {
+    @objc func arrayButtonClicked(sender: UIButton) {
         
-    }
-    
-    @objc func dateButtonClicked() {
         
-    }
-    
-    @objc func priceUpClicked() {
-        
-    }
-    
-    @objc func priceDownClicked() {
         
     }
 

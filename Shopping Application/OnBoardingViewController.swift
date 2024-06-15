@@ -43,8 +43,8 @@ class OnBoardingViewController: UIViewController {
         
         imageLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(80)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(70)
-            make.height.equalTo(280)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(40)
+            make.height.equalTo(240)
         }
         
         startButton.snp.makeConstraints { make in
@@ -63,7 +63,7 @@ class OnBoardingViewController: UIViewController {
         titleLabel.font = .systemFont(ofSize: 40, weight: .heavy)
         titleLabel.textAlignment = .center
         
-        imageLabel.image = UIImage(systemName: "star")
+        imageLabel.image = UIImage(named: "launch")
         
         startButton.setTitle("시작하기", for: .normal)
         startButton.titleLabel?.font = .boldSystemFont(ofSize: 15)

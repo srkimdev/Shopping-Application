@@ -81,8 +81,6 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
         priceLabel.font = .boldSystemFont(ofSize: 14)
         
-        
-        
     }
     
     func designCell(transition: SearchResultDetail) {

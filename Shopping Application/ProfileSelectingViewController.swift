@@ -11,6 +11,9 @@ import SnapKit
 class ProfileSelectingViewController: UIViewController {
 
     let selectedImage = UIImageView()
+    let selectedImageButton = UIButton()
+    let cameraImageView = UIImageView()
+    let cameraImage = UIImageView()
     
     lazy var imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
@@ -27,9 +30,17 @@ class ProfileSelectingViewController: UIViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        selectedImage.layer.cornerRadius = selectedImage.frame.width / 2
+        cameraImageView.layer.cornerRadius = 10
+    }
+    
     func configureHierarchy() {
         
         view.addSubview(selectedImage)
+        view.addSubview(selectedImageButton)
+        selectedImageButton.addSubview(cameraImageView)
+        cameraImageView.addSubview(cameraImage)
         view.addSubview(imageCollectionView)
         
     }
@@ -43,12 +54,30 @@ class ProfileSelectingViewController: UIViewController {
             make.width.equalTo(100)
         }
         
+        selectedImageButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.centerX.equalTo(view.self)
+            make.height.equalTo(100)
+            make.width.equalTo(100)
+        }
+        
+        cameraImageView.snp.makeConstraints { make in
+            make.trailing.equalTo(selectedImageButton.snp.trailing).offset(-4)
+            make.bottom.equalTo(selectedImageButton.snp.bottom).offset(-12)
+            make.height.width.equalTo(20)
+        }
+        
+        cameraImage.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(cameraImageView.snp.width).multipliedBy(0.7)
+        }
+        
+        
         imageCollectionView.snp.makeConstraints { make in
             make.top.equalTo(selectedImage.snp.bottom).offset(60)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(300)
         }
-        
         
     }
     
@@ -62,7 +91,15 @@ class ProfileSelectingViewController: UIViewController {
         item.tintColor = .black
         navigationItem.leftBarButtonItem = item
         
-        selectedImage.image = UIImage(named: "profile_1")
+        selectedImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+        selectedImage.layer.masksToBounds = true
+        selectedImage.layer.borderWidth = 5
+        selectedImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        
+        cameraImageView.backgroundColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        cameraImage.tintColor = .white
+        cameraImage.image = UIImage(systemName: "camera.fill")
+        
         
     }
     

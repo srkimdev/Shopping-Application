@@ -18,5 +18,13 @@ extension UICollectionViewCell: ReusableProtocol {
     static var identifier: String {
         return String(describing: self)
     }
+ 
+}
+
+extension UITableViewCell: ReusableProtocol {
+    
+    static var identifier: String {
+        return String(describing: self)
+    }
     
 }
