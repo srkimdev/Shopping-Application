@@ -20,7 +20,14 @@ class MainSearchViewController: UIViewController {
     let deleteAllButton = UIButton()
     
     let searchListTableView = UITableView()
-    var list: [String] = []
+    
+    var list: [String] = [] {
+        
+        didSet {
+            searchListTableView.reloadData()
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,17 +35,22 @@ class MainSearchViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureUI()
-        
-        noRecentImage.isHidden = true
-        noRecentLabel.isHidden = true
 
         searchBar.delegate = self
         searchListTableView.delegate = self
         searchListTableView.dataSource = self
         searchListTableView.register(MainSearchTableViewCell.self, forCellReuseIdentifier: MainSearchTableViewCell.identifier)
         
+        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        isRecentText()
+        
+    }
+
     func configureHierarchy() {
         
         view.addSubview(searchBar)
@@ -78,14 +90,14 @@ class MainSearchViewController: UIViewController {
         }
         
         recentLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchBarLine.snp.bottom).offset(12)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(12)
+            make.top.equalTo(searchBarLine.snp.bottom).offset(8)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.height.equalTo(30)
         }
         
         deleteAllButton.snp.makeConstraints { make in
             make.top.equalTo(searchBarLine.snp.bottom).offset(12)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-12)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             make.height.equalTo(30)
         }
         
@@ -112,12 +124,14 @@ class MainSearchViewController: UIViewController {
         noRecentLabel.textAlignment = .center
         
         recentLabel.text = "최근 검색"
-        recentLabel.font = .boldSystemFont(ofSize: 15)
+        recentLabel.font = .boldSystemFont(ofSize: 14)
         
         deleteAllButton.setTitle("전체 삭제", for: .normal)
         deleteAllButton.setTitleColor(#colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1), for: .normal)
+        deleteAllButton.titleLabel?.font = .systemFont(ofSize: 14)
         
         searchListTableView.rowHeight = 40
+        searchListTableView.separatorStyle = .none
     }
     
 }
@@ -126,8 +140,12 @@ extension MainSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        guard let text = searchBar.text else { return }
+        list.append(text)
+        searchBar.text = ""
+        
         let vc = SearchResultViewController()
-        vc.data = searchBar.text
+        vc.data = text
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -137,14 +155,55 @@ extension MainSearchViewController: UISearchBarDelegate {
 extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = searchListTableView.dequeueReusableCell(withIdentifier: MainSearchTableViewCell.identifier, for: indexPath)
+        let cell = searchListTableView.dequeueReusableCell(withIdentifier: MainSearchTableViewCell.identifier, for: indexPath) as! MainSearchTableViewCell
+        
+        cell.designCell(transition: list[indexPath.row])
+        cell.deleteButton.tag = indexPath.row
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         
         return cell
+    }
+    
+}
+
+extension MainSearchViewController {
+    
+    func isRecentText() {
+        
+        if list.count > 0 {
+            recentLabel.isHidden = false
+            deleteAllButton.isHidden = false
+            searchListTableView.isHidden = false
+            
+            noRecentImage.isHidden = true
+            noRecentLabel.isHidden = true
+            
+        } else {
+            recentLabel.isHidden = true
+            deleteAllButton.isHidden = true
+            searchListTableView.isHidden = true
+            
+            noRecentImage.isHidden = false
+            noRecentLabel.isHidden = false
+        }
+        
+    }
+    
+    @objc func deleteButtonClicked(sender: UIButton) {
+        
+        list.remove(at: sender.tag)
+        
+    }
+    
+    @objc func deleteAllButtonClicked() {
+        
+        list.removeAll()
+        
     }
     
 }

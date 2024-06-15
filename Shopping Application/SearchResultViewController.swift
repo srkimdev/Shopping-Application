@@ -22,6 +22,9 @@ class SearchResultViewController: UIViewController {
     
     var data: String?
     var list: [SearchResultDetail] = []
+    var totalCount = 0
+    var totalPage = 0
+    var start = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,8 @@ class SearchResultViewController: UIViewController {
         
         productCollectionView.delegate = self
         productCollectionView.dataSource = self
+        productCollectionView.prefetchDataSource = self
+
         productCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
         
     }
@@ -92,7 +97,7 @@ class SearchResultViewController: UIViewController {
         }
         
         productCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(accurateButton.snp.bottom).offset(4)
+            make.top.equalTo(accurateButton.snp.bottom).offset(12)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -109,7 +114,6 @@ class SearchResultViewController: UIViewController {
         
         line.backgroundColor = .systemGray5
         
-        totalLabel.text = "111111개의 검색 결과"
         totalLabel.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         totalLabel.font = .boldSystemFont(ofSize: 15)
         
@@ -149,7 +153,7 @@ class SearchResultViewController: UIViewController {
     
     func callRequest(text: String) {
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)"
         
         let header: HTTPHeaders = [
             "X-Naver-Client-Id": "Ot_GH8dUBgvHiLCjiMZn",
@@ -160,10 +164,37 @@ class SearchResultViewController: UIViewController {
             switch response.result {
                 
             case .success(let value):
-                print(value)
-                self.list = value.items
+
+                self.totalCount = value.total
+                self.totalLabel.text = "\(self.totalCount)개의 검색 결과"
+                
+                var filteredList = [SearchResultDetail]()
+                
+                if self.start == 1 {
+                    
+                    for item in value.items {
+                        filteredList.append(item)
+                    }
+                    
+                    self.list = filteredList
+                    
+                } else {
+                    
+                    for item in value.items {
+                        filteredList.append(item)
+                    }
+                    
+                    self.list.append(contentsOf: filteredList)
+                    print(self.list)
+                }
                 
                 self.productCollectionView.reloadData()
+                
+                if self.start == 1 {
+                    
+                    self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                    
+                }
                 
             case .failure(let error):
                 print(error)
@@ -213,9 +244,24 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 14, bottom: 10, right: 14)
+        layout.sectionInset = UIEdgeInsets(top: 2, left: 14, bottom: 10, right: 14)
         
         return layout
     }
     
+}
+
+extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        for item in indexPaths {
+            if list.count - 4 == item.row {
+                start += 30
+                if totalPage != start {
+                    callRequest(text: data!)
+                }
+            }
+        }
+    }
 }

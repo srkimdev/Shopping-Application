@@ -61,14 +61,16 @@ class MainSearchTableViewCell: UITableViewCell {
         timeImage.image = UIImage(systemName: "clock")
         timeImage.tintColor = .black
         
-        print(timeImage.frame)
-        print(deleteButton.frame)
-        
-        productLabel.text = "맥북 거치대"
         productLabel.font = .systemFont(ofSize: 13)
         
         deleteButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         deleteButton.tintColor = .black
+        
+    }
+    
+    func designCell(transition: String) {
+        
+        productLabel.text = transition
         
     }
     

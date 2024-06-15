@@ -10,6 +10,7 @@ import UIKit
 struct SearchResult: Codable {
     
     let total: Int
+    let display: Int
     let items: [SearchResultDetail]
     
 }
