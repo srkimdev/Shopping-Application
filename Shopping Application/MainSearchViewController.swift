@@ -146,6 +146,7 @@ extension MainSearchViewController: UISearchBarDelegate {
         
         let vc = SearchResultViewController()
         vc.data = text
+        
         navigationController?.pushViewController(vc, animated: true)
         
     }

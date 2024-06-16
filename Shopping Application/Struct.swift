@@ -21,6 +21,14 @@ struct SearchResultDetail: Codable {
     let link: String
     let image: String
     let mallName: String
+    let productId: String
     let lprice: String
+    
+}
+
+enum ProfileMode: String {
+    
+    case setup = "setup"
+    case edit = "edit"
     
 }

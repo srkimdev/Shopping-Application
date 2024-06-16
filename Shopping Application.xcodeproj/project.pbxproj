@@ -30,6 +30,7 @@
 		DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D402C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift */; };
 		DC487D432C1D3E61006B7AAF /* SettingOtherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D422C1D3E61006B7AAF /* SettingOtherTableViewCell.swift */; };
 		DC487D452C1D6E10006B7AAF /* MainSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */; };
+		DC487D472C1DBE5D006B7AAF /* SearchWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D462C1DBE5D006B7AAF /* SearchWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		DC487D402C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC487D422C1D3E61006B7AAF /* SettingOtherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingOtherTableViewCell.swift; sourceTree = "<group>"; };
 		DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchTableViewCell.swift; sourceTree = "<group>"; };
+		DC487D462C1DBE5D006B7AAF /* SearchWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				DC487D382C1C2A2C006B7AAF /* MainSettingViewController.swift */,
 				DC487D3A2C1C2CA9006B7AAF /* SearchResultViewController.swift */,
 				DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */,
+				DC487D462C1DBE5D006B7AAF /* SearchWebViewController.swift */,
 				DC487D402C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift */,
 				DC487D422C1D3E61006B7AAF /* SettingOtherTableViewCell.swift */,
 			);
@@ -203,6 +206,7 @@
 				DC487D392C1C2A2C006B7AAF /* MainSettingViewController.swift in Sources */,
 				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
+				DC487D472C1DBE5D006B7AAF /* SearchWebViewController.swift in Sources */,
 				DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */,
 				DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,

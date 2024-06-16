@@ -49,11 +49,10 @@ class ProfileSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureHierarchy()
         configureLayout()
         configureUI()
-        randomImage()
         
         clearButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -69,7 +68,6 @@ class ProfileSettingViewController: UIViewController {
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         cameraImageView.layer.cornerRadius = 10
     }
-    
     
     func configureHierarchy() {
         
@@ -140,13 +138,25 @@ class ProfileSettingViewController: UIViewController {
         
         navigationItem.title = "PROFILE SETTING"
         
+        let mode = UserDefaults.standard.string(forKey: "mode")
+        
+        if mode == "edit"{
+            navigationItem.title = "EDIT PROFILE"
+            let item = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
+            item.tintColor = .black
+            navigationItem.rightBarButtonItem = item
+
+        } else {
+            randomImage()
+        }
+        
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
         item.tintColor = .black
         navigationItem.leftBarButtonItem = item
         
         view.backgroundColor = .white
         
-        profileImage.layer.borderWidth = 5
+        profileImage.layer.borderWidth = 3
         profileImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         profileImage.layer.masksToBounds = true
         profileImage.contentMode = .scaleAspectFill
@@ -157,7 +167,6 @@ class ProfileSettingViewController: UIViewController {
         
         cameraImage.image = UIImage(systemName: "camera.fill")
         cameraImage.tintColor = .white
-        
         
         nicknameTextField.placeholder = "닉네임을 입력해주세요 :)"
         
@@ -181,6 +190,7 @@ class ProfileSettingViewController: UIViewController {
         if allowed {
             
             UserDefaults.standard.set(textFieldInput, forKey: "userName")
+            UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
             
             let vc = TabBarController()
             vc.modalPresentationStyle = .overFullScreen
@@ -209,6 +219,11 @@ class ProfileSettingViewController: UIViewController {
         let vc = ProfileSelectingViewController()
         navigationController?.pushViewController(vc, animated: true)
         
+    }
+    
+    @objc func saveButtonClicked() {
+        UserDefaults.standard.set(nicknameTextField.text, forKey: "userName")
+        UserDefaults.standard.set(true, forKey: "editOK")
     }
 
 }

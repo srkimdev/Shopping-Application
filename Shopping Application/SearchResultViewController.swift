@@ -25,6 +25,8 @@ class SearchResultViewController: UIViewController {
     var totalCount = 0
     var totalPage = 0
     var start = 1
+    var sortOption = "sim"
+    let sortSelect = ["sim", "date", "dsc", "asc"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +42,10 @@ class SearchResultViewController: UIViewController {
 
         productCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
         
+        accurateButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
+        dateButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
+        priceUpButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
+        priceDownButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
     }
     
     func configureHierarchy() {
@@ -117,13 +123,15 @@ class SearchResultViewController: UIViewController {
         totalLabel.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         totalLabel.font = .boldSystemFont(ofSize: 15)
         
+        accurateButton.backgroundColor = .black
         accurateButton.setTitle("정확도", for: .normal)
-        accurateButton.setTitleColor(.black, for: .normal)
+        accurateButton.setTitleColor(.white, for: .normal)
         accurateButton.titleLabel?.font = .systemFont(ofSize: 13)
         accurateButton.layer.masksToBounds = true
         accurateButton.layer.borderWidth = 1
         accurateButton.layer.borderColor = UIColor.lightGray.cgColor
         accurateButton.layer.cornerRadius = 15
+        accurateButton.tag = 0
         
         dateButton.setTitle("날짜순", for: .normal)
         dateButton.setTitleColor(.black, for: .normal)
@@ -132,6 +140,7 @@ class SearchResultViewController: UIViewController {
         dateButton.layer.borderWidth = 1
         dateButton.layer.borderColor = UIColor.lightGray.cgColor
         dateButton.layer.cornerRadius = 15
+        dateButton.tag = 1
         
         priceUpButton.setTitle("가격높은순", for: .normal)
         priceUpButton.setTitleColor(.black, for: .normal)
@@ -140,6 +149,7 @@ class SearchResultViewController: UIViewController {
         priceUpButton.layer.borderWidth = 1
         priceUpButton.layer.borderColor = UIColor.lightGray.cgColor
         priceUpButton.layer.cornerRadius = 15
+        priceUpButton.tag = 2
         
         priceDownButton.setTitle("가격낮은순", for: .normal)
         priceDownButton.setTitleColor(.black, for: .normal)
@@ -148,12 +158,13 @@ class SearchResultViewController: UIViewController {
         priceDownButton.layer.borderWidth = 1
         priceDownButton.layer.borderColor = UIColor.lightGray.cgColor
         priceDownButton.layer.cornerRadius = 15
+        priceDownButton.tag = 3
         
     }
     
     func callRequest(text: String) {
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(sortOption)"
         
         let header: HTTPHeaders = [
             "X-Naver-Client-Id": "Ot_GH8dUBgvHiLCjiMZn",
@@ -166,7 +177,7 @@ class SearchResultViewController: UIViewController {
             case .success(let value):
 
                 self.totalCount = value.total
-                self.totalLabel.text = "\(self.totalCount)개의 검색 결과"
+                self.totalLabel.text = "\(self.formatNumberString(number: self.totalCount))개의 검색 결과"
                 
                 var filteredList = [SearchResultDetail]()
                 
@@ -185,15 +196,13 @@ class SearchResultViewController: UIViewController {
                     }
                     
                     self.list.append(contentsOf: filteredList)
-                    print(self.list)
+                    
                 }
                 
                 self.productCollectionView.reloadData()
                 
                 if self.start == 1 {
-                    
                     self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-                    
                 }
                 
             case .failure(let error):
@@ -211,8 +220,35 @@ class SearchResultViewController: UIViewController {
     
     @objc func arrayButtonClicked(sender: UIButton) {
         
+        sortOption = sortSelect[sender.tag]
+        callRequest(text: data!)
         
+        [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
+            button.backgroundColor = .white
+            button.setTitleColor(.black, for: .normal)
+        }
+
+        sender.backgroundColor = .black
+        sender.setTitleColor(.white, for: .normal)
+            
+    }
+    
+    @objc func likeButtonClicked(sender: UIButton) {
         
+        print(#function)
+        var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
+        UserDefaults.standard.set(like.toggle(), forKey: list[sender.tag].productId)
+        productCollectionView.reloadData()
+        
+    }
+    
+    func formatNumberString(number: Int) -> String {
+        
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: NSNumber(value: number))!
     }
 
 }
@@ -228,8 +264,37 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
         
         cell.designCell(transition: list[indexPath.row])
+        cell.goodButton.tag = indexPath.row
+        
+        let key = list[indexPath.row].productId
+        
+        if UserDefaults.standard.bool(forKey: key) {
+            cell.goodButton.backgroundColor = .white
+            cell.goodButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            
+        } else {
+            cell.goodButton.backgroundColor = .black
+            cell.goodButton.alpha = 0.3
+            cell.goodButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+        }
+        
+        cell.goodButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = SearchWebViewController()
+        vc.text = list[indexPath.row].link
+        vc.titleLabel = list[indexPath.row].title
+        
+        let item = UIBarButtonItem(title: "")
+        navigationItem.backBarButtonItem = item
+        item.tintColor = .black
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }

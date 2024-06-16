@@ -26,6 +26,15 @@ class MainSettingViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        print(UserDefaults.standard.bool(forKey: "editOK"))
+        if UserDefaults.standard.bool(forKey: "editOK") {
+            settingTableView.reloadData()
+            UserDefaults.standard.set(false, forKey: "editOK")
+        }
+    }
+    
     func configureHierarchy() {
         
         view.addSubview(settingTableView)
@@ -60,6 +69,9 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
             
+            cell.profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+            cell.profileName.text = UserDefaults.standard.string(forKey: "userName")
+            
             return cell
         } else {
             
@@ -93,10 +105,36 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
         
         if indexPath.row == 0 {
             
+            let vc = ProfileSettingViewController()
+            navigationController?.pushViewController(vc, animated: true)
             
+        } else if indexPath.row == 5 {
             
+            let alert = UIAlertController(
+                title: "탈퇴하기",
+                message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
+                preferredStyle: .alert)
+                
+            let check = UIAlertAction(title: "확인", style: .default) {_ in 
+                
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                
+                let rootViewcontroller = UINavigationController(rootViewController: OnBoardingViewController())
+                
+                sceneDelegate?.window?.rootViewController = rootViewcontroller
+                sceneDelegate?.window?.makeKeyAndVisible()
+                
+            }
+            
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+                
+            alert.addAction(cancel)
+            alert.addAction(check)
+                
+            present(alert, animated: true)
         }
-        
+
     }
     
     

@@ -28,6 +28,11 @@ class SettingProfileTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        profileImage.layer.cornerRadius = profileImage.frame.width / 2
+    }
+    
     func configureHierarchy() {
         
         contentView.addSubview(profileImage)
@@ -68,13 +73,11 @@ class SettingProfileTableViewCell: UITableViewCell {
     
     func configureUI() {
         
-        profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+        
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderWidth = 3
-//        profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         
-        profileName.text = UserDefaults.standard.string(forKey: "userName")
         profileName.font = .boldSystemFont(ofSize: 17)
         
         joinDate.text = "2024. 06. 15 가입"

@@ -16,6 +16,7 @@ class ProfileSelectingViewController: UIViewController {
     let cameraImage = UIImageView()
     
     lazy var imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    var profileImage: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,16 @@ class ProfileSelectingViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        UserDefaults.standard.set(false, forKey: "editOK")
+    }
+    
     override func viewDidLayoutSubviews() {
         selectedImage.layer.cornerRadius = selectedImage.frame.width / 2
         cameraImageView.layer.cornerRadius = 10
     }
+    
+    
     
     func configureHierarchy() {
         
@@ -83,7 +90,13 @@ class ProfileSelectingViewController: UIViewController {
     
     func configureUI() {
         
-        navigationItem.title = "PROFILE SETTING"
+        let mode = UserDefaults.standard.string(forKey: "mode")
+        
+        if mode == "edit" {
+            navigationItem.title = "EDIT PROFILE"
+        } else {
+            navigationItem.title = "PROFILE SETTING"
+        }
         
         view.backgroundColor = .white
         
@@ -99,7 +112,6 @@ class ProfileSelectingViewController: UIViewController {
         cameraImageView.backgroundColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         cameraImage.tintColor = .white
         cameraImage.image = UIImage(systemName: "camera.fill")
-        
         
     }
     

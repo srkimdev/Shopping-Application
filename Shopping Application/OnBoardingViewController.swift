@@ -72,6 +72,9 @@ class OnBoardingViewController: UIViewController {
         startButton.layer.masksToBounds = true
         startButton.layer.cornerRadius = 20
         
+        var mode = ProfileMode.setup.rawValue
+        UserDefaults.standard.set(mode, forKey: "mode")
+        
 //        nameLabel.text = "김성률"
 //        nameLabel.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
 //        nameLabel.font = .boldSystemFont(ofSize: 20)

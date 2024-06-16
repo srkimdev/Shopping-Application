@@ -48,6 +48,12 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(200)
         }
         
+        goodButton.snp.makeConstraints { make in
+            make.trailing.equalTo(productImage.snp.trailing).inset(12)
+            make.bottom.equalTo(productImage.snp.bottom).inset(12)
+            make.height.width.equalTo(24)
+        }
+        
         companyLabel.snp.makeConstraints { make in
             make.top.equalTo(productImage.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
@@ -72,6 +78,12 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         productImage.backgroundColor = .blue
         productImage.layer.masksToBounds = true
         productImage.layer.cornerRadius = 10
+        productImage.isUserInteractionEnabled = true
+        
+        goodButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+        goodButton.imageEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        goodButton.layer.masksToBounds = true
+        goodButton.layer.cornerRadius = 5
         
         companyLabel.font = .systemFont(ofSize: 11)
         companyLabel.textColor = .lightGray
@@ -89,9 +101,18 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         productImage.kf.setImage(with: url)
         
         companyLabel.text = transition.mallName
-        productLabel.text = transition.title
-        priceLabel.text = "\(transition.lprice)원"
-        
+        productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        priceLabel.text = "\(formatNumberString(number: Int(transition.lprice)!))원"
         
     }
+    
+    func formatNumberString(number: Int) -> String {
+        
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: NSNumber(value: number))!
+    }
+
 }
