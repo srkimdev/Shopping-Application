@@ -33,6 +33,8 @@ class MainSettingViewController: UIViewController {
             settingTableView.reloadData()
             UserDefaults.standard.set(false, forKey: "editOK")
         }
+        
+        settingTableView.reloadData()
     }
     
     func configureHierarchy() {
@@ -80,8 +82,11 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             if indexPath.row == 1 {
                 
                 cell.saveImage.image = UIImage(named: "like_selected")
-                cell.countLabel.text = "18개의 상품"
+                cell.countLabel.text = "\(UserDefaults.standard.integer(forKey: "totalLike"))개의 상품"
                 
+            } else {
+                cell.saveImage.image = nil
+                cell.countLabel.text = nil
             }
             
             cell.designCell(transition: list[indexPath.row - 1])
@@ -109,6 +114,10 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             navigationController?.pushViewController(vc, animated: true)
             
         } else if indexPath.row == 5 {
+            
+            if let appDomain = Bundle.main.bundleIdentifier {
+                UserDefaults.standard.removePersistentDomain(forName: appDomain)
+            }
             
             let alert = UIAlertController(
                 title: "탈퇴하기",

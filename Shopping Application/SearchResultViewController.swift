@@ -22,8 +22,9 @@ class SearchResultViewController: UIViewController {
     
     var data: String?
     var list: [SearchResultDetail] = []
-    var totalCount = 0
     var totalPage = 0
+    var totalCount = 0
+    var likeCount = 0
     var start = 1
     var sortOption = "sim"
     let sortSelect = ["sim", "date", "dsc", "asc"]
@@ -241,6 +242,16 @@ class SearchResultViewController: UIViewController {
         
         var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
         like.toggle()
+    
+        likeCount = UserDefaults.standard.integer(forKey: "totalLike")
+        
+        if like {
+            likeCount += 1
+        } else {
+            likeCount -= 1
+        }
+        
+        UserDefaults.standard.set(likeCount, forKey: "totalLike")
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         productCollectionView.reloadData()
         

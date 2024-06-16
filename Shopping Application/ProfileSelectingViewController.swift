@@ -17,6 +17,7 @@ class ProfileSelectingViewController: UIViewController {
     
     lazy var imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     var profileImage: UIImageView?
+    var selectedNumber: Int = UserDefaults.standard.integer(forKey: "profileNumber")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +40,6 @@ class ProfileSelectingViewController: UIViewController {
         selectedImage.layer.cornerRadius = selectedImage.frame.width / 2
         cameraImageView.layer.cornerRadius = 10
     }
-    
-    
     
     func configureHierarchy() {
         
@@ -106,7 +105,7 @@ class ProfileSelectingViewController: UIViewController {
         
         selectedImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
         selectedImage.layer.masksToBounds = true
-        selectedImage.layer.borderWidth = 5
+        selectedImage.layer.borderWidth = 3
         selectedImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         
         cameraImageView.backgroundColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
@@ -132,7 +131,7 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
         
         let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as! ProfileSelectingCollectionViewCell
         
-        cell.designCell(transition: indexPath.row)
+        cell.designCell(transition: indexPath.row, num: selectedNumber)
         
         return cell
     }
@@ -140,8 +139,12 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         selectedImage.image = UIImage(named: "profile_\(indexPath.row)")
-        UserDefaults.standard.set(indexPath.row, forKey: "profileNumber")
         
+        selectedNumber = indexPath.row
+        
+        imageCollectionView.reloadData()
+        
+        UserDefaults.standard.set(selectedNumber, forKey: "profileNumber")
     }
     
 }
