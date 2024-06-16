@@ -48,7 +48,7 @@ class ProfileSelectingCollectionViewCell: UICollectionViewCell {
     func configureUI() {
         
         profileImage.layer.masksToBounds = true
-        profileImage.layer.borderWidth = 2
+        profileImage.layer.borderWidth = 1
         profileImage.contentMode = .scaleAspectFill
         profileImage.alpha = 0.5
     }
