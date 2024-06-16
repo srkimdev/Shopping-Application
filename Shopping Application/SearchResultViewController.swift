@@ -48,6 +48,10 @@ class SearchResultViewController: UIViewController {
         priceDownButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        productCollectionView.reloadData()
+    }
+    
     func configureHierarchy() {
         
         view.addSubview(line)
@@ -235,9 +239,9 @@ class SearchResultViewController: UIViewController {
     
     @objc func likeButtonClicked(sender: UIButton) {
         
-        print(#function)
         var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
-        UserDefaults.standard.set(like.toggle(), forKey: list[sender.tag].productId)
+        like.toggle()
+        UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         productCollectionView.reloadData()
         
     }
@@ -270,6 +274,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         if UserDefaults.standard.bool(forKey: key) {
             cell.goodButton.backgroundColor = .white
+            cell.goodButton.alpha = 1
             cell.goodButton.setImage(UIImage(named: "like_selected"), for: .normal)
             
         } else {
@@ -288,6 +293,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let vc = SearchWebViewController()
         vc.text = list[indexPath.row].link
         vc.titleLabel = list[indexPath.row].title
+        vc.key = list[indexPath.row].productId
         
         let item = UIBarButtonItem(title: "")
         navigationItem.backBarButtonItem = item

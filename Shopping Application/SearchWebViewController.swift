@@ -14,6 +14,7 @@ class SearchWebViewController: UIViewController {
     let website = WKWebView()
     var text: String?
     var titleLabel: String?
+    var key: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,37 @@ class SearchWebViewController: UIViewController {
     func configureUI() {
         
         view.backgroundColor = .white
-        navigationItem.title = titleLabel
+        navigationItem.title = titleLabel?.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        
+        guard let key = key else { return }
+        
+        if UserDefaults.standard.bool(forKey: key) {
+            let item = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: #selector(likeButtonClicked))
+            item.tintColor = .black
+            navigationItem.rightBarButtonItem = item
+        } else {
+            let item = UIBarButtonItem(image: UIImage(named: "like_unselected"), style: .plain, target: self, action: #selector(likeButtonClicked))
+            navigationItem.rightBarButtonItem = item
+        }
+
+    }
+    
+    @objc func likeButtonClicked() {
+        
+        guard let key = key else { return }
+        var like: Bool = UserDefaults.standard.bool(forKey: key)
+        like.toggle()
+
+        if like {
+            let item = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: #selector(likeButtonClicked))
+            navigationItem.rightBarButtonItem = item
+        } else {
+            let item = UIBarButtonItem(image: UIImage(named: "like_unselected"), style: .plain, target: self, action: #selector(likeButtonClicked))
+            navigationItem.rightBarButtonItem = item
+            
+        }
+        
+        UserDefaults.standard.set(like, forKey: key)
     }
 }
 
