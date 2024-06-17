@@ -13,7 +13,6 @@ class SettingProfileTableViewCell: UITableViewCell {
     let profileImage = UIImageView()
     let profileName = UILabel()
     let joinDate = UILabel()
-    
     let nextButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -54,7 +53,7 @@ class SettingProfileTableViewCell: UITableViewCell {
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(40)
             make.leading.equalTo(profileImage.snp.trailing).offset(20)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
-            make.height.equalTo(16)
+            make.height.equalTo(20)
         }
         
         joinDate.snp.makeConstraints { make in
@@ -74,8 +73,8 @@ class SettingProfileTableViewCell: UITableViewCell {
     func configureUI() {
         
         profileImage.layer.masksToBounds = true
-        profileImage.layer.borderWidth = 3
-        profileImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        profileImage.layer.borderWidth = CustomDesign.profileBorderWidth3
+        profileImage.layer.borderColor = CustomDesign.orange.cgColor
         
         profileName.font = .boldSystemFont(ofSize: 17)
         

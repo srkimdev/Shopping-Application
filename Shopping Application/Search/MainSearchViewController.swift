@@ -119,12 +119,12 @@ class MainSearchViewController: UIViewController {
     
     func configureUI() {
         
-        view.backgroundColor = .white
+        view.backgroundColor = CustomDesign.viewBackgoundColor
         navigationItem.title = "\(UserDefaults.standard.string(forKey: "userName")!)'s MEANING OUT"
         
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchBar.searchBarStyle = .minimal
-        searchBarLine.backgroundColor = .systemGray5
+        searchBarLine.backgroundColor = CustomDesign.lineColor
         
         noRecentImage.image = UIImage(named: "empty")
         
@@ -136,25 +136,13 @@ class MainSearchViewController: UIViewController {
         recentLabel.font = .boldSystemFont(ofSize: 14)
         
         deleteAllButton.setTitle("전체 삭제", for: .normal)
-        deleteAllButton.setTitleColor(#colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1), for: .normal)
+        deleteAllButton.setTitleColor(CustomDesign.orange, for: .normal)
         deleteAllButton.titleLabel?.font = .systemFont(ofSize: 14)
         
-        tableViewLine.backgroundColor = .systemGray5
+        tableViewLine.backgroundColor = CustomDesign.lineColor
         
         searchListTableView.rowHeight = 40
         searchListTableView.separatorStyle = .none
-    }
-    
-    func saveRecentSearch(search: String) {
-        if recentSearches.contains(search) {
-            recentSearches.removeAll { $0 == search }
-        }
-        recentSearches.insert(search, at: 0)
-        UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
-    }
-    
-    func loadRecentSearches() -> [String] {
-        return UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
     }
     
 }
@@ -232,6 +220,21 @@ extension MainSearchViewController {
     
     @objc func deleteAllButtonClicked() {
         recentSearches.removeAll()
+    }
+    
+}
+
+extension MainSearchViewController {
+    
+    func saveRecentSearch(search: String) {
+        if recentSearches.contains(search) {
+            recentSearches.removeAll { $0 == search }
+        }
+        recentSearches.insert(search, at: 0)
+    }
+    
+    func loadRecentSearches() -> [String] {
+        return UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
     }
     
 }

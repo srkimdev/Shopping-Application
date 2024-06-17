@@ -114,54 +114,26 @@ class SearchResultViewController: UIViewController {
     
     func configureUI() {
         
-        view.backgroundColor = .white
+        view.backgroundColor = CustomDesign.viewBackgoundColor
         navigationItem.title = data
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
-        item.tintColor = .black
+        item.tintColor = CustomDesign.itemTintColor
         navigationItem.leftBarButtonItem = item
         
-        line.backgroundColor = .systemGray5
+        line.backgroundColor = CustomDesign.lineColor
         
-        totalLabel.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        totalLabel.textColor = CustomDesign.orange
         totalLabel.font = .boldSystemFont(ofSize: 15)
         
+        let buttonArray = [accurateButton, dateButton, priceUpButton, priceDownButton]
+        
+        for item in 0...3 {
+            buttonDesign(button: buttonArray[item], buttonName: ConstantTable.arrayButton[item])
+            buttonArray[item].tag = item
+        }
+        
         accurateButton.backgroundColor = .black
-        accurateButton.setTitle("정확도", for: .normal)
-        accurateButton.setTitleColor(.white, for: .normal)
-        accurateButton.titleLabel?.font = .systemFont(ofSize: 13)
-        accurateButton.layer.masksToBounds = true
-        accurateButton.layer.borderWidth = 1
-        accurateButton.layer.borderColor = UIColor.lightGray.cgColor
-        accurateButton.layer.cornerRadius = 15
-        accurateButton.tag = 0
-        
-        dateButton.setTitle("날짜순", for: .normal)
-        dateButton.setTitleColor(.black, for: .normal)
-        dateButton.titleLabel?.font = .systemFont(ofSize: 13)
-        dateButton.layer.masksToBounds = true
-        dateButton.layer.borderWidth = 1
-        dateButton.layer.borderColor = UIColor.lightGray.cgColor
-        dateButton.layer.cornerRadius = 15
-        dateButton.tag = 1
-        
-        priceUpButton.setTitle("가격높은순", for: .normal)
-        priceUpButton.setTitleColor(.black, for: .normal)
-        priceUpButton.titleLabel?.font = .systemFont(ofSize: 13)
-        priceUpButton.layer.masksToBounds = true
-        priceUpButton.layer.borderWidth = 1
-        priceUpButton.layer.borderColor = UIColor.lightGray.cgColor
-        priceUpButton.layer.cornerRadius = 15
-        priceUpButton.tag = 2
-        
-        priceDownButton.setTitle("가격낮은순", for: .normal)
-        priceDownButton.setTitleColor(.black, for: .normal)
-        priceDownButton.titleLabel?.font = .systemFont(ofSize: 13)
-        priceDownButton.layer.masksToBounds = true
-        priceDownButton.layer.borderWidth = 1
-        priceDownButton.layer.borderColor = UIColor.lightGray.cgColor
-        priceDownButton.layer.cornerRadius = 15
-        priceDownButton.tag = 3
-        
+        accurateButton.setTitleColor(.white, for: .normal)        
     }
     
     func callRequest(text: String) {
@@ -180,7 +152,7 @@ class SearchResultViewController: UIViewController {
 
                 var totalCount = 0
                 totalCount = value.total
-                self.totalLabel.text = "\(self.formatNumberString(number: totalCount))개의 검색 결과"
+                self.totalLabel.text = "\(ConstantTable.formatNumberString(number: totalCount))개의 검색 결과"
                 
                 var filteredList = [SearchResultDetail]()
                 
@@ -251,12 +223,6 @@ class SearchResultViewController: UIViewController {
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         productCollectionView.reloadData()
         
-    }
-    
-    func formatNumberString(number: Int) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter.string(from: NSNumber(value: number))!
     }
 
 }
@@ -338,4 +304,20 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             }
         }
     }
+}
+
+extension SearchResultViewController {
+    
+    func buttonDesign(button: UIButton, buttonName: String) {
+        
+        button.setTitle(buttonName, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 13)
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.cornerRadius = 15
+        
+    }
+    
 }

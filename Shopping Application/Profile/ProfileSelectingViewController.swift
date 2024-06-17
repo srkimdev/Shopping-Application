@@ -89,23 +89,21 @@ class ProfileSelectingViewController: UIViewController {
     
     func configureUI() {
         
-        let mode = UserDefaults.standard.string(forKey: "mode")
-        
-        if mode == "edit" {
+        if UserDefaults.standard.string(forKey: "mode") == "edit" {
             navigationItem.title = "EDIT PROFILE"
         } else {
             navigationItem.title = "PROFILE SETTING"
         }
         
-        view.backgroundColor = .white
+        view.backgroundColor = CustomDesign.viewBackgoundColor
         
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
-        item.tintColor = .black
+        item.tintColor = CustomDesign.itemTintColor
         navigationItem.leftBarButtonItem = item
         
         selectedImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
         selectedImage.layer.masksToBounds = true
-        selectedImage.layer.borderWidth = 3
+        selectedImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         selectedImage.layer.borderColor = CustomDesign.orange.cgColor
         
         cameraImageView.backgroundColor = CustomDesign.orange

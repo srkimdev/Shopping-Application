@@ -12,7 +12,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.tintColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        tabBar.tintColor = CustomDesign.orange
         tabBar.unselectedItemTintColor = .lightGray
         
         let search = MainSearchViewController()

@@ -58,19 +58,18 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
             
-            
             cell.profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
-            
             
             cell.profileName.text = UserDefaults.standard.string(forKey: "userName")
             
             return cell
+            
         } else {
             
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingOtherTableViewCell.identifier, for: indexPath) as! SettingOtherTableViewCell
             
             if indexPath.row == 1 {
-                cell.saveImage.image = UIImage(named: "like_selected")
+                cell.saveImage.image = CustomDesign.likeImage
                 cell.countLabel.text = "\(UserDefaults.standard.integer(forKey: "totalLike"))개의 상품"
             } else {
                 cell.saveImage.image = nil

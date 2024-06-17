@@ -75,12 +75,11 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     func configureUI() {
         
-        productImage.backgroundColor = .blue
         productImage.layer.masksToBounds = true
-        productImage.layer.cornerRadius = 10
         productImage.isUserInteractionEnabled = true
+        productImage.layer.cornerRadius = 10
         
-        goodButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+        goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
         goodButton.imageEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         goodButton.layer.masksToBounds = true
         goodButton.layer.cornerRadius = 5
@@ -102,18 +101,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
         companyLabel.text = transition.mallName
         productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-        priceLabel.text = "\(formatNumberString(number: Int(transition.lprice)!))원"
+        priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.lprice)!))원"
         
     }
 
-}
-
-extension SearchResultCollectionViewCell {
-    
-    func formatNumberString(number: Int) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter.string(from: NSNumber(value: number))!
-    }
-    
 }

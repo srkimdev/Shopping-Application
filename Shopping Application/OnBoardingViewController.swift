@@ -57,9 +57,9 @@ class OnBoardingViewController: UIViewController {
     
     func configureUI() {
         
-        view.backgroundColor = .white
+        view.backgroundColor = CustomDesign.viewBackgoundColor
         titleLabel.text = "MeaningOut"
-        titleLabel.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        titleLabel.textColor = CustomDesign.orange
         titleLabel.font = .systemFont(ofSize: 40, weight: .heavy)
         titleLabel.textAlignment = .center
         
@@ -68,7 +68,7 @@ class OnBoardingViewController: UIViewController {
         startButton.setTitle("시작하기", for: .normal)
         startButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
         startButton.setTitleColor(.white, for: .normal)
-        startButton.backgroundColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        startButton.backgroundColor = CustomDesign.orange
         startButton.layer.masksToBounds = true
         startButton.layer.cornerRadius = 20
         

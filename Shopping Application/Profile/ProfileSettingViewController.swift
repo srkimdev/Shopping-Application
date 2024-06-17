@@ -22,29 +22,8 @@ class ProfileSettingViewController: UIViewController {
     let mode = UserDefaults.standard.string(forKey: "mode")
     var allowed: Bool = false
     var textFieldInput: String = "" {
-        
         didSet {
-            
-            if textFieldInput.count < 2 || textFieldInput.count >= 10 {
-                nicknameStatusLable.text = "2글자 이상 10글자 미만으로 입력해주세요."
-                allowed = false
-            } else if textFieldInput.contains("@") {
-                nicknameStatusLable.text = "닉네임에 @는 포함할 수 없어요."
-                allowed = false
-            } else if textFieldInput.contains("#") {
-                nicknameStatusLable.text = "닉네임에 #는 포함할 수 없어요."
-                allowed = false
-            } else if textFieldInput.contains("$") {
-                nicknameStatusLable.text = "닉네임에 $는 포함할 수 없어요."
-                allowed = false
-            } else if textFieldInput.contains("%") {
-                nicknameStatusLable.text = "닉네임에 %는 포함할 수 없어요."
-                allowed = false
-            } else {
-                nicknameStatusLable.text = "사용할 수 있는 닉네임이에요"
-                allowed = true
-            }
-            
+            isNickname()
         }
     }
     
@@ -65,9 +44,12 @@ class ProfileSettingViewController: UIViewController {
         
         if UserDefaults.standard.bool(forKey: "fromWhere") {
             profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+            nicknameTextField.text = UserDefaults.standard.string(forKey: "userName")
         } else {
             profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
         }
+        
+        textFieldInput = UserDefaults.standard.string(forKey: "userName") ?? ""
     
     }
     
@@ -146,7 +128,7 @@ class ProfileSettingViewController: UIViewController {
         if mode == "edit"{
             navigationItem.title = "EDIT PROFILE"
             let item = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
-            item.tintColor = .black
+            item.tintColor = CustomDesign.itemTintColor
             navigationItem.rightBarButtonItem = item
             
             clearButton.isHidden = true
@@ -157,12 +139,12 @@ class ProfileSettingViewController: UIViewController {
         }
         
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
-        item.tintColor = .black
+        item.tintColor = CustomDesign.itemTintColor
         navigationItem.leftBarButtonItem = item
         
-        view.backgroundColor = .white
+        view.backgroundColor = CustomDesign.viewBackgoundColor
         
-        profileImage.layer.borderWidth = 3
+        profileImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         profileImage.layer.borderColor = CustomDesign.orange.cgColor
         profileImage.layer.masksToBounds = true
         profileImage.contentMode = .scaleAspectFill
@@ -199,7 +181,7 @@ class ProfileSettingViewController: UIViewController {
             UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
             UserDefaults.standard.set(true, forKey: "goToSearch")
             UserDefaults.standard.set(joinDate(), forKey: "joinDate")
-            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp") , forKey: "profileNumber")
+            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp"), forKey: "profileNumber")
             
             let vc = TabBarController()
             vc.modalPresentationStyle = .overFullScreen
@@ -227,8 +209,10 @@ class ProfileSettingViewController: UIViewController {
     }
     
     @objc func saveButtonClicked() {
-        UserDefaults.standard.set(nicknameTextField.text, forKey: "userName")
-        UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp") , forKey: "profileNumber")
+        if allowed {
+            UserDefaults.standard.set(nicknameTextField.text, forKey: "userName")
+            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp") , forKey: "profileNumber")
+        }
     }
 
 }
@@ -238,7 +222,7 @@ extension ProfileSettingViewController {
     func randomImage() {
         let randomNumber: Int = .random(in: 0...11)
         profileImage.image = UIImage(named: "profile_\(randomNumber)")
-        UserDefaults.standard.set(randomNumber, forKey: "profileNumber")
+        UserDefaults.standard.set(randomNumber, forKey: "profileNumberTemp")
     }
     
     func joinDate() -> String {
@@ -249,6 +233,38 @@ extension ProfileSettingViewController {
         dateFormatter.dateFormat = "yyyy.MM.dd"
         return dateFormatter.string(from: currentDate)
 
+    }
+    
+    func isDigit(input: String) -> Bool {
+        let decimalCharacters = CharacterSet.decimalDigits
+        return input.rangeOfCharacter(from: decimalCharacters) != nil
+    }
+    
+    func isNickname() {
+        
+        if textFieldInput.count < 2 || textFieldInput.count >= 10 {
+            nicknameStatusLable.text = "2글자 이상 10글자 미만으로 입력해주세요."
+            allowed = false
+        } else if textFieldInput.contains("@") {
+            nicknameStatusLable.text = "닉네임에 @는 포함할 수 없어요."
+            allowed = false
+        } else if textFieldInput.contains("#") {
+            nicknameStatusLable.text = "닉네임에 #는 포함할 수 없어요."
+            allowed = false
+        } else if textFieldInput.contains("$") {
+            nicknameStatusLable.text = "닉네임에 $는 포함할 수 없어요."
+            allowed = false
+        } else if textFieldInput.contains("%") {
+            nicknameStatusLable.text = "닉네임에 %는 포함할 수 없어요."
+            allowed = false
+        } else if isDigit(input: textFieldInput) {
+            nicknameStatusLable.text = "닉네임에 숫자는 포함할 수 없어요."
+            allowed = false
+        } else {
+            nicknameStatusLable.text = "사용할 수 있는 닉네임이에요"
+            allowed = true
+        }
+        
     }
     
 }

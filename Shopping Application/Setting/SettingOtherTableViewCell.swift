@@ -54,12 +54,8 @@ class SettingOtherTableViewCell: UITableViewCell {
     }
     
     func configureUI() {
-        
-        listLabel.text = "나의 장바구니 목록"
         listLabel.font = .systemFont(ofSize: 13)
-        
         countLabel.font = .systemFont(ofSize: 13)
-        
     }
     
     func designCell(transition: String) {

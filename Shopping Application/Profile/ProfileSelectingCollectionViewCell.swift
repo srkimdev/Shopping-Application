@@ -48,7 +48,7 @@ class ProfileSelectingCollectionViewCell: UICollectionViewCell {
     func configureUI() {
         
         profileImage.layer.masksToBounds = true
-        profileImage.layer.borderWidth = 1
+        profileImage.layer.borderWidth = CustomDesign.profileBorderWidth1
         profileImage.contentMode = .scaleAspectFill
         profileImage.alpha = 0.5
     }
@@ -57,7 +57,7 @@ class ProfileSelectingCollectionViewCell: UICollectionViewCell {
         profileImage.image = UIImage(named: "profile_\(transition)")
         
         if transition == num {
-            profileImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+            profileImage.layer.borderColor = CustomDesign.orange.cgColor
             profileImage.alpha = 1
         } else {
             profileImage.layer.borderColor = UIColor.black.cgColor
