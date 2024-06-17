@@ -23,11 +23,8 @@ class SearchResultViewController: UIViewController {
     var data: String?
     var list: [SearchResultDetail] = []
     var totalPage = 0
-    var totalCount = 0
-    var likeCount = 0
     var start = 1
     var sortOption = "sim"
-    let sortSelect = ["sim", "date", "dsc", "asc"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,8 +178,9 @@ class SearchResultViewController: UIViewController {
                 
             case .success(let value):
 
-                self.totalCount = value.total
-                self.totalLabel.text = "\(self.formatNumberString(number: self.totalCount))개의 검색 결과"
+                var totalCount = 0
+                totalCount = value.total
+                self.totalLabel.text = "\(self.formatNumberString(number: totalCount))개의 검색 결과"
                 
                 var filteredList = [SearchResultDetail]()
                 
@@ -218,14 +216,12 @@ class SearchResultViewController: UIViewController {
     }
     
     @objc func backButtonClicked() {
-        
         navigationController?.popViewController(animated: true)
-        
     }
     
     @objc func arrayButtonClicked(sender: UIButton) {
         
-        sortOption = sortSelect[sender.tag]
+        sortOption = ConstantTable.sortSelect[sender.tag]
         callRequest(text: data!)
         
         [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
@@ -243,26 +239,23 @@ class SearchResultViewController: UIViewController {
         var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
         like.toggle()
     
-        likeCount = UserDefaults.standard.integer(forKey: "totalLike")
+        ConstantTable.likeCount = UserDefaults.standard.integer(forKey: "totalLike")
         
         if like {
-            likeCount += 1
+            ConstantTable.likeCount += 1
         } else {
-            likeCount -= 1
+            ConstantTable.likeCount -= 1
         }
         
-        UserDefaults.standard.set(likeCount, forKey: "totalLike")
+        UserDefaults.standard.set(ConstantTable.likeCount, forKey: "totalLike")
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         productCollectionView.reloadData()
         
     }
     
     func formatNumberString(number: Int) -> String {
-        
         let numberFormatter = NumberFormatter()
-        
         numberFormatter.numberStyle = .decimal
-        
         return numberFormatter.string(from: NSNumber(value: number))!
     }
 
@@ -286,12 +279,12 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         if UserDefaults.standard.bool(forKey: key) {
             cell.goodButton.backgroundColor = .white
             cell.goodButton.alpha = 1
-            cell.goodButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            cell.goodButton.setImage(CustomDesign.likeImage, for: .normal)
             
         } else {
             cell.goodButton.backgroundColor = .black
             cell.goodButton.alpha = 0.3
-            cell.goodButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+            cell.goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
         }
         
         cell.goodButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
@@ -301,12 +294,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let vc = SearchWebViewController()
-        vc.text = list[indexPath.row].link
-        vc.titleLabel = list[indexPath.row].title
-        vc.key = list[indexPath.row].productId
+        let data = WebViewInfo(text: list[indexPath.row].link, titlelabel: list[indexPath.row].title, key: list[indexPath.row].productId)
         
-        // 구조체로 넘길 것
+        let vc = SearchWebViewController(data: data)
         
         let item = UIBarButtonItem(title: "")
         navigationItem.backBarButtonItem = item

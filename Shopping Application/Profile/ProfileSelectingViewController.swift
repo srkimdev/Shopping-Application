@@ -106,9 +106,9 @@ class ProfileSelectingViewController: UIViewController {
         selectedImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
         selectedImage.layer.masksToBounds = true
         selectedImage.layer.borderWidth = 3
-        selectedImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        selectedImage.layer.borderColor = CustomDesign.orange.cgColor
         
-        cameraImageView.backgroundColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        cameraImageView.backgroundColor = CustomDesign.orange
         cameraImage.tintColor = .white
         cameraImage.image = UIImage(systemName: "camera.fill")
         

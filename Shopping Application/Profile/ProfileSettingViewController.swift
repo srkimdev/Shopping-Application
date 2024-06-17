@@ -163,11 +163,11 @@ class ProfileSettingViewController: UIViewController {
         view.backgroundColor = .white
         
         profileImage.layer.borderWidth = 3
-        profileImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        profileImage.layer.borderColor = CustomDesign.orange.cgColor
         profileImage.layer.masksToBounds = true
         profileImage.contentMode = .scaleAspectFill
         
-        cameraImageView.backgroundColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        cameraImageView.backgroundColor = CustomDesign.orange
         cameraImageView.layer.masksToBounds = true
         cameraImageView.contentMode = .scaleAspectFill
         
@@ -179,13 +179,13 @@ class ProfileSettingViewController: UIViewController {
         textFieldLine.backgroundColor = .systemGray4
         
         nicknameStatusLable.text = "2글자 이상 10글자 미만으로 입력해주세요."
-        nicknameStatusLable.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        nicknameStatusLable.textColor = CustomDesign.orange
         nicknameStatusLable.font = .boldSystemFont(ofSize: 13)
         
         clearButton.setTitle("완료", for: .normal)
         clearButton.setTitleColor(.white, for: .normal)
         clearButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        clearButton.backgroundColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+        clearButton.backgroundColor = CustomDesign.orange
         clearButton.layer.masksToBounds = true
         clearButton.layer.cornerRadius = 20
         

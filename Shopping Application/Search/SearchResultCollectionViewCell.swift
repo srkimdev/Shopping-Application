@@ -105,14 +105,15 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         priceLabel.text = "\(formatNumberString(number: Int(transition.lprice)!))원"
         
     }
+
+}
+
+extension SearchResultCollectionViewCell {
     
     func formatNumberString(number: Int) -> String {
-        
         let numberFormatter = NumberFormatter()
-        
         numberFormatter.numberStyle = .decimal
-        
         return numberFormatter.string(from: NSNumber(value: number))!
     }
-
+    
 }

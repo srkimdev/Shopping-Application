@@ -12,10 +12,18 @@ import SnapKit
 class SearchWebViewController: UIViewController {
 
     let website = WKWebView()
-    var text: String?
-    var titleLabel: String?
-    var key: String?
-    var likeCount = 0
+    var data: WebViewInfo
+   
+    init(data: WebViewInfo) {
+        self.data = data
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +32,7 @@ class SearchWebViewController: UIViewController {
         configureLayout()
         configureUI()
         
-        let url = URL(string: text!)!
+        let url = URL(string: data.text)!
         let request = URLRequest(url: url)
         website.load(request)
         
@@ -47,16 +55,14 @@ class SearchWebViewController: UIViewController {
     func configureUI() {
         
         view.backgroundColor = .white
-        navigationItem.title = titleLabel?.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        navigationItem.title = data.titlelabel.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         
-        guard let key = key else { return }
-        
-        if UserDefaults.standard.bool(forKey: key) {
-            let item = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: #selector(likeButtonClicked))
+        if UserDefaults.standard.bool(forKey: data.key) {
+            let item = UIBarButtonItem(image: CustomDesign.likeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
             item.tintColor = .black
             navigationItem.rightBarButtonItem = item
         } else {
-            let item = UIBarButtonItem(image: UIImage(named: "like_unselected"), style: .plain, target: self, action: #selector(likeButtonClicked))
+            let item = UIBarButtonItem(image: CustomDesign.unlikeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
             navigationItem.rightBarButtonItem = item
         }
 
@@ -64,19 +70,18 @@ class SearchWebViewController: UIViewController {
     
     @objc func likeButtonClicked() {
         
-        guard let key = key else { return }
-        var like: Bool = UserDefaults.standard.bool(forKey: key)
+        var like: Bool = UserDefaults.standard.bool(forKey: data.key)
         like.toggle()
         
-        likeCount = UserDefaults.standard.integer(forKey: "totalLike")
+        ConstantTable.likeCount = UserDefaults.standard.integer(forKey: "totalLike")
         
         if like {
-            likeCount += 1
+            ConstantTable.likeCount += 1
         } else {
-            likeCount -= 1
+            ConstantTable.likeCount -= 1
         }
         
-        UserDefaults.standard.set(likeCount, forKey: "totalLike")
+        UserDefaults.standard.set(ConstantTable.likeCount, forKey: "totalLike")
 
         if like {
             let item = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: #selector(likeButtonClicked))
@@ -87,7 +92,7 @@ class SearchWebViewController: UIViewController {
             
         }
         
-        UserDefaults.standard.set(like, forKey: key)
+        UserDefaults.standard.set(like, forKey: data.key)
     }
 }
 

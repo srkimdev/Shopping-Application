@@ -10,7 +10,6 @@ import UIKit
 class MainSettingViewController: UIViewController {
 
     let settingTableView = UITableView()
-    let list = ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,6 @@ class MainSettingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         UserDefaults.standard.set(true, forKey: "fromWhere")
         settingTableView.reloadData()
     }
@@ -52,7 +50,7 @@ class MainSettingViewController: UIViewController {
 extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count + 1
+        return ConstantTable.settingCell.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,16 +70,14 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingOtherTableViewCell.identifier, for: indexPath) as! SettingOtherTableViewCell
             
             if indexPath.row == 1 {
-                
                 cell.saveImage.image = UIImage(named: "like_selected")
                 cell.countLabel.text = "\(UserDefaults.standard.integer(forKey: "totalLike"))개의 상품"
-                
             } else {
                 cell.saveImage.image = nil
                 cell.countLabel.text = nil
             }
             
-            cell.designCell(transition: list[indexPath.row - 1])
+            cell.designCell(transition: ConstantTable.settingCell[indexPath.row - 1])
             
             return cell
         }
@@ -117,15 +113,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
                 preferredStyle: .alert)
                 
             let check = UIAlertAction(title: "확인", style: .default) {_ in 
-                
-                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                let sceneDelegate = windowScene?.delegate as? SceneDelegate
-                
-                let rootViewcontroller = UINavigationController(rootViewController: OnBoardingViewController())
-                
-                sceneDelegate?.window?.rootViewController = rootViewcontroller
-                sceneDelegate?.window?.makeKeyAndVisible()
-                
+                self.initialize()
             }
             
             let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -138,5 +126,19 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
 
     }
     
+    
+}
+
+extension MainSettingViewController {
+    
+    func initialize() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        
+        let rootViewcontroller = UINavigationController(rootViewController: OnBoardingViewController())
+        
+        sceneDelegate?.window?.rootViewController = rootViewcontroller
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
     
 }

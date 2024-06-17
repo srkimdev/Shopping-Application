@@ -46,7 +46,6 @@ class MainSearchViewController: UIViewController {
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
         
         recentSearches = loadRecentSearches()
-        print(recentSearches)
         
     }
     
@@ -152,7 +151,6 @@ class MainSearchViewController: UIViewController {
         }
         recentSearches.insert(search, at: 0)
         UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
-        print(UserDefaults.standard.stringArray(forKey: "RecentSearches"))
     }
     
     func loadRecentSearches() -> [String] {
