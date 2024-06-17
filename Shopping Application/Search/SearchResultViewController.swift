@@ -172,8 +172,8 @@ class SearchResultViewController: UIViewController {
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(sortOption)"
         
         let header: HTTPHeaders = [
-            "X-Naver-Client-Id": "Ot_GH8dUBgvHiLCjiMZn",
-            "X-Naver-Client-Secret": "GaWZjoHF6T"
+            "X-Naver-Client-Id": APIkey.Id,
+            "X-Naver-Client-Secret": APIkey.Secret
         ]
         
         AF.request(url, method: .get, headers: header).responseDecodable(of: SearchResult.self) { response in
