@@ -306,6 +306,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         vc.titleLabel = list[indexPath.row].title
         vc.key = list[indexPath.row].productId
         
+        // 구조체로 넘길 것
+        
         let item = UIBarButtonItem(title: "")
         navigationItem.backBarButtonItem = item
         item.tintColor = .black

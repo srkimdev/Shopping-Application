@@ -33,7 +33,7 @@ class ProfileSelectingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UserDefaults.standard.set(false, forKey: "editOK")
+        UserDefaults.standard.set(false, forKey: "fromWhere")
     }
     
     override func viewDidLayoutSubviews() {
@@ -103,7 +103,7 @@ class ProfileSelectingViewController: UIViewController {
         item.tintColor = .black
         navigationItem.leftBarButtonItem = item
         
-        selectedImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+        selectedImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
         selectedImage.layer.masksToBounds = true
         selectedImage.layer.borderWidth = 3
         selectedImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
@@ -144,7 +144,7 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
         
         imageCollectionView.reloadData()
         
-        UserDefaults.standard.set(selectedNumber, forKey: "profileNumber")
+        UserDefaults.standard.set(selectedNumber, forKey: "profileNumberTemp")
     }
     
 }

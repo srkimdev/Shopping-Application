@@ -19,6 +19,7 @@ class ProfileSettingViewController: UIViewController {
     let nicknameStatusLable = UILabel()
     let clearButton = UIButton()
     
+    let mode = UserDefaults.standard.string(forKey: "mode")
     var allowed: Bool = false
     var textFieldInput: String = "" {
         
@@ -61,7 +62,13 @@ class ProfileSettingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+        
+        if UserDefaults.standard.bool(forKey: "fromWhere") {
+            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+        } else {
+            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
+        }
+    
     }
     
     override func viewDidLayoutSubviews() {
@@ -136,17 +143,16 @@ class ProfileSettingViewController: UIViewController {
     
     func configureUI() {
         
-        navigationItem.title = "PROFILE SETTING"
-        
-        let mode = UserDefaults.standard.string(forKey: "mode")
-        
         if mode == "edit"{
             navigationItem.title = "EDIT PROFILE"
             let item = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
             item.tintColor = .black
             navigationItem.rightBarButtonItem = item
+            
+            clearButton.isHidden = true
 
         } else {
+            navigationItem.title = "PROFILE SETTING"
             randomImage()
         }
         
@@ -191,6 +197,9 @@ class ProfileSettingViewController: UIViewController {
             
             UserDefaults.standard.set(textFieldInput, forKey: "userName")
             UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
+            UserDefaults.standard.set(true, forKey: "goToSearch")
+            UserDefaults.standard.set(joinDate(), forKey: "joinDate")
+            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp") , forKey: "profileNumber")
             
             let vc = TabBarController()
             vc.modalPresentationStyle = .overFullScreen
@@ -208,22 +217,18 @@ class ProfileSettingViewController: UIViewController {
     }
     
     @objc func textFieldDidChange(textField: UITextField) {
-        
         guard let text = textField.text else { return }
         textFieldInput = text
-        
     }
     
     @objc func profileImageButtonClicked() {
-        
         let vc = ProfileSelectingViewController()
         navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     @objc func saveButtonClicked() {
         UserDefaults.standard.set(nicknameTextField.text, forKey: "userName")
-        UserDefaults.standard.set(true, forKey: "editOK")
+        UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp") , forKey: "profileNumber")
     }
 
 }
@@ -231,11 +236,19 @@ class ProfileSettingViewController: UIViewController {
 extension ProfileSettingViewController {
     
     func randomImage() {
-        
         let randomNumber: Int = .random(in: 0...11)
         profileImage.image = UIImage(named: "profile_\(randomNumber)")
         UserDefaults.standard.set(randomNumber, forKey: "profileNumber")
+    }
+    
+    func joinDate() -> String {
         
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        return dateFormatter.string(from: currentDate)
+
     }
     
 }

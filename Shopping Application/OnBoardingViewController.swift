@@ -73,20 +73,10 @@ class OnBoardingViewController: UIViewController {
         startButton.layer.cornerRadius = 20
         
         UserDefaults.standard.set(ProfileMode.setup.rawValue, forKey: "mode")
-        
-//        nameLabel.text = "김성률"
-//        nameLabel.textColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
-//        nameLabel.font = .boldSystemFont(ofSize: 20)
-//        nameLabel.textAlignment = .center
-        
     }
     
     @objc func startButtonClicked() {
-        
         let vc = ProfileSettingViewController()
         navigationController?.pushViewController(vc, animated: true)
-        
     }
-
-    
 }

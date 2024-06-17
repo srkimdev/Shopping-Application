@@ -28,34 +28,23 @@ class MainSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        print(UserDefaults.standard.bool(forKey: "editOK"))
-        if UserDefaults.standard.bool(forKey: "editOK") {
-            settingTableView.reloadData()
-            UserDefaults.standard.set(false, forKey: "editOK")
-        }
-        
+        UserDefaults.standard.set(true, forKey: "fromWhere")
         settingTableView.reloadData()
     }
     
     func configureHierarchy() {
-        
         view.addSubview(settingTableView)
-        
     }
     
     func configureLayout() {
-        
         settingTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        
     }
     
     func configureUI() {
-        
         view.backgroundColor = .white
         navigationItem.title = "SETTING"
-        
     }
 
 }
@@ -71,7 +60,10 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
             
+            
             cell.profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+            
+            
             cell.profileName.text = UserDefaults.standard.string(forKey: "userName")
             
             return cell

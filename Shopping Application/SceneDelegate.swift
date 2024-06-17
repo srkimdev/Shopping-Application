@@ -16,15 +16,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let vc = OnBoardingViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        window?.rootViewController = nav
-        window?.makeKeyAndVisible()
+        if UserDefaults.standard.bool(forKey: "goToSearch") {
+            let vc = TabBarController()
+            window?.rootViewController = vc
+        } else {
+            let vc = OnBoardingViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            window?.rootViewController = nav
+        }
         
-//        let vc = TabBarController()
-//        let nav = UINavigationController(rootViewController: vc)
-//        window?.rootViewController = nav
-//        window?.makeKeyAndVisible()
+        window?.makeKeyAndVisible()
 
     }
 

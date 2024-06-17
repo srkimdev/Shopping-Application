@@ -15,6 +15,7 @@ class SearchWebViewController: UIViewController {
     var text: String?
     var titleLabel: String?
     var key: String?
+    var likeCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,16 @@ class SearchWebViewController: UIViewController {
         guard let key = key else { return }
         var like: Bool = UserDefaults.standard.bool(forKey: key)
         like.toggle()
+        
+        likeCount = UserDefaults.standard.integer(forKey: "totalLike")
+        
+        if like {
+            likeCount += 1
+        } else {
+            likeCount -= 1
+        }
+        
+        UserDefaults.standard.set(likeCount, forKey: "totalLike")
 
         if like {
             let item = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: #selector(likeButtonClicked))

@@ -73,14 +73,13 @@ class SettingProfileTableViewCell: UITableViewCell {
     
     func configureUI() {
         
-        
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderWidth = 3
         profileImage.layer.borderColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
         
         profileName.font = .boldSystemFont(ofSize: 17)
         
-        joinDate.text = "2024. 06. 15 가입"
+        joinDate.text = "\(UserDefaults.standard.string(forKey: "joinDate")!) 가입"
         joinDate.font = .systemFont(ofSize: 12)
         
         nextButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
