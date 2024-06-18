@@ -56,7 +56,9 @@ class ProfileSelectingCollectionViewCell: UICollectionViewCell {
     func designCell(transition: Int, num: Int) {
         profileImage.image = UIImage(named: "profile_\(transition)")
         
+        print(transition, num)
         if transition == num {
+            print("here")
             profileImage.layer.borderColor = CustomDesign.orange.cgColor
             profileImage.alpha = 1
         } else {

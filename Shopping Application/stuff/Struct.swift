@@ -49,6 +49,7 @@ enum CustomDesign {
 struct ConstantTable {
     
     static var likeCount = 0
+    static var sortOption = 0
     static let sortSelect = ["sim", "date", "dsc", "asc"]
     static let settingCell = ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
     static let arrayButton = ["정확도", "날짜순", "가격높은순", "가격낮은순"]

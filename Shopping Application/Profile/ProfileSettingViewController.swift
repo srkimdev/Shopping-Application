@@ -43,6 +43,7 @@ class ProfileSettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         if UserDefaults.standard.bool(forKey: "fromWhere") {
+            print("dd")
             profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
             nicknameTextField.text = UserDefaults.standard.string(forKey: "userName")
         } else {
@@ -193,9 +194,7 @@ class ProfileSettingViewController: UIViewController {
     }
     
     @objc func backButtonClicked() {
-        
         navigationController?.popViewController(animated: true)
-        
     }
     
     @objc func textFieldDidChange(textField: UITextField) {

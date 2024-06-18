@@ -24,7 +24,6 @@ class SearchResultViewController: UIViewController {
     var list: [SearchResultDetail] = []
     var totalPage = 0
     var start = 1
-    var sortOption = "sim"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,12 +132,13 @@ class SearchResultViewController: UIViewController {
         }
         
         accurateButton.backgroundColor = .black
-        accurateButton.setTitleColor(.white, for: .normal)        
+        accurateButton.setTitleColor(.white, for: .normal)
+        
     }
     
     func callRequest(text: String) {
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(sortOption)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[ConstantTable.sortOption])"
         
         let header: HTTPHeaders = [
             "X-Naver-Client-Id": APIkey.Id,
@@ -193,7 +193,8 @@ class SearchResultViewController: UIViewController {
     
     @objc func arrayButtonClicked(sender: UIButton) {
         
-        sortOption = ConstantTable.sortSelect[sender.tag]
+        ConstantTable.sortOption = sender.tag
+        start = 1
         callRequest(text: data!)
         
         [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
@@ -203,6 +204,8 @@ class SearchResultViewController: UIViewController {
 
         sender.backgroundColor = .black
         sender.setTitleColor(.white, for: .normal)
+        
+        productCollectionView.reloadData()
             
     }
     

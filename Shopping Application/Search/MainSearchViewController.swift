@@ -184,7 +184,12 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = SearchResultViewController()
-        vc.data = recentSearches[indexPath.row]
+        let temp = recentSearches[indexPath.row]
+        vc.data = temp
+        
+        recentSearches.remove(at: indexPath.row)
+        recentSearches.insert(temp, at: 0)
+        
         navigationController?.pushViewController(vc, animated: true)
         
     }

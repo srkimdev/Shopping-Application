@@ -76,6 +76,12 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.countLabel.text = nil
             }
             
+            if indexPath.row == 5 {
+                cell.isUserInteractionEnabled = true
+            } else {
+                cell.isUserInteractionEnabled = false
+            }
+            
             cell.designCell(transition: ConstantTable.settingCell[indexPath.row - 1])
             
             return cell
