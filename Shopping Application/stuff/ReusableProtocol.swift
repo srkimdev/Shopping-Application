@@ -7,6 +7,8 @@
 
 import UIKit
 
+// protocol for tableViewCell, collectionViewCell indentifier
+
 protocol ReusableProtocol {
     
     static var identifier: String { get }

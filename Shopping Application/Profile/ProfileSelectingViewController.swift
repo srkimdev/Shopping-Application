@@ -78,7 +78,6 @@ class ProfileSelectingViewController: UIViewController {
             make.width.height.equalTo(cameraImageView.snp.width).multipliedBy(0.7)
         }
         
-        
         imageCollectionView.snp.makeConstraints { make in
             make.top.equalTo(selectedImage.snp.bottom).offset(60)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
@@ -89,6 +88,7 @@ class ProfileSelectingViewController: UIViewController {
     
     func configureUI() {
         
+        // check mode
         if UserDefaults.standard.string(forKey: "mode") == "edit" {
             navigationItem.title = "EDIT PROFILE"
         } else {
@@ -112,6 +112,7 @@ class ProfileSelectingViewController: UIViewController {
         
     }
     
+    // go back
     @objc func backButtonClicked() {
         navigationController?.popViewController(animated: true)
     }
@@ -120,9 +121,8 @@ class ProfileSelectingViewController: UIViewController {
 
 extension ProfileSelectingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return ConstantTable.profileImageNumber.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -150,6 +150,7 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
 
 extension ProfileSelectingViewController: UICollectionViewDelegateFlowLayout {
     
+    // setting collectionViewCell
     func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 70

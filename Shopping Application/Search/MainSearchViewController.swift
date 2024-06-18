@@ -24,7 +24,9 @@ class MainSearchViewController: UIViewController {
     
     var recentSearches: [String] = [] {
         
+        // check that list has texts
         didSet {
+            isRecentText()
             UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
             searchListTableView.reloadData()
         }
@@ -34,9 +36,6 @@ class MainSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -45,7 +44,6 @@ class MainSearchViewController: UIViewController {
         searchListTableView.delegate = self
         searchListTableView.dataSource = self
         searchListTableView.register(MainSearchTableViewCell.self, forCellReuseIdentifier: MainSearchTableViewCell.identifier)
-        searchListTableView.addGestureRecognizer(tapGesture)
         
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
         
@@ -54,7 +52,7 @@ class MainSearchViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        isRecentText()
+        navigationItem.title = "\(UserDefaults.standard.string(forKey: "userName")!)'s MEANING OUT"
     }
 
     func configureHierarchy() {
@@ -124,7 +122,6 @@ class MainSearchViewController: UIViewController {
     func configureUI() {
         
         view.backgroundColor = CustomDesign.viewBackgoundColor
-        navigationItem.title = "\(UserDefaults.standard.string(forKey: "userName")!)'s MEANING OUT"
         
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchBar.searchBarStyle = .minimal
@@ -149,14 +146,17 @@ class MainSearchViewController: UIViewController {
         searchListTableView.separatorStyle = .none
     }
     
+    // remove selected cell
     @objc func deleteButtonClicked(sender: UIButton) {
         recentSearches.remove(at: sender.tag)
     }
     
+    // remove all cells
     @objc func deleteAllButtonClicked() {
         recentSearches.removeAll()
     }
     
+    // keyboard hiding
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -171,9 +171,9 @@ extension MainSearchViewController: UISearchBarDelegate {
         saveRecentSearch(search: text)
         searchBar.text = ""
         
+        // go to searchResultpage and transfer searchBar text
         let vc = SearchResultViewController()
         vc.data = text
-        
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -203,9 +203,11 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
         let temp = recentSearches[indexPath.row]
         vc.data = temp
         
+        // selected cell should be on top
         recentSearches.remove(at: indexPath.row)
         recentSearches.insert(temp, at: 0)
         
+        // go to searchResultpage with selected product
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -214,7 +216,10 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainSearchViewController {
     
+    // show noRecentText or tableViewCell
     func isRecentText() {
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
         if recentSearches.count > 0 {
             recentLabel.isHidden = false
@@ -224,6 +229,9 @@ extension MainSearchViewController {
             noRecentImage.isHidden = true
             noRecentLabel.isHidden = true
             
+            tapGesture.cancelsTouchesInView = false
+            searchListTableView.addGestureRecognizer(tapGesture)
+            
         } else {
             recentLabel.isHidden = true
             deleteAllButton.isHidden = true
@@ -231,10 +239,13 @@ extension MainSearchViewController {
             
             noRecentImage.isHidden = false
             noRecentLabel.isHidden = false
+            
+            view.addGestureRecognizer(tapGesture)
         }
         
     }
     
+    // prevent overlap and set the recent text to top
     func saveRecentSearch(search: String) {
         if recentSearches.contains(search) {
             recentSearches.removeAll { $0 == search }
@@ -242,6 +253,7 @@ extension MainSearchViewController {
         recentSearches.insert(search, at: 0)
     }
     
+    // set previous search words when you turn on the app
     func loadRecentSearches() -> [String] {
         return UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
     }

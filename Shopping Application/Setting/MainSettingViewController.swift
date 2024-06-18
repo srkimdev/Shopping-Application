@@ -55,6 +55,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // profile setting
         if indexPath.row == 0 {
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
             
@@ -64,6 +65,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             
             return cell
             
+        // other cells setting
         } else {
             
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingOtherTableViewCell.identifier, for: indexPath) as! SettingOtherTableViewCell
@@ -76,6 +78,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.countLabel.text = nil
             }
             
+            // only "탈퇴하기" cell can be selected
             if indexPath.row == 5 {
                 cell.isUserInteractionEnabled = true
             } else {
@@ -108,10 +111,12 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             
         } else if indexPath.row == 5 {
             
+            // all userdefaults will be removed
             if let appDomain = Bundle.main.bundleIdentifier {
                 UserDefaults.standard.removePersistentDomain(forName: appDomain)
             }
             
+            // alert setting
             let alert = UIAlertController(
                 title: "탈퇴하기",
                 message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
@@ -136,6 +141,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
 
 extension MainSettingViewController {
     
+    // go to OnBoarding screen when you click "확인" button
     func initialize() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate

@@ -145,6 +145,7 @@ class SearchResultViewController: UIViewController {
             "X-Naver-Client-Secret": APIkey.Secret
         ]
         
+        // api communication with url, header
         AF.request(url, method: .get, headers: header).responseDecodable(of: SearchResult.self) { response in
             switch response.result {
                 
@@ -166,6 +167,7 @@ class SearchResultViewController: UIViewController {
                     
                 } else {
                     
+                    // pagenation
                     for item in value.items {
                         filteredList.append(item)
                     }
@@ -176,6 +178,8 @@ class SearchResultViewController: UIViewController {
                 
                 self.productCollectionView.reloadData()
                 
+                
+                // scroll to top
                 if self.start == 1 {
                     self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
                 }
@@ -187,33 +191,35 @@ class SearchResultViewController: UIViewController {
         
     }
     
+    // go back
     @objc func backButtonClicked() {
         navigationController?.popViewController(animated: true)
     }
     
     @objc func arrayButtonClicked(sender: UIButton) {
         
-        ConstantTable.sortOption = sender.tag
+        // sort by arraybutton, page is set to 1
         start = 1
+        ConstantTable.sortOption = sender.tag
         callRequest(text: data!)
         
+        // button view change
         [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
             button.backgroundColor = .white
             button.setTitleColor(.black, for: .normal)
         }
-
         sender.backgroundColor = .black
         sender.setTitleColor(.white, for: .normal)
-        
-        productCollectionView.reloadData()
             
     }
     
     @objc func likeButtonClicked(sender: UIButton) {
         
+        // check product has like or not, and reverse
         var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
         like.toggle()
     
+        // count total like
         ConstantTable.likeCount = UserDefaults.standard.integer(forKey: "totalLike")
         
         if like {
@@ -222,6 +228,7 @@ class SearchResultViewController: UIViewController {
             ConstantTable.likeCount -= 1
         }
         
+        // save total like, isLike
         UserDefaults.standard.set(ConstantTable.likeCount, forKey: "totalLike")
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         productCollectionView.reloadData()
@@ -245,6 +252,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         let key = list[indexPath.row].productId
         
+        //
         if UserDefaults.standard.bool(forKey: key) {
             cell.goodButton.backgroundColor = .white
             cell.goodButton.alpha = 1
@@ -263,22 +271,23 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        // data transtion - itemTitle, link, productId
         let data = WebViewInfo(text: list[indexPath.row].link, titlelabel: list[indexPath.row].title, key: list[indexPath.row].productId)
         
-        let vc = SearchWebViewController(data: data)
-        
+        // go to webview
         let item = UIBarButtonItem(title: "")
         navigationItem.backBarButtonItem = item
         item.tintColor = .black
         
+        let vc = SearchWebViewController(data: data)
         navigationController?.pushViewController(vc, animated: true)
-        
     }
     
 }
 
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     
+    // custom collectionViewCell
     func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 68
@@ -296,6 +305,7 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
 
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     
+    // pagenation
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
         for item in indexPaths {
@@ -311,6 +321,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
 
 extension SearchResultViewController {
     
+    // custom array buttons
     func buttonDesign(button: UIButton, buttonName: String) {
         
         button.setTitle(buttonName, for: .normal)

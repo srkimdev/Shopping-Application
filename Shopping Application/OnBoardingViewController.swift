@@ -72,6 +72,7 @@ class OnBoardingViewController: UIViewController {
         startButton.layer.masksToBounds = true
         startButton.layer.cornerRadius = 20
         
+        // mode setting - setup mode
         UserDefaults.standard.set(ProfileMode.setup.rawValue, forKey: "mode")
     }
     

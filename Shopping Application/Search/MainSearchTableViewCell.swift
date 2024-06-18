@@ -49,9 +49,9 @@ class MainSearchTableViewCell: UITableViewCell {
         }
         
         deleteButton.snp.makeConstraints { make in
-            make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(14)
+            make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.width.equalTo(deleteButton.snp.height).multipliedBy(1.0)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-8)
         }
         
     }

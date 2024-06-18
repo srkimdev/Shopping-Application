@@ -18,8 +18,7 @@ class ProfileSettingViewController: UIViewController {
     let textFieldLine = UIView()
     let nicknameStatusLable = UILabel()
     let clearButton = UIButton()
-    
-    let mode = UserDefaults.standard.string(forKey: "mode")
+
     var allowed: Bool = false
     var textFieldInput: String = "" {
         didSet {
@@ -42,15 +41,17 @@ class ProfileSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        // from setting
         if UserDefaults.standard.bool(forKey: "fromWhere") {
             profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
             nicknameTextField.text = UserDefaults.standard.string(forKey: "userName")
         } else {
+        // from onboarding
             profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
         }
         
         textFieldInput = UserDefaults.standard.string(forKey: "userName") ?? ""
-    
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -125,7 +126,8 @@ class ProfileSettingViewController: UIViewController {
     
     func configureUI() {
         
-        if mode == "edit"{
+        // mode check
+        if UserDefaults.standard.string(forKey: "mode") == "edit"{
             navigationItem.title = "EDIT PROFILE"
             let item = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
             item.tintColor = CustomDesign.itemTintColor
@@ -175,23 +177,26 @@ class ProfileSettingViewController: UIViewController {
     
     @objc func clearButtonClicked() {
         
+        // you can go to next page and user information will be saved when allowed is true
         if allowed {
             
+            // save - userName, mode, initial screen, joinDate, profileNumber
             UserDefaults.standard.set(textFieldInput, forKey: "userName")
             UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
             UserDefaults.standard.set(true, forKey: "goToSearch")
             UserDefaults.standard.set(joinDate(), forKey: "joinDate")
             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp"), forKey: "profileNumber")
             
+            // go to TabBarController
             let vc = TabBarController()
             vc.modalPresentationStyle = .overFullScreen
             vc.modalTransitionStyle = .crossDissolve
-            
             present(vc, animated: true)
         }
     
     }
     
+    // go back
     @objc func backButtonClicked() {
         navigationController?.popViewController(animated: true)
     }
@@ -201,11 +206,13 @@ class ProfileSettingViewController: UIViewController {
         textFieldInput = text
     }
     
+    // go to profileSelecting when you click the profileImage
     @objc func profileImageButtonClicked() {
         let vc = ProfileSelectingViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    // savebutton in edit mode
     @objc func saveButtonClicked() {
         if allowed {
             UserDefaults.standard.set(nicknameTextField.text, forKey: "userName")
@@ -217,12 +224,14 @@ class ProfileSettingViewController: UIViewController {
 
 extension ProfileSettingViewController {
     
+    // show randomImage
     func randomImage() {
-        let randomNumber: Int = .random(in: 0...11)
+        let randomNumber: Int = .random(in: 0...ConstantTable.profileImageNumber.count - 1)
         profileImage.image = UIImage(named: "profile_\(randomNumber)")
         UserDefaults.standard.set(randomNumber, forKey: "profileNumberTemp")
     }
     
+    // create joinDate
     func joinDate() -> String {
         
         let currentDate = Date()
@@ -233,11 +242,13 @@ extension ProfileSettingViewController {
 
     }
     
+    // check textfield has number or not
     func isDigit(input: String) -> Bool {
         let decimalCharacters = CharacterSet.decimalDigits
         return input.rangeOfCharacter(from: decimalCharacters) != nil
     }
     
+    // check textfield condition and set allowed
     func isNickname() {
         
         if textFieldInput.count < 2 || textFieldInput.count >= 10 {

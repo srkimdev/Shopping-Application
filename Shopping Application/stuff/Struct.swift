@@ -26,6 +26,7 @@ struct SearchResultDetail: Codable {
     
 }
 
+// this is for reusing ProfileSettingViewController
 enum ProfileMode: String {
     
     case setup = "setup"
@@ -53,7 +54,9 @@ struct ConstantTable {
     static let sortSelect = ["sim", "date", "dsc", "asc"]
     static let settingCell = ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
     static let arrayButton = ["정확도", "날짜순", "가격높은순", "가격낮은순"]
+    static let profileImageNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     
+    // joinDate setting
     static func formatNumberString(number: Int) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal

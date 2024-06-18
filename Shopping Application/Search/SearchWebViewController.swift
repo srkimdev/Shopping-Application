@@ -63,6 +63,7 @@ class SearchWebViewController: UIViewController {
     
     @objc func likeButtonClicked() {
         
+        // same with searchResultViewController.likeButtonClicked
         var like: Bool = UserDefaults.standard.bool(forKey: data.key)
         like.toggle()
         
