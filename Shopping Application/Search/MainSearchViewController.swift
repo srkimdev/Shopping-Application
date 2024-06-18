@@ -34,6 +34,9 @@ class MainSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -42,6 +45,7 @@ class MainSearchViewController: UIViewController {
         searchListTableView.delegate = self
         searchListTableView.dataSource = self
         searchListTableView.register(MainSearchTableViewCell.self, forCellReuseIdentifier: MainSearchTableViewCell.identifier)
+        searchListTableView.addGestureRecognizer(tapGesture)
         
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
         
@@ -145,6 +149,18 @@ class MainSearchViewController: UIViewController {
         searchListTableView.separatorStyle = .none
     }
     
+    @objc func deleteButtonClicked(sender: UIButton) {
+        recentSearches.remove(at: sender.tag)
+    }
+    
+    @objc func deleteAllButtonClicked() {
+        recentSearches.removeAll()
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
 }
 
 extension MainSearchViewController: UISearchBarDelegate {
@@ -218,18 +234,6 @@ extension MainSearchViewController {
         }
         
     }
-    
-    @objc func deleteButtonClicked(sender: UIButton) {
-        recentSearches.remove(at: sender.tag)
-    }
-    
-    @objc func deleteAllButtonClicked() {
-        recentSearches.removeAll()
-    }
-    
-}
-
-extension MainSearchViewController {
     
     func saveRecentSearch(search: String) {
         if recentSearches.contains(search) {
