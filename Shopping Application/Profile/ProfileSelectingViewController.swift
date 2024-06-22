@@ -88,7 +88,7 @@ class ProfileSelectingViewController: UIViewController {
     
     func configureUI() {
         
-        // check mode
+        // mode check
         if UserDefaults.standard.string(forKey: "mode") == "edit" {
             navigationItem.title = "EDIT PROFILE"
         } else {

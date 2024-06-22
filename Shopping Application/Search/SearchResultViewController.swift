@@ -252,7 +252,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         let key = list[indexPath.row].productId
         
-        //
+        // change button image
         if UserDefaults.standard.bool(forKey: key) {
             cell.goodButton.backgroundColor = .white
             cell.goodButton.alpha = 1
