@@ -17,7 +17,7 @@ class ProfileSelectingViewController: UIViewController {
     
     lazy var imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     var profileImage: UIImageView?
-    var selectedNumber: Int = UserDefaults.standard.integer(forKey: "profileNumber")
+    var selectedNumber: Int = UserDefaultsManager.profileNumber
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class ProfileSelectingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UserDefaults.standard.set(false, forKey: "fromWhere")
+        UserDefaultsManager.fromWhere = false
     }
     
     override func viewDidLayoutSubviews() {

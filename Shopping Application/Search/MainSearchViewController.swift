@@ -52,7 +52,7 @@ class MainSearchViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "\(UserDefaults.standard.string(forKey: "userName")!)'s MEANING OUT"
+        navigationItem.title = "\(UserDefaultsManager.userName)'s MEANING OUT"
     }
 
     func configureHierarchy() {

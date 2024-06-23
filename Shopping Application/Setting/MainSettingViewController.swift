@@ -26,7 +26,7 @@ class MainSettingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UserDefaults.standard.set(true, forKey: "fromWhere")
+        UserDefaultsManager.fromWhere = true
         settingTableView.reloadData()
     }
     
@@ -59,9 +59,9 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
             
-            cell.profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+            cell.profileImage.image = UIImage(named: "profile_\(UserDefaultsManager.profileNumber)")
             
-            cell.profileName.text = UserDefaults.standard.string(forKey: "userName")
+            cell.profileName.text = UserDefaultsManager.userName
             
             return cell
             
@@ -72,7 +72,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             
             if indexPath.row == 1 {
                 cell.saveImage.image = CustomDesign.likeImage
-                cell.countLabel.text = "\(UserDefaults.standard.integer(forKey: "totalLike"))개의 상품"
+                cell.countLabel.text = "\(UserDefaultsManager.totalLike)개의 상품"
             } else {
                 cell.saveImage.image = nil
                 cell.countLabel.text = nil

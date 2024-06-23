@@ -181,11 +181,12 @@ class ProfileSettingViewController: UIViewController {
         if allowed {
             
             // save - userName, mode, initial screen, joinDate, profileNumber
-            UserDefaults.standard.set(textFieldInput, forKey: "userName")
+            UserDefaultsManager.userName = textFieldInput
+            UserDefaultsManager.goToSearch = true
+            UserDefaultsManager.joinDate = joinDate()
+            UserDefaultsManager.profileNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
+            
             UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
-            UserDefaults.standard.set(true, forKey: "goToSearch")
-            UserDefaults.standard.set(joinDate(), forKey: "joinDate")
-            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp"), forKey: "profileNumber")
             
             // go to TabBarController
             let vc = TabBarController()
@@ -215,8 +216,8 @@ class ProfileSettingViewController: UIViewController {
     // savebutton in edit mode
     @objc func saveButtonClicked() {
         if allowed {
-            UserDefaults.standard.set(nicknameTextField.text, forKey: "userName")
-            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "profileNumberTemp") , forKey: "profileNumber")
+            UserDefaultsManager.userName = nicknameTextField.text!
+            UserDefaultsManager.profileNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
         }
     }
 

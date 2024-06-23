@@ -220,7 +220,7 @@ class SearchResultViewController: UIViewController {
         like.toggle()
     
         // count total like
-        ConstantTable.likeCount = UserDefaults.standard.integer(forKey: "totalLike")
+        ConstantTable.likeCount = UserDefaultsManager.totalLike
         
         if like {
             ConstantTable.likeCount += 1
@@ -229,7 +229,7 @@ class SearchResultViewController: UIViewController {
         }
         
         // save total like, isLike
-        UserDefaults.standard.set(ConstantTable.likeCount, forKey: "totalLike")
+        UserDefaultsManager.totalLike = ConstantTable.likeCount
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         productCollectionView.reloadData()
         

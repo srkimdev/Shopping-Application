@@ -67,7 +67,7 @@ class SearchWebViewController: UIViewController {
         var like: Bool = UserDefaults.standard.bool(forKey: data.key)
         like.toggle()
         
-        ConstantTable.likeCount = UserDefaults.standard.integer(forKey: "totalLike")
+        ConstantTable.likeCount = UserDefaultsManager.totalLike
         
         if like {
             ConstantTable.likeCount += 1
@@ -75,7 +75,7 @@ class SearchWebViewController: UIViewController {
             ConstantTable.likeCount -= 1
         }
         
-        UserDefaults.standard.set(ConstantTable.likeCount, forKey: "totalLike")
+        UserDefaultsManager.totalLike = ConstantTable.likeCount
 
         if like {
             let item = UIBarButtonItem(image: CustomDesign.likeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
