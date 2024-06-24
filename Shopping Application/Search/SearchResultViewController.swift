@@ -31,7 +31,9 @@ class SearchResultViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureUI()
-        callRequest(text: data!)
+        callRequest(text: data!) { value in
+            self.alamofireDesign(value: value)
+        }
         
         productCollectionView.delegate = self
         productCollectionView.dataSource = self
@@ -136,7 +138,7 @@ class SearchResultViewController: UIViewController {
         
     }
     
-    func callRequest(text: String) {
+    func callRequest(text: String, completionHandler: @escaping (SearchResult) -> Void) {
         
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[ConstantTable.sortOption])"
         
@@ -151,38 +153,7 @@ class SearchResultViewController: UIViewController {
                 
             case .success(let value):
 
-                var totalCount = 0
-                totalCount = value.total
-                self.totalLabel.text = "\(ConstantTable.formatNumberString(number: totalCount))개의 검색 결과"
-                
-                var filteredList = [SearchResultDetail]()
-                
-                if self.start == 1 {
-                    
-                    for item in value.items {
-                        filteredList.append(item)
-                    }
-                    
-                    self.list = filteredList
-                    
-                } else {
-                    
-                    // pagenation
-                    for item in value.items {
-                        filteredList.append(item)
-                    }
-                    
-                    self.list.append(contentsOf: filteredList)
-                    
-                }
-                
-                self.productCollectionView.reloadData()
-                
-                
-                // scroll to top
-                if self.start == 1 {
-                    self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-                }
+                completionHandler(value)
                 
             case .failure(let error):
                 print(error)
@@ -201,7 +172,10 @@ class SearchResultViewController: UIViewController {
         // sort by arraybutton, page is set to 1
         start = 1
         ConstantTable.sortOption = sender.tag
-        callRequest(text: data!)
+//        callRequest(text: data!)
+        callRequest(text: data!) { value in
+            self.alamofireDesign(value: value)
+        }
         
         // button view change
         [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
@@ -312,7 +286,9 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             if list.count - 4 == item.row {
                 start += 30
                 if totalPage != start {
-                    callRequest(text: data!)
+                    callRequest(text: data!) { value in
+                        self.alamofireDesign(value: value)
+                    }
                 }
             }
         }
@@ -331,6 +307,41 @@ extension SearchResultViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.cornerRadius = 15
+        
+    }
+    
+    func alamofireDesign(value: SearchResult) {
+        
+        let totalCount = value.total
+        self.totalLabel.text = "\(ConstantTable.formatNumberString(number: totalCount))개의 검색 결과"
+        
+        var filteredList = [SearchResultDetail]()
+        
+        if self.start == 1 {
+            
+            for item in value.items {
+                filteredList.append(item)
+            }
+            
+            self.list = filteredList
+            
+        } else {
+            
+            // pagenation
+            for item in value.items {
+                filteredList.append(item)
+            }
+            
+            self.list.append(contentsOf: filteredList)
+            
+        }
+        
+        self.productCollectionView.reloadData()
+        
+        // scroll to top
+        if self.start == 1 {
+            self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
         
     }
     

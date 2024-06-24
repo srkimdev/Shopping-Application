@@ -117,21 +117,8 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             }
             
             // alert setting
-            let alert = UIAlertController(
-                title: "탈퇴하기",
-                message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
-                preferredStyle: .alert)
-                
-            let check = UIAlertAction(title: "확인", style: .default) {_ in 
-                self.initialize()
-            }
+            showAlert(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?", completionHandler: initialize)
             
-            let cancel = UIAlertAction(title: "취소", style: .cancel)
-                
-            alert.addAction(cancel)
-            alert.addAction(check)
-                
-            present(alert, animated: true)
         }
 
     }
@@ -150,6 +137,26 @@ extension MainSettingViewController {
         
         sceneDelegate?.window?.rootViewController = rootViewcontroller
         sceneDelegate?.window?.makeKeyAndVisible()
+    }
+    
+    func showAlert(title: String, message: String, completionHandler: @escaping () -> Void) {
+        
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+            
+        let check = UIAlertAction(title: "확인", style: .default) { _ in
+            completionHandler()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+            
+        alert.addAction(cancel)
+        alert.addAction(check)
+            
+        present(alert, animated: true)
+        
     }
     
 }
