@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 import SnapKit
 
-class SearchWebViewController: UIViewController {
+class SearchWebViewController: BaseViewController {
 
     let website = WKWebView()
     var data: WebViewInfo
@@ -25,7 +25,7 @@ class SearchWebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -36,17 +36,17 @@ class SearchWebViewController: UIViewController {
         
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(website)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         website.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 
-    func configureUI() {
+    override func configureUI() {
         
         view.backgroundColor = CustomDesign.viewBackgoundColor
         navigationItem.title = data.titlelabel.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")

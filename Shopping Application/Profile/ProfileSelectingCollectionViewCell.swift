@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileSelectingCollectionViewCell: UICollectionViewCell {
+class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
     
     let profileImage = UIImageView()
     
@@ -21,23 +21,19 @@ class ProfileSelectingCollectionViewCell: UICollectionViewCell {
         
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         contentView.addSubview(profileImage)
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         profileImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
@@ -45,7 +41,7 @@ class ProfileSelectingCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderWidth = CustomDesign.profileBorderWidth1

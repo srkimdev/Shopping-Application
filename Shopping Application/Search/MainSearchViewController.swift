@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainSearchViewController: UIViewController {
+class MainSearchViewController: BaseViewController {
 
     let searchBar = UISearchBar()
     let searchBarLine = UIView()
@@ -35,11 +35,11 @@ class MainSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureHierarchy()
         configureLayout()
         configureUI()
-
+        
         searchBar.delegate = self
         searchListTableView.delegate = self
         searchListTableView.dataSource = self
@@ -55,7 +55,7 @@ class MainSearchViewController: UIViewController {
         navigationItem.title = "\(UserDefaultsManager.userName)'s MEANING OUT"
     }
 
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(searchBar)
         view.addSubview(searchBarLine)
@@ -68,7 +68,7 @@ class MainSearchViewController: UIViewController {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -119,7 +119,7 @@ class MainSearchViewController: UIViewController {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         view.backgroundColor = CustomDesign.viewBackgoundColor
         

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class OnBoardingViewController: UIViewController {
+class OnBoardingViewController: BaseViewController {
 
     let titleLabel = UILabel()
     let imageLabel = UIImageView()
@@ -16,7 +16,7 @@ class OnBoardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -25,7 +25,7 @@ class OnBoardingViewController: UIViewController {
         
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(titleLabel)
         view.addSubview(imageLabel)
@@ -33,7 +33,7 @@ class OnBoardingViewController: UIViewController {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(90)
@@ -55,7 +55,8 @@ class OnBoardingViewController: UIViewController {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
+        super.configureUI()
         
         view.backgroundColor = CustomDesign.viewBackgoundColor
         titleLabel.text = "MeaningOut"

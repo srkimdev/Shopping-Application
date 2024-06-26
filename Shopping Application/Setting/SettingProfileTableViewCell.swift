@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SettingProfileTableViewCell: UITableViewCell {
+class SettingProfileTableViewCell: BaseTableViewCell {
 
     let profileImage = UIImageView()
     let profileName = UILabel()
@@ -17,14 +17,11 @@ class SettingProfileTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         configureHierarchy()
         configureLayout()
         configureUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
     }
     
     override func draw(_ rect: CGRect) {
@@ -32,7 +29,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         contentView.addSubview(profileImage)
         contentView.addSubview(profileName)
@@ -41,7 +38,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         profileImage.snp.makeConstraints { make in
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
@@ -70,7 +67,7 @@ class SettingProfileTableViewCell: UITableViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderWidth = CustomDesign.profileBorderWidth3

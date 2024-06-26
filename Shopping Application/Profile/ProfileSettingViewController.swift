@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileSettingViewController: UIViewController {
+class ProfileSettingViewController: BaseViewController {
 
     let profileImage = UIImageView()
     let profileImageButton = UIButton()
@@ -28,7 +28,7 @@ class ProfileSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         configureHierarchy()
         configureLayout()
         configureUI()
@@ -59,7 +59,7 @@ class ProfileSettingViewController: UIViewController {
         cameraImageView.layer.cornerRadius = 10
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(profileImage)
         view.addSubview(profileImageButton)
@@ -72,7 +72,7 @@ class ProfileSettingViewController: UIViewController {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         profileImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -124,7 +124,7 @@ class ProfileSettingViewController: UIViewController {
         }
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         // mode check
         if UserDefaults.standard.string(forKey: "mode") == "edit"{

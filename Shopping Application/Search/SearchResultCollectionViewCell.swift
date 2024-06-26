@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class SearchResultCollectionViewCell: UICollectionViewCell {
+class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     let productImage = UIImageView()
     let goodButton = UIButton()
@@ -19,18 +19,14 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         configureHierarchy()
         configureLayout()
         configureUI()
         
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         contentView.addSubview(productImage)
         productImage.addSubview(goodButton)
@@ -40,7 +36,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         productImage.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide)
@@ -73,7 +69,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         productImage.layer.masksToBounds = true
         productImage.isUserInteractionEnabled = true

@@ -7,17 +7,17 @@
 
 import UIKit
 
-class MainSettingViewController: UIViewController {
+class MainSettingViewController: BaseViewController {
 
     let settingTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureHierarchy()
         configureLayout()
         configureUI()
-        
+
         settingTableView.delegate = self
         settingTableView.dataSource = self
         settingTableView.register(SettingProfileTableViewCell.self, forCellReuseIdentifier: SettingProfileTableViewCell.identifier)
@@ -30,17 +30,17 @@ class MainSettingViewController: UIViewController {
         settingTableView.reloadData()
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(settingTableView)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         settingTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    func configureUI() {
+    override func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "SETTING"
     }

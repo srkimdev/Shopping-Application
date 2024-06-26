@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainSearchTableViewCell: UITableViewCell {
+class MainSearchTableViewCell: BaseTableViewCell {
 
     let timeImage = UIImageView()
     let productLabel = UILabel()
@@ -23,11 +23,7 @@ class MainSearchTableViewCell: UITableViewCell {
         
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         contentView.addSubview(timeImage)
         contentView.addSubview(productLabel)
@@ -35,7 +31,7 @@ class MainSearchTableViewCell: UITableViewCell {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         timeImage.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(12)
@@ -56,7 +52,7 @@ class MainSearchTableViewCell: UITableViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         timeImage.image = UIImage(systemName: "clock")
         timeImage.tintColor = CustomDesign.itemTintColor

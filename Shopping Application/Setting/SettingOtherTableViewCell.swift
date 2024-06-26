@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SettingOtherTableViewCell: UITableViewCell {
+class SettingOtherTableViewCell: BaseTableViewCell {
 
     let listLabel = UILabel()
     let saveImage = UIImageView()
@@ -20,13 +20,10 @@ class SettingOtherTableViewCell: UITableViewCell {
         configureHierarchy()
         configureLayout()
         configureUI()
+        
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureHierarchy() {
+
+    override func configureHierarchy() {
         
         contentView.addSubview(listLabel)
         contentView.addSubview(saveImage)
@@ -34,7 +31,7 @@ class SettingOtherTableViewCell: UITableViewCell {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         listLabel.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
@@ -53,7 +50,7 @@ class SettingOtherTableViewCell: UITableViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         listLabel.font = .systemFont(ofSize: 13)
         countLabel.font = .systemFont(ofSize: 13)
     }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class SearchResultViewController: UIViewController {
+class SearchResultViewController: BaseViewController {
 
     lazy var productCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
@@ -27,10 +27,11 @@ class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureHierarchy()
         configureLayout()
         configureUI()
+
         callRequest(text: data!) { value in
             self.alamofireDesign(value: value)
         }
@@ -51,7 +52,7 @@ class SearchResultViewController: UIViewController {
         productCollectionView.reloadData()
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(line)
         view.addSubview(totalLabel)
@@ -63,7 +64,7 @@ class SearchResultViewController: UIViewController {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         line.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -113,7 +114,7 @@ class SearchResultViewController: UIViewController {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         view.backgroundColor = CustomDesign.viewBackgoundColor
         navigationItem.title = data
@@ -172,7 +173,7 @@ class SearchResultViewController: UIViewController {
         // sort by arraybutton, page is set to 1
         start = 1
         ConstantTable.sortOption = sender.tag
-//        callRequest(text: data!)
+
         callRequest(text: data!) { value in
             self.alamofireDesign(value: value)
         }

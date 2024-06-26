@@ -28,6 +28,9 @@
 		DC487D432C1D3E61006B7AAF /* SettingOtherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D422C1D3E61006B7AAF /* SettingOtherTableViewCell.swift */; };
 		DC487D452C1D6E10006B7AAF /* MainSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */; };
 		DC487D472C1DBE5D006B7AAF /* SearchWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D462C1DBE5D006B7AAF /* SearchWebViewController.swift */; };
+		DC67AD2B2C2BDF0100A5129F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2A2C2BDF0100A5129F /* BaseViewController.swift */; };
+		DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2C2C2BDF9B00A5129F /* BaseTableViewCell.swift */; };
+		DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -60,6 +63,9 @@
 		DC487D422C1D3E61006B7AAF /* SettingOtherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingOtherTableViewCell.swift; sourceTree = "<group>"; };
 		DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchTableViewCell.swift; sourceTree = "<group>"; };
 		DC487D462C1DBE5D006B7AAF /* SearchWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWebViewController.swift; sourceTree = "<group>"; };
+		DC67AD2A2C2BDF0100A5129F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		DC67AD2C2C2BDF9B00A5129F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 				DC487D142C1AE4DC006B7AAF /* Assets.xcassets */,
 				DC487D162C1AE4DC006B7AAF /* LaunchScreen.storyboard */,
 				DC487D192C1AE4DC006B7AAF /* Info.plist */,
+				DC67AD292C2BDED200A5129F /* Base */,
 				DCA841C92C201D4C00B21AF2 /* stuff */,
 				DC487D282C1AE767006B7AAF /* OnBoardingViewController.swift */,
 				DCA841C72C20187700B21AF2 /* Profile */,
@@ -113,6 +120,16 @@
 				DCA841C62C20185F00B21AF2 /* Setting */,
 			);
 			path = "Shopping Application";
+			sourceTree = "<group>";
+		};
+		DC67AD292C2BDED200A5129F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DC67AD2A2C2BDF0100A5129F /* BaseViewController.swift */,
+				DC67AD2C2C2BDF9B00A5129F /* BaseTableViewCell.swift */,
+				DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		DCA841C62C20185F00B21AF2 /* Setting */ = {
@@ -246,6 +263,8 @@
 				DC487D372C1C29B8006B7AAF /* TabBarController.swift in Sources */,
 				DC487D2F2C1C0700006B7AAF /* ReusableProtocol.swift in Sources */,
 				DC487D392C1C2A2C006B7AAF /* MainSettingViewController.swift in Sources */,
+				DC67AD2B2C2BDF0100A5129F /* BaseViewController.swift in Sources */,
+				DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */,
 				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
 				DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
@@ -256,6 +275,7 @@
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
 				DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */,
 				DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */,
+				DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */,
 				DC487D3D2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift in Sources */,
 				DC487D432C1D3E61006B7AAF /* SettingOtherTableViewCell.swift in Sources */,
 				DC487D452C1D6E10006B7AAF /* MainSearchTableViewCell.swift in Sources */,
