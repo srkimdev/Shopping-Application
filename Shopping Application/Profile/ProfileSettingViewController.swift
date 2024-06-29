@@ -28,11 +28,7 @@ class ProfileSettingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
+
         clearButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         profileImageButton.addTarget(self, action: #selector(profileImageButtonClicked), for: .touchUpInside)

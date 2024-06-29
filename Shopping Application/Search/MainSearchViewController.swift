@@ -35,10 +35,6 @@ class MainSearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureHierarchy()
-        configureLayout()
-        configureUI()
         
         searchBar.delegate = self
         searchListTableView.delegate = self

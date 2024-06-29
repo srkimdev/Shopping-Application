@@ -27,10 +27,6 @@ class SearchResultViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
 
         callRequest(text: data!) { value in
             self.alamofireDesign(value: value)

@@ -13,20 +13,16 @@ class OnBoardingViewController: BaseViewController {
     let titleLabel = UILabel()
     let imageLabel = UIImageView()
     let startButton = UIButton()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
         
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         
     }
     
     override func configureHierarchy() {
-        
+    
         view.addSubview(titleLabel)
         view.addSubview(imageLabel)
         view.addSubview(startButton)
@@ -56,7 +52,6 @@ class OnBoardingViewController: BaseViewController {
     }
     
     override func configureUI() {
-        super.configureUI()
         
         view.backgroundColor = CustomDesign.viewBackgoundColor
         titleLabel.text = "MeaningOut"

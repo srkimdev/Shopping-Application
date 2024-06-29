@@ -13,10 +13,6 @@ class MainSettingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
 
         settingTableView.delegate = self
         settingTableView.dataSource = self

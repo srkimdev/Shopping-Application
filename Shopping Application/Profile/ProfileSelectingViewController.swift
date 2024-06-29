@@ -22,10 +22,6 @@ class ProfileSelectingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
         imageCollectionView.register(ProfileSelectingCollectionViewCell.self, forCellWithReuseIdentifier: ProfileSelectingCollectionViewCell.identifier)

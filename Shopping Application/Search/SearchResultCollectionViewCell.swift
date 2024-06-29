@@ -19,10 +19,6 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        configureHierarchy()
-        configureLayout()
-        configureUI()
         
     }
     

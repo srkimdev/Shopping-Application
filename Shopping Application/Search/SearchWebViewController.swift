@@ -26,10 +26,6 @@ class SearchWebViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
         let url = URL(string: data.text)!
         let request = URLRequest(url: url)
         website.load(request)

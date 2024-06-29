@@ -12,6 +12,11 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureHierarchy()
+        configureLayout()
+        configureUI()
+        view.backgroundColor = .white
+        
     }
     
     func configureHierarchy() {
@@ -23,7 +28,7 @@ class BaseViewController: UIViewController {
     }
     
     func configureUI() {
-        view.backgroundColor = .white
+        
     }
     
 }
