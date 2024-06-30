@@ -10,13 +10,17 @@ import SnapKit
 
 class OnBoardingViewController: BaseViewController {
 
-    
+    let mainView = OnBoardingView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+        mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         
+    }
+    
+    override func loadView() {
+        view = mainView
     }
     
     
