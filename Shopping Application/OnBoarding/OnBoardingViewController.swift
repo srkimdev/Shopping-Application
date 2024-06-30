@@ -17,13 +17,13 @@ class OnBoardingViewController: BaseViewController {
         
         mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         
+        // mode setting - setup mode
+        UserDefaults.standard.set(ProfileMode.setup.rawValue, forKey: "mode")
     }
     
     override func loadView() {
         view = mainView
     }
-    
-    
     
     @objc func startButtonClicked() {
         let vc = ProfileSettingViewController()
