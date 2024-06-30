@@ -61,6 +61,5 @@ class OnBoardingView: BaseView {
         startButton.layer.cornerRadius = 20
         
     }
-    
-    
+
 }
