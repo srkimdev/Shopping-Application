@@ -11,8 +11,9 @@ import SnapKit
 
 class SearchWebViewController: BaseViewController {
 
-    let website = WKWebView()
     var data: WebViewInfo
+    
+    let mainView = SearchWebView()
    
     init(data: WebViewInfo) {
         self.data = data
@@ -23,28 +24,19 @@ class SearchWebViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let url = URL(string: data.text)!
         let request = URLRequest(url: url)
-        website.load(request)
-        
+        mainView.website.load(request)
     }
     
-    override func configureHierarchy() {
-        view.addSubview(website)
-    }
-    
-    override func configureLayout() {
-        website.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-
     override func configureUI() {
-        
-        view.backgroundColor = CustomDesign.viewBackgoundColor
         navigationItem.title = data.titlelabel.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         
         if UserDefaults.standard.bool(forKey: data.key) {
@@ -54,7 +46,6 @@ class SearchWebViewController: BaseViewController {
             let item = UIBarButtonItem(image: CustomDesign.unlikeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
             navigationItem.rightBarButtonItem = item
         }
-
     }
     
     @objc func likeButtonClicked() {

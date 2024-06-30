@@ -123,7 +123,7 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as! ProfileSelectingCollectionViewCell
+        guard let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as? ProfileSelectingCollectionViewCell else { return UICollectionViewCell() }
         
         selectedNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
         cell.designCell(transition: indexPath.row, num: selectedNumber)
