@@ -119,7 +119,6 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
 
     }
     
-    
 }
 
 extension MainSettingViewController {
