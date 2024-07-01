@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import WebKit
 
-class SearchWebView: BaseView {
+final class SearchWebView: BaseView {
     
     let website = WKWebView()
     

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainSearchTableViewCell: BaseTableViewCell {
+final class MainSearchTableViewCell: BaseTableViewCell {
 
     let timeImage = UIImageView()
     let productLabel = UILabel()
@@ -60,7 +60,7 @@ class MainSearchTableViewCell: BaseTableViewCell {
         
     }
     
-    func designCell(transition: String) {
+    private func designCell(transition: String) {
         productLabel.text = transition
     }
 

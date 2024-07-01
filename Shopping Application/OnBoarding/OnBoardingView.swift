@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class OnBoardingView: BaseView {
+final class OnBoardingView: BaseView {
     
     let titleLabel = UILabel()
     let imageLabel = UIImageView()

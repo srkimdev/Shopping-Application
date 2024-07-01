@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class SearchResultViewController: BaseViewController {
+final class SearchResultViewController: BaseViewController {
 
     lazy var productCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
@@ -135,7 +135,7 @@ class SearchResultViewController: BaseViewController {
         
     }
     
-    func callRequest(text: String, completionHandler: @escaping (SearchResult) -> Void) {
+    private func callRequest(text: String, completionHandler: @escaping (SearchResult) -> Void) {
         
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[ConstantTable.sortOption])"
         
@@ -202,7 +202,10 @@ class SearchResultViewController: BaseViewController {
         // save total like, isLike
         UserDefaultsManager.totalLike = ConstantTable.likeCount
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
-        productCollectionView.reloadData()
+        
+//        UIView.performWithoutAnimation {
+            productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
+//        }x`x`
         
     }
 
@@ -216,25 +219,11 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+        guard let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as? SearchResultCollectionViewCell else { return UICollectionViewCell() }
         
         cell.designCell(transition: list[indexPath.row])
+        
         cell.goodButton.tag = indexPath.row
-        
-        let key = list[indexPath.row].productId
-        
-        // change button image
-        if UserDefaults.standard.bool(forKey: key) {
-            cell.goodButton.backgroundColor = .white
-            cell.goodButton.alpha = 1
-            cell.goodButton.setImage(CustomDesign.likeImage, for: .normal)
-            
-        } else {
-            cell.goodButton.backgroundColor = .black
-            cell.goodButton.alpha = 0.3
-            cell.goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
-        }
-        
         cell.goodButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         
         return cell
@@ -295,7 +284,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
 extension SearchResultViewController {
     
     // custom array buttons
-    func buttonDesign(button: UIButton, buttonName: String) {
+    private func buttonDesign(button: UIButton, buttonName: String) {
         
         button.setTitle(buttonName, for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -307,7 +296,7 @@ extension SearchResultViewController {
         
     }
     
-    func alamofireDesign(value: SearchResult) {
+    private func alamofireDesign(value: SearchResult) {
         
         let totalCount = value.total
         self.totalLabel.text = "\(ConstantTable.formatNumberString(number: totalCount))개의 검색 결과"
@@ -339,7 +328,5 @@ extension SearchResultViewController {
         if self.start == 1 {
             self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
-        
     }
-    
 }

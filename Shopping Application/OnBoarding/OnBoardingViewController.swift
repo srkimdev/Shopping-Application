@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class OnBoardingViewController: BaseViewController {
+final class OnBoardingViewController: BaseViewController {
 
     let mainView = OnBoardingView()
 

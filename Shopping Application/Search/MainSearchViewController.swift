@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainSearchViewController: BaseViewController {
+final class MainSearchViewController: BaseViewController {
 
     let searchBar = UISearchBar()
     let searchBarLine = UIView()
@@ -213,7 +213,7 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainSearchViewController {
     
     // show noRecentText or tableViewCell
-    func isRecentText() {
+    private func isRecentText() {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
@@ -242,7 +242,7 @@ extension MainSearchViewController {
     }
     
     // prevent overlap and set the recent text to top
-    func saveRecentSearch(search: String) {
+    private func saveRecentSearch(search: String) {
         if recentSearches.contains(search) {
             recentSearches.removeAll { $0 == search }
         }
@@ -250,7 +250,7 @@ extension MainSearchViewController {
     }
     
     // set previous search words when you turn on the app
-    func loadRecentSearches() -> [String] {
+    private func loadRecentSearches() -> [String] {
         return UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
     }
     

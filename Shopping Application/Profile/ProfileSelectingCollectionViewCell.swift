@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
+final class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
     
     let profileImage = UIImageView()
     
@@ -45,7 +45,7 @@ class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
         profileImage.alpha = 0.5
     }
     
-    func designCell(transition: Int, num: Int) {
+    private func designCell(transition: Int, num: Int) {
         profileImage.image = UIImage(named: "profile_\(transition)")
         
         if transition == num {
@@ -56,6 +56,5 @@ class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
             profileImage.alpha = 0.5
         }
     }
-    
     
 }

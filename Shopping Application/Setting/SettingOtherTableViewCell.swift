@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SettingOtherTableViewCell: BaseTableViewCell {
+final class SettingOtherTableViewCell: BaseTableViewCell {
 
     let listLabel = UILabel()
     let saveImage = UIImageView()
@@ -51,7 +51,7 @@ class SettingOtherTableViewCell: BaseTableViewCell {
         countLabel.font = .systemFont(ofSize: 13)
     }
     
-    func designCell(transition: String) {
+    private func designCell(transition: String) {
         listLabel.text = transition
     }
     

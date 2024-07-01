@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileSettingViewController: BaseViewController {
+final class ProfileSettingViewController: BaseViewController {
 
     let mainView = ProfileSettingView()
     
@@ -42,7 +42,6 @@ class ProfileSettingViewController: BaseViewController {
         // from onboarding
             mainView.profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
         }
-        
         
         if UserDefaults.standard.string(forKey: "mode") == "edit" {
             textFieldInput = UserDefaults.standard.string(forKey: "userName") ?? ""
@@ -127,14 +126,14 @@ class ProfileSettingViewController: BaseViewController {
 extension ProfileSettingViewController {
     
     // show randomImage
-    func randomImage() {
+    private func randomImage() {
         let randomNumber: Int = .random(in: 0...ConstantTable.profileImageNumber.count - 1)
         mainView.profileImage.image = UIImage(named: "profile_\(randomNumber)")
         UserDefaults.standard.set(randomNumber, forKey: "profileNumberTemp")
     }
     
     // create joinDate
-    func joinDate() -> String {
+    private func joinDate() -> String {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
 
@@ -143,13 +142,13 @@ extension ProfileSettingViewController {
     }
     
     // check textfield has number or not
-    func isDigit(input: String) -> Bool {
+    private func isDigit(input: String) -> Bool {
         let decimalCharacters = CharacterSet.decimalDigits
         return input.rangeOfCharacter(from: decimalCharacters) != nil
     }
     
     // check textfield condition and set allowed
-    func isNickname() {
+    private func isNickname() {
         
         if textFieldInput.count < 2 || textFieldInput.count >= 10 {
             mainView.nicknameStatusLable.text = "2글자 이상 10글자 미만으로 입력해주세요."

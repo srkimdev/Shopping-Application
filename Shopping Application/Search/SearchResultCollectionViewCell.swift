@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class SearchResultCollectionViewCell: BaseCollectionViewCell {
+final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     let productImage = UIImageView()
     let goodButton = UIButton()
@@ -86,7 +86,7 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
         
     }
     
-    func designCell(transition: SearchResultDetail) {
+    private func designCell(transition: SearchResultDetail) {
         
         let url = URL(string: transition.image)
         productImage.kf.setImage(with: url)
@@ -94,6 +94,20 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
         companyLabel.text = transition.mallName
         productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.lprice)!))원"
+        
+        let key = transition.productId
+        
+        // change button image
+        if UserDefaults.standard.bool(forKey: key) {
+            goodButton.backgroundColor = .white
+            goodButton.alpha = 1
+            goodButton.setImage(CustomDesign.likeImage, for: .normal)
+            
+        } else {
+            goodButton.backgroundColor = .black
+            goodButton.alpha = 0.3
+            goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
+        }
         
     }
 

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SettingProfileTableViewCell: BaseTableViewCell {
+final class SettingProfileTableViewCell: BaseTableViewCell {
 
     let profileImage = UIImageView()
     let profileName = UILabel()

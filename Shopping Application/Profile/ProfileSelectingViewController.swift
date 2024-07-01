@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileSelectingViewController: BaseViewController {
+final class ProfileSelectingViewController: BaseViewController {
 
     let selectedImage = UIImageView()
     let selectedImageButton = UIButton()

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileSettingView: BaseView {
+final class ProfileSettingView: BaseView {
     
     let profileImage = UIImageView()
     let profileImageButton = UIButton()

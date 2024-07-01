@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainSettingViewController: BaseViewController {
+final class MainSettingViewController: BaseViewController {
 
     let settingTableView = UITableView()
     
@@ -124,7 +124,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
 extension MainSettingViewController {
     
     // go to OnBoarding screen when you click "확인" button
-    func initialize() {
+    private func initialize() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         
@@ -134,7 +134,7 @@ extension MainSettingViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     
-    func showAlert(title: String, message: String, completionHandler: @escaping () -> Void) {
+    private func showAlert(title: String, message: String, completionHandler: @escaping () -> Void) {
         
         let alert = UIAlertController(
             title: title,

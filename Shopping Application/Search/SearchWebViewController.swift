@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 import SnapKit
 
-class SearchWebViewController: BaseViewController {
+final class SearchWebViewController: BaseViewController {
 
     var data: WebViewInfo
     
