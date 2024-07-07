@@ -45,7 +45,7 @@ final class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
         profileImage.alpha = 0.5
     }
     
-    private func designCell(transition: Int, num: Int) {
+    func designCell(transition: Int, num: Int) {
         profileImage.image = UIImage(named: "profile_\(transition)")
         
         if transition == num {

@@ -51,7 +51,7 @@ final class SettingOtherTableViewCell: BaseTableViewCell {
         countLabel.font = .systemFont(ofSize: 13)
     }
     
-    private func designCell(transition: String) {
+    func designCell(transition: String) {
         listLabel.text = transition
     }
     

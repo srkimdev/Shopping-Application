@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import RealmSwift
 
 final class SearchResultViewController: BaseViewController {
 
@@ -20,6 +21,7 @@ final class SearchResultViewController: BaseViewController {
     let priceUpButton = UIButton()
     let priceDownButton = UIButton()
     
+    let realm = try! Realm()
     var data: String?
     var list: [SearchResultDetail] = []
     var totalPage = 0
@@ -57,7 +59,6 @@ final class SearchResultViewController: BaseViewController {
         view.addSubview(priceUpButton)
         view.addSubview(priceDownButton)
         view.addSubview(productCollectionView)
-        
     }
     
     override func configureLayout() {
@@ -193,19 +194,36 @@ final class SearchResultViewController: BaseViewController {
         // count total like
         ConstantTable.likeCount = UserDefaultsManager.totalLike
         
+        let task = DBTable(productId: list[sender.tag].productId, productImage: list[sender.tag].image, productCompany: list[sender.tag].mallName, productName: list[sender.tag].title, productPrice: list[sender.tag].lprice, productLink: list[sender.tag].link)
+        
         if like {
             ConstantTable.likeCount += 1
+            
+            try! realm.write {
+                realm.add(task)
+            }
+            
         } else {
+            
             ConstantTable.likeCount -= 1
+            
+            let filterProduct = realm.objects(DBTable.self).filter {
+                $0.productId == self.list[sender.tag].productId
+            }
+            
+            try! realm.write {
+                realm.delete(filterProduct)
+            }
+            
         }
         
         // save total like, isLike
         UserDefaultsManager.totalLike = ConstantTable.likeCount
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         
-//        UIView.performWithoutAnimation {
+        UIView.performWithoutAnimation {
             productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
-//        }x`x`
+        }
         
     }
 

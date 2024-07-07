@@ -1,15 +1,15 @@
 //
-//  SearchResultCollectionViewCell.swift
+//  SearchSaveCollectionViewCell.swift
 //  Shopping Application
 //
-//  Created by 김성률 on 6/14/24.
+//  Created by 김성률 on 7/7/24.
 //
 
 import UIKit
 import SnapKit
 import Kingfisher
 
-final class SearchResultCollectionViewCell: BaseCollectionViewCell {
+class SearchSaveCollectionViewCell: BaseCollectionViewCell {
     
     let productImage = UIImageView()
     let goodButton = UIButton()
@@ -71,7 +71,8 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         productImage.isUserInteractionEnabled = true
         productImage.layer.cornerRadius = 10
         
-        goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
+        goodButton.backgroundColor = .white
+        goodButton.setImage(CustomDesign.likeImage, for: .normal)
         goodButton.imageEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         goodButton.layer.masksToBounds = true
         goodButton.layer.cornerRadius = 5
@@ -86,29 +87,17 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         
     }
     
-    func designCell(transition: SearchResultDetail) {
+    func designCell(transition: DBTable) {
         
-        let url = URL(string: transition.image)
+        print(1)
+        
+        let url = URL(string: transition.productImage)
         productImage.kf.setImage(with: url)
         
-        companyLabel.text = transition.mallName
-        productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-        priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.lprice)!))원"
-        
-        let key = transition.productId
-        
-        // change button image
-        if UserDefaults.standard.bool(forKey: key) {
-            goodButton.backgroundColor = .white
-            goodButton.alpha = 1
-            goodButton.setImage(CustomDesign.likeImage, for: .normal)
-            
-        } else {
-            goodButton.backgroundColor = .black
-            goodButton.alpha = 0.3
-            goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
-        }
+        companyLabel.text = transition.productCompany
+        productLabel.text = transition.productName.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.productPrice)!))원"
         
     }
-
+    
 }

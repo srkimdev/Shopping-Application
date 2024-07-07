@@ -60,7 +60,7 @@ final class MainSearchTableViewCell: BaseTableViewCell {
         
     }
     
-    private func designCell(transition: String) {
+    func designCell(transition: String) {
         productLabel.text = transition
     }
 
