@@ -33,6 +33,9 @@
 		DC67AD2B2C2BDF0100A5129F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2A2C2BDF0100A5129F /* BaseViewController.swift */; };
 		DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2C2C2BDF9B00A5129F /* BaseTableViewCell.swift */; };
 		DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */; };
+		DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */; };
+		DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */; };
+		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -74,6 +77,9 @@
 		DC67AD2A2C2BDF0100A5129F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DC67AD2C2C2BDF9B00A5129F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
+		DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
+		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -196,6 +202,7 @@
 				DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */,
 				DC487D322C1C2265006B7AAF /* Struct.swift */,
 				DCFBF7482C3A5F3E007DA893 /* DBTable.swift */,
+				DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */,
 			);
 			path = stuff;
 			sourceTree = "<group>";
@@ -205,6 +212,8 @@
 			children = (
 				DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */,
 				DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */,
+				DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */,
+				DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */,
 			);
 			path = Save;
 			sourceTree = "<group>";
@@ -311,13 +320,16 @@
 				DCA841CF2C201F3500B21AF2 /* APIkey.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
 				DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */,
+				DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */,
 				DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */,
+				DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */,
 				DCFBF74E2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift in Sources */,
 				DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */,
 				DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */,
 				DC0CFA9F2C31398E00E80424 /* ProfileSettingView.swift in Sources */,
 				DC487D3D2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift in Sources */,
 				DC487D432C1D3E61006B7AAF /* SettingOtherTableViewCell.swift in Sources */,
+				DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */,
 				DC487D452C1D6E10006B7AAF /* MainSearchTableViewCell.swift in Sources */,
 				DC487D3B2C1C2CA9006B7AAF /* SearchResultViewController.swift in Sources */,
 				DC487D352C1C25BC006B7AAF /* MainSearchViewController.swift in Sources */,

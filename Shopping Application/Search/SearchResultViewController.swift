@@ -21,6 +21,7 @@ final class SearchResultViewController: BaseViewController {
     let priceUpButton = UIButton()
     let priceDownButton = UIButton()
     
+    let realmrepository = RealmRepository()
     let realm = try! Realm()
     var data: String?
     var list: [SearchResultDetail] = []
@@ -197,11 +198,20 @@ final class SearchResultViewController: BaseViewController {
         let task = DBTable(productId: list[sender.tag].productId, productImage: list[sender.tag].image, productCompany: list[sender.tag].mallName, productName: list[sender.tag].title, productPrice: list[sender.tag].lprice, productLink: list[sender.tag].link)
         
         if like {
-            ConstantTable.likeCount += 1
             
-            try! realm.write {
-                realm.add(task)
+            var folder: Folder?
+            let list = realm.objects(Folder.self)
+            if task.productCompany == "네이버" {
+                
+                folder = list[1]
+                
+            } else {
+                
+                folder = list[2]
             }
+            
+            realmrepository.createItem(task, folder: folder ?? list[0])
+            ConstantTable.likeCount += 1
             
         } else {
             

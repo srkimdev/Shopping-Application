@@ -16,7 +16,9 @@ class SearchSaveViewController: BaseViewController {
     let line = UIView()
     
     let realm = try! Realm()
-    var list: Results<DBTable>!
+    var list: [DBTable] = []
+    var folder: Folder?
+    
     var start = 1
     
     override func viewDidLoad() {
@@ -26,9 +28,10 @@ class SearchSaveViewController: BaseViewController {
         productCollectionView.dataSource = self
         productCollectionView.register(SearchSaveCollectionViewCell.self, forCellWithReuseIdentifier: SearchSaveCollectionViewCell.identifier)
         
-        list = realm.objects(DBTable.self).sorted(byKeyPath: "id", ascending: true)
-        
-        print(realm.configuration.fileURL)
+        if let folder = folder {
+            let value = folder.detail
+            list = Array(value)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +62,11 @@ class SearchSaveViewController: BaseViewController {
     }
     
     override func configureUI() {
-        navigationItem.title = "좋아요 리스트"
+        
+        if let folder = folder {
+            navigationItem.title = folder.name
+        }
+        
     }
     
     @objc func likeButtonClicked(sender: UIButton) {
@@ -81,7 +88,7 @@ class SearchSaveViewController: BaseViewController {
         UserDefaultsManager.totalLike = ConstantTable.likeCount
         
         UIView.performWithoutAnimation {
-            list = realm.objects(DBTable.self).sorted(byKeyPath: "id", ascending: true)
+//            list = realm.objects(DBTable.self).sorted(byKeyPath: "id", ascending: true)
             productCollectionView.reloadData()
         }
         
