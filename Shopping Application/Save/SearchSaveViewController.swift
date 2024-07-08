@@ -110,14 +110,15 @@ extension SearchSaveViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         // data transtion - itemTitle, link, productId
-        let data = WebViewInfo(text: list[indexPath.row].productLink, titlelabel: list[indexPath.row].productName, key: list[indexPath.row].productId)
+        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].productImage, productCompany: list[indexPath.row].productCompany, productName: list[indexPath.row].productName, productPrice: list[indexPath.row].productPrice, productLink: list[indexPath.row].productLink)
         
         // go to webview
         let item = UIBarButtonItem(title: "")
         navigationItem.backBarButtonItem = item
         item.tintColor = .black
         
-        let vc = SearchWebViewController(data: data)
+        let vc = SearchWebViewController()
+        vc.data = data
         navigationController?.pushViewController(vc, animated: true)
     }
     

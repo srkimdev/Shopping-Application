@@ -249,15 +249,15 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        // data transtion - itemTitle, link, productId
-        let data = WebViewInfo(text: list[indexPath.row].link, titlelabel: list[indexPath.row].title, key: list[indexPath.row].productId)
+        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].image, productCompany: list[indexPath.row].mallName, productName: list[indexPath.row].title, productPrice: list[indexPath.row].lprice, productLink: list[indexPath.row].link)
         
         // go to webview
         let item = UIBarButtonItem(title: "")
         navigationItem.backBarButtonItem = item
         item.tintColor = .black
         
-        let vc = SearchWebViewController(data: data)
+        let vc = SearchWebViewController()
+        vc.data = data
         navigationController?.pushViewController(vc, animated: true)
     }
     

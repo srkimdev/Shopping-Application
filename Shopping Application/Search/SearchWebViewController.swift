@@ -8,21 +8,15 @@
 import UIKit
 import WebKit
 import SnapKit
+import RealmSwift
 
 final class SearchWebViewController: BaseViewController {
 
-    var data: WebViewInfo
+    var data: DBTable!
     
     let mainView = SearchWebView()
-   
-    init(data: WebViewInfo) {
-        self.data = data
-        super.init(nibName: nil, bundle: nil)
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    let realm = try! Realm()
     
     override func loadView() {
         view = mainView
@@ -31,15 +25,15 @@ final class SearchWebViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: data.text)!
+        let url = URL(string: data.productLink)!
         let request = URLRequest(url: url)
         mainView.website.load(request)
     }
     
     override func configureUI() {
-        navigationItem.title = data.titlelabel.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        navigationItem.title = data.productName.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         
-        if UserDefaults.standard.bool(forKey: data.key) {
+        if UserDefaults.standard.bool(forKey: data.productId) {
             let item = UIBarButtonItem(image: CustomDesign.likeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
             navigationItem.rightBarButtonItem = item
         } else {
@@ -51,15 +45,30 @@ final class SearchWebViewController: BaseViewController {
     @objc func likeButtonClicked() {
         
         // same with searchResultViewController.likeButtonClicked
-        var like: Bool = UserDefaults.standard.bool(forKey: data.key)
+        var like: Bool = UserDefaults.standard.bool(forKey: data.productId)
         like.toggle()
         
         ConstantTable.likeCount = UserDefaultsManager.totalLike
         
         if like {
-            ConstantTable.likeCount += 1
+            
+            try! realm.write {
+                realm.add(data)
+                ConstantTable.likeCount += 1
+            }
+            
+            
         } else {
-            ConstantTable.likeCount -= 1
+            
+            let filterProduct = realm.objects(DBTable.self).where {
+                $0.productId == data.productId
+            }
+            
+            try! realm.write {
+                realm.delete(filterProduct)
+                ConstantTable.likeCount -= 1
+            }
+            
         }
         
         UserDefaultsManager.totalLike = ConstantTable.likeCount
@@ -72,7 +81,7 @@ final class SearchWebViewController: BaseViewController {
             navigationItem.rightBarButtonItem = item
         }
         
-        UserDefaults.standard.set(like, forKey: data.key)
+        UserDefaults.standard.set(like, forKey: data.productId)
     }
 }
 
