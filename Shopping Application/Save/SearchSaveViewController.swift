@@ -27,6 +27,8 @@ class SearchSaveViewController: BaseViewController {
         productCollectionView.register(SearchSaveCollectionViewCell.self, forCellWithReuseIdentifier: SearchSaveCollectionViewCell.identifier)
         
         list = realm.objects(DBTable.self).sorted(byKeyPath: "id", ascending: true)
+        
+        print(realm.configuration.fileURL)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,26 +63,26 @@ class SearchSaveViewController: BaseViewController {
     }
     
     @objc func likeButtonClicked(sender: UIButton) {
-        
-        // check product has like or not, and reverse
-        var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
-        like.toggle()
     
         // count total like
         ConstantTable.likeCount = UserDefaultsManager.totalLike
         
-        if like {
-            ConstantTable.likeCount += 1
-        } else {
+        let filterProduct = realm.objects(DBTable.self).where {
+            $0.productId == self.list[sender.tag].productId
+        }
+        
+        try! realm.write {
+            UserDefaults.standard.set(false, forKey: list[sender.tag].productId)
+            realm.delete(filterProduct)
             ConstantTable.likeCount -= 1
         }
         
         // save total like, isLike
         UserDefaultsManager.totalLike = ConstantTable.likeCount
-        UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         
         UIView.performWithoutAnimation {
-            productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
+            list = realm.objects(DBTable.self).sorted(byKeyPath: "id", ascending: true)
+            productCollectionView.reloadData()
         }
         
     }
@@ -97,7 +99,6 @@ extension SearchSaveViewController: UICollectionViewDelegate, UICollectionViewDa
         
         guard let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: SearchSaveCollectionViewCell.identifier, for: indexPath) as? SearchSaveCollectionViewCell else { return UICollectionViewCell() }
         
-        print(2)
         cell.designCell(transition: list[indexPath.row])
         
         cell.goodButton.tag = indexPath.row

@@ -89,8 +89,6 @@ class SearchSaveCollectionViewCell: BaseCollectionViewCell {
     
     func designCell(transition: DBTable) {
         
-        print(1)
-        
         let url = URL(string: transition.productImage)
         productImage.kf.setImage(with: url)
         
