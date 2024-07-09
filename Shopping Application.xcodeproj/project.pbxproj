@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0CFA8F2C30215C00E80424 /* BaseView.swift */; };
 		DC0CFA932C30220E00E80424 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0CFA922C30220E00E80424 /* OnBoardingView.swift */; };
-		DC0CFA9F2C31398E00E80424 /* ProfileSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0CFA9E2C31398E00E80424 /* ProfileSettingView.swift */; };
 		DC0CFAA12C314F7000E80424 /* SearchWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0CFAA02C314F7000E80424 /* SearchWebView.swift */; };
+		DC2CA9472C3D357700B31A98 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CA9462C3D357700B31A98 /* Observable.swift */; };
+		DC2CA9492C3D361300B31A98 /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */; };
 		DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D0B2C1AE4DA006B7AAF /* AppDelegate.swift */; };
 		DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D0D2C1AE4DA006B7AAF /* SceneDelegate.swift */; };
 		DC487D152C1AE4DC006B7AAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC487D142C1AE4DC006B7AAF /* Assets.xcassets */; };
@@ -51,8 +52,9 @@
 /* Begin PBXFileReference section */
 		DC0CFA8F2C30215C00E80424 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		DC0CFA922C30220E00E80424 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
-		DC0CFA9E2C31398E00E80424 /* ProfileSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingView.swift; sourceTree = "<group>"; };
 		DC0CFAA02C314F7000E80424 /* SearchWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWebView.swift; sourceTree = "<group>"; };
+		DC2CA9462C3D357700B31A98 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
 		DC487D082C1AE4DA006B7AAF /* Shopping Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping Application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC487D0B2C1AE4DA006B7AAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC487D0D2C1AE4DA006B7AAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */,
-				DC0CFA9E2C31398E00E80424 /* ProfileSettingView.swift */,
+				DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */,
 				DC487D2C2C1BF149006B7AAF /* ProfileSelectingViewController.swift */,
 				DC487D302C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift */,
 			);
@@ -203,6 +205,7 @@
 				DC487D322C1C2265006B7AAF /* Struct.swift */,
 				DCFBF7482C3A5F3E007DA893 /* DBTable.swift */,
 				DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */,
+				DC2CA9462C3D357700B31A98 /* Observable.swift */,
 			);
 			path = stuff;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
 				DC487D472C1DBE5D006B7AAF /* SearchWebViewController.swift in Sources */,
 				DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */,
+				DC2CA9492C3D361300B31A98 /* ProfileSettingViewModel.swift in Sources */,
 				DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */,
 				DCA841CF2C201F3500B21AF2 /* APIkey.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
@@ -323,10 +327,10 @@
 				DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */,
 				DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */,
 				DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */,
+				DC2CA9472C3D357700B31A98 /* Observable.swift in Sources */,
 				DCFBF74E2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift in Sources */,
 				DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */,
 				DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */,
-				DC0CFA9F2C31398E00E80424 /* ProfileSettingView.swift in Sources */,
 				DC487D3D2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift in Sources */,
 				DC487D432C1D3E61006B7AAF /* SettingOtherTableViewCell.swift in Sources */,
 				DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */,

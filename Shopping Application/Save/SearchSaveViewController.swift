@@ -78,6 +78,8 @@ class SearchSaveViewController: BaseViewController {
             $0.productId == self.list[sender.tag].productId
         }
         
+        print(filterProduct, "here")
+        
         try! realm.write {
             UserDefaults.standard.set(false, forKey: list[sender.tag].productId)
             realm.delete(filterProduct)

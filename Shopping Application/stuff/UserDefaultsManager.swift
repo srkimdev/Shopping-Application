@@ -11,7 +11,7 @@ class UserDefaultsManager {
     
     static var userName: String {
             
-        get { return UserDefaults.standard.string(forKey: "userName")! }
+        get { return UserDefaults.standard.string(forKey: "userName") ?? ""}
         
         set { UserDefaults.standard.set(newValue, forKey: "userName") }
             
