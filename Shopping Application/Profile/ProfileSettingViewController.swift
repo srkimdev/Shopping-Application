@@ -23,21 +23,25 @@ final class ProfileSettingViewController: BaseViewController {
     
     var allowed: Bool = false
     
+    // curren Image number
+    var profileImageNumber: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         bindData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         // from setting
-        if UserDefaults.standard.bool(forKey: "fromWhere") {
-            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
-            nicknameTextField.text = UserDefaults.standard.string(forKey: "userName")
-        } else {
-        // from onboarding
-            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
-        }
+//        if UserDefaults.standard.bool(forKey: "fromWhere") {
+//            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
+//            nicknameTextField.text = UserDefaults.standard.string(forKey: "userName")
+//        } else {
+//        // from onboarding
+//            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
+//        }
 
     }
     
@@ -62,24 +66,24 @@ final class ProfileSettingViewController: BaseViewController {
         profileImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalTo(view.self)
-            make.height.width.equalTo(100)
+            make.size.equalTo(100)
         }
         
         profileImageButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalTo(view.self)
-            make.height.width.equalTo(100)
+            make.size.equalTo(100)
         }
         
         cameraImageView.snp.makeConstraints { make in
             make.trailing.equalTo(profileImage.snp.trailing).inset(4)
             make.bottom.equalTo(profileImage.snp.bottom).inset(12)
-            make.height.width.equalTo(20)
+            make.size.equalTo(20)
         }
         
         cameraImage.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(cameraImageView.snp.width).multipliedBy(0.7)
+            make.size.equalTo(cameraImageView.snp.width).multipliedBy(0.7)
         }
         
         nicknameTextField.snp.makeConstraints { make in
@@ -124,6 +128,7 @@ final class ProfileSettingViewController: BaseViewController {
     
         BackButton()
         
+        profileImage.image = UIImage(named: "profile_\(profileImageNumber)")
         profileImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         profileImage.layer.borderColor = CustomDesign.orange.cgColor
         profileImage.layer.masksToBounds = true
@@ -171,14 +176,22 @@ final class ProfileSettingViewController: BaseViewController {
             present(vc, animated: true)
         }
     }
+    
+    @objc func profileImageButtonClicked() {
+        let vc = ProfileSelectingViewController()
+        
+        vc.selectedNumber = { value in
+            self.profileImageNumber = value
+            self.profileImage.image = UIImage(named: "profile_\(self.profileImageNumber)")
+        }
+        
+        vc.profileImageNumber = profileImageNumber
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
     @objc func nicknameChanged() {
         viewModel.inputText.value = nicknameTextField.text
-    }
-
-    @objc func profileImageButtonClicked() {
-        let vc = ProfileSelectingViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc func saveButtonClicked() {
@@ -192,14 +205,11 @@ final class ProfileSettingViewController: BaseViewController {
 extension ProfileSettingViewController {
 
     private func randomImage() {
-        let randomNumber: Int = .random(in: 0...ConstantTable.profileImageNumber.count - 1)
-        profileImage.image = UIImage(named: "profile_\(randomNumber)")
-        UserDefaults.standard.set(randomNumber, forKey: "profileNumberTemp")
+        profileImageNumber = .random(in: 0...ConstantTable.profileImageNumber.count - 1)
     }
 
     private func joinDate() -> String {
         let dateFormatter = DateFormatter()
-
         dateFormatter.dateFormat = "yyyy.MM.dd"
         return dateFormatter.string(from: Date())
     }

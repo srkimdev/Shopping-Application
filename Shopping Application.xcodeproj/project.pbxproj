@@ -38,6 +38,7 @@
 		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
 		DC9099DF2C3E5B30001A5326 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */; };
 		DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */; };
+		DC9099E42C3E77DC001A5326 /* ProfileSelectingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E32C3E77DC001A5326 /* ProfileSelectingViewModel.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -84,6 +85,7 @@
 		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		DC9099E32C3E77DC001A5326 /* ProfileSelectingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectingViewModel.swift; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				DC487D2A2C1AEE2C006B7AAF /* ProfileSettingViewController.swift */,
 				DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */,
 				DC487D2C2C1BF149006B7AAF /* ProfileSelectingViewController.swift */,
+				DC9099E32C3E77DC001A5326 /* ProfileSelectingViewModel.swift */,
 				DC487D302C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift */,
 			);
 			path = Profile;
@@ -334,6 +337,7 @@
 				DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */,
 				DCA841CF2C201F3500B21AF2 /* APIkey.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
+				DC9099E42C3E77DC001A5326 /* ProfileSelectingViewModel.swift in Sources */,
 				DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */,
 				DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */,
 				DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */,

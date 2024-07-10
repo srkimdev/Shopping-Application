@@ -16,8 +16,9 @@ final class ProfileSelectingViewController: BaseViewController {
     let cameraImage = UIImageView()
     
     lazy var imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    var profileImage: UIImageView?
-    var selectedNumber: Int = UserDefaultsManager.profileNumber
+    
+    var selectedNumber: ((Int) -> Void)?
+    var profileImageNumber: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,9 @@ final class ProfileSelectingViewController: BaseViewController {
         imageCollectionView.register(ProfileSelectingCollectionViewCell.self, forCellWithReuseIdentifier: ProfileSelectingCollectionViewCell.identifier)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        UserDefaultsManager.fromWhere = false
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        UserDefaultsManager.fromWhere = false
+//    }
     
     override func viewDidLayoutSubviews() {
         selectedImage.layer.cornerRadius = selectedImage.frame.width / 2
@@ -37,13 +38,11 @@ final class ProfileSelectingViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        
         view.addSubview(selectedImage)
         view.addSubview(selectedImageButton)
         selectedImageButton.addSubview(cameraImageView)
         cameraImageView.addSubview(cameraImage)
         view.addSubview(imageCollectionView)
-        
     }
     
     override func configureLayout() {
@@ -51,26 +50,24 @@ final class ProfileSelectingViewController: BaseViewController {
         selectedImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalTo(view.self)
-            make.height.equalTo(100)
-            make.width.equalTo(100)
+            make.size.equalTo(100)
         }
         
         selectedImageButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalTo(view.self)
-            make.height.equalTo(100)
-            make.width.equalTo(100)
+            make.size.equalTo(100)
         }
         
         cameraImageView.snp.makeConstraints { make in
-            make.trailing.equalTo(selectedImageButton.snp.trailing).offset(-4)
-            make.bottom.equalTo(selectedImageButton.snp.bottom).offset(-12)
-            make.height.width.equalTo(20)
+            make.trailing.equalTo(selectedImageButton.snp.trailing).inset(4)
+            make.bottom.equalTo(selectedImageButton.snp.bottom).inset(12)
+            make.size.equalTo(20)
         }
         
         cameraImage.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(cameraImageView.snp.width).multipliedBy(0.7)
+            make.size.equalTo(cameraImageView.snp.width).multipliedBy(0.7)
         }
         
         imageCollectionView.snp.makeConstraints { make in
@@ -78,7 +75,6 @@ final class ProfileSelectingViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(300)
         }
-        
     }
     
     override func configureUI() {
@@ -90,21 +86,19 @@ final class ProfileSelectingViewController: BaseViewController {
             navigationItem.title = "PROFILE SETTING"
         }
         
-        view.backgroundColor = CustomDesign.viewBackgoundColor
-        
-        let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
-        item.tintColor = CustomDesign.itemTintColor
-        navigationItem.leftBarButtonItem = item
-        
-        selectedImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
+        BackButton()
+
+        selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
         selectedImage.layer.masksToBounds = true
         selectedImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         selectedImage.layer.borderColor = CustomDesign.orange.cgColor
         
         cameraImageView.backgroundColor = CustomDesign.orange
+        
         cameraImage.tintColor = .white
         cameraImage.image = UIImage(systemName: "camera.fill")
     }
+    
 }
 
 extension ProfileSelectingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -117,28 +111,24 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
         
         guard let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as? ProfileSelectingCollectionViewCell else { return UICollectionViewCell() }
         
-        selectedNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
-        cell.designCell(transition: indexPath.row, num: selectedNumber)
+        cell.designCell(transition: indexPath.row, num: profileImageNumber!)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        selectedImage.image = UIImage(named: "profile_\(indexPath.row)")
+        profileImageNumber = indexPath.item
+        selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
         
-        selectedNumber = indexPath.row
+        selectedNumber?(profileImageNumber!)
         
         imageCollectionView.reloadData()
-        
-        UserDefaults.standard.set(selectedNumber, forKey: "profileNumberTemp")
     }
-    
 }
 
 extension ProfileSelectingViewController: UICollectionViewDelegateFlowLayout {
     
-    // setting collectionViewCell
     func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 70
@@ -150,5 +140,4 @@ extension ProfileSelectingViewController: UICollectionViewDelegateFlowLayout {
         
         return layout
     }
-    
 }
