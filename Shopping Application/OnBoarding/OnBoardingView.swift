@@ -2,28 +2,25 @@
 //  OnBoardingView.swift
 //  Shopping Application
 //
-//  Created by 김성률 on 6/29/24.
+//  Created by 김성률 on 7/10/24.
 //
 
 import UIKit
 import SnapKit
 
-final class OnBoardingView: BaseView {
+class OnBoardingView: BaseView {
     
     let titleLabel = UILabel()
     let imageLabel = UIImageView()
     let startButton = UIButton()
     
     override func configureHierarchy() {
-    
         addSubview(titleLabel)
         addSubview(imageLabel)
         addSubview(startButton)
-        
     }
     
     override func configureLayout() {
-        
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(90)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
@@ -41,11 +38,9 @@ final class OnBoardingView: BaseView {
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
             make.height.equalTo(40)
         }
-        
     }
     
     override func configureUI() {
-        
         titleLabel.text = "MeaningOut"
         titleLabel.textColor = CustomDesign.orange
         titleLabel.font = .systemFont(ofSize: 40, weight: .heavy)
@@ -59,7 +54,5 @@ final class OnBoardingView: BaseView {
         startButton.backgroundColor = CustomDesign.orange
         startButton.layer.masksToBounds = true
         startButton.layer.cornerRadius = 20
-        
     }
-
 }

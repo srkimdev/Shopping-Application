@@ -9,20 +9,20 @@ import UIKit
 import SnapKit
 
 final class OnBoardingViewController: BaseViewController {
-
+    
     let mainView = OnBoardingView()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
-        
-        // mode setting - setup mode
-        UserDefaults.standard.set(ProfileMode.setup.rawValue, forKey: "mode")
-    }
     
     override func loadView() {
         view = mainView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UserDefaults.standard.set(ProfileMode.setup.rawValue, forKey: "mode")
+    }
+    
+    override func configureAction() {
+        mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
     }
     
     @objc func startButtonClicked() {

@@ -15,7 +15,6 @@ class BaseView: UIView {
         configureHierarchy()
         configureLayout()
         configureUI()
-        
     }
     
     @available(*, unavailable)
