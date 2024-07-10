@@ -24,9 +24,7 @@ final class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureHierarchy() {
-        
         contentView.addSubview(profileImage)
-        
     }
     
     override func configureLayout() {
@@ -34,7 +32,6 @@ final class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
         profileImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
-        
     }
     
     override func configureUI() {
