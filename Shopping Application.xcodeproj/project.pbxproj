@@ -38,6 +38,7 @@
 		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
 		DC9099DF2C3E5B30001A5326 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */; };
 		DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */; };
+		DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -84,6 +85,7 @@
 		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				DC487D342C1C25BC006B7AAF /* MainSearchViewController.swift */,
+				DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */,
 				DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */,
 				DC487D3A2C1C2CA9006B7AAF /* SearchResultViewController.swift */,
 				DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */,
@@ -335,6 +338,7 @@
 				DCA841CF2C201F3500B21AF2 /* APIkey.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
 				DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */,
+				DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */,
 				DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */,
 				DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */,
 				DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */,

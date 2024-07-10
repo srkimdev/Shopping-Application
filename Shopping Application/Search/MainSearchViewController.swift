@@ -20,18 +20,16 @@ final class MainSearchViewController: BaseViewController {
     let deleteAllButton = UIButton()
     
     let searchListTableView = UITableView()
-    let tableViewLine = UIView()
     
-    var recentSearches: [String] = [] {
-        
-        // check that list has texts
+    var searchList: [String] = [] {
         didSet {
-            isRecentText()
-            UserDefaults.standard.set(recentSearches, forKey: "RecentSearches")
+            viewModel.inputIsText.value = searchList
+            UserDefaults.standard.set(searchList, forKey: "RecentSearches")
             searchListTableView.reloadData()
         }
-        
     }
+    
+    let viewModel = MainSearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +39,9 @@ final class MainSearchViewController: BaseViewController {
         searchListTableView.dataSource = self
         searchListTableView.register(MainSearchTableViewCell.self, forCellReuseIdentifier: MainSearchTableViewCell.identifier)
         
-        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
+        searchList = loadRecentSearches()
         
-        recentSearches = loadRecentSearches()
-        
+        bindData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +56,7 @@ final class MainSearchViewController: BaseViewController {
         view.addSubview(noRecentLabel)
         view.addSubview(recentLabel)
         view.addSubview(deleteAllButton)
-        view.addSubview(tableViewLine)
         view.addSubview(searchListTableView)
-        
     }
     
     override func configureLayout() {
@@ -102,25 +97,17 @@ final class MainSearchViewController: BaseViewController {
             make.height.equalTo(30)
         }
         
-        tableViewLine.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(1)
-        }
-        
         searchListTableView.snp.makeConstraints { make in
             make.top.equalTo(recentLabel.snp.bottom)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
     }
     
     override func configureUI() {
         
-        view.backgroundColor = CustomDesign.viewBackgoundColor
-        
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchBar.searchBarStyle = .minimal
+        
         searchBarLine.backgroundColor = CustomDesign.lineColor
         
         noRecentImage.image = UIImage(named: "empty")
@@ -136,27 +123,25 @@ final class MainSearchViewController: BaseViewController {
         deleteAllButton.setTitleColor(CustomDesign.orange, for: .normal)
         deleteAllButton.titleLabel?.font = .systemFont(ofSize: 14)
         
-        tableViewLine.backgroundColor = CustomDesign.lineColor
-        
         searchListTableView.rowHeight = 40
         searchListTableView.separatorStyle = .none
     }
     
-    // remove selected cell
+    override func configureAction() {
+        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
+    }
+
     @objc func deleteButtonClicked(sender: UIButton) {
-        recentSearches.remove(at: sender.tag)
+        searchList.remove(at: sender.tag)
     }
-    
-    // remove all cells
+
     @objc func deleteAllButtonClicked() {
-        recentSearches.removeAll()
+        searchList.removeAll()
     }
-    
-    // keyboard hiding
+
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
 }
 
 extension MainSearchViewController: UISearchBarDelegate {
@@ -164,29 +149,27 @@ extension MainSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         guard let text = searchBar.text else { return }
-        saveRecentSearch(search: text)
-        searchBar.text = ""
         
-        // go to searchResultpage and transfer searchBar text
+        topToRecentSearch(search: text)
+        searchBar.text = nil
+
         let vc = SearchResultViewController()
         vc.data = text
         navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
 }
 
 extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recentSearches.count
+        return searchList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = searchListTableView.dequeueReusableCell(withIdentifier: MainSearchTableViewCell.identifier, for: indexPath) as! MainSearchTableViewCell
         
-        cell.designCell(transition: recentSearches[indexPath.row])
+        cell.designCell(transition: searchList[indexPath.row])
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         
@@ -195,63 +178,47 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let temp = searchList[indexPath.row]
+        topToRecentSearch(search: temp)
+        
         let vc = SearchResultViewController()
-        let temp = recentSearches[indexPath.row]
         vc.data = temp
-        
-        // selected cell should be on top
-        recentSearches.remove(at: indexPath.row)
-        recentSearches.insert(temp, at: 0)
-        
-        // go to searchResultpage with selected product
         navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
 }
 
 extension MainSearchViewController {
     
-    // show noRecentText or tableViewCell
-    private func isRecentText() {
+    private func bindData() {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
-        if recentSearches.count > 0 {
-            recentLabel.isHidden = false
-            deleteAllButton.isHidden = false
-            searchListTableView.isHidden = false
+        viewModel.outputIsText.bind { value in
+
+            self.recentLabel.isHidden = !value
+            self.deleteAllButton.isHidden = !value
+            self.searchListTableView.isHidden = !value
             
-            noRecentImage.isHidden = true
-            noRecentLabel.isHidden = true
+            self.noRecentImage.isHidden = value
+            self.noRecentLabel.isHidden = value
             
-            tapGesture.cancelsTouchesInView = false
-            searchListTableView.addGestureRecognizer(tapGesture)
-            
-        } else {
-            recentLabel.isHidden = true
-            deleteAllButton.isHidden = true
-            searchListTableView.isHidden = true
-            
-            noRecentImage.isHidden = false
-            noRecentLabel.isHidden = false
-            
-            view.addGestureRecognizer(tapGesture)
+            if value {
+                tapGesture.cancelsTouchesInView = !value
+                self.searchListTableView.addGestureRecognizer(tapGesture)
+            } else {
+                self.view.addGestureRecognizer(tapGesture)
+            }
         }
-        
+    }
+
+    private func topToRecentSearch(search: String) {
+        if searchList.contains(search) {
+            searchList.removeAll { $0 == search }
+        }
+        searchList.insert(search, at: 0)
     }
     
-    // prevent overlap and set the recent text to top
-    private func saveRecentSearch(search: String) {
-        if recentSearches.contains(search) {
-            recentSearches.removeAll { $0 == search }
-        }
-        recentSearches.insert(search, at: 0)
-    }
-    
-    // set previous search words when you turn on the app
     private func loadRecentSearches() -> [String] {
         return UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
     }
-    
 }
