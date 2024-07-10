@@ -11,11 +11,9 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configureHierarchy()
         configureLayout()
         configureUI()
-        
     }
     
     @available(*, unavailable)
@@ -23,16 +21,10 @@ class BaseCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarchy() {
-        
-    }
+    func configureHierarchy() { }
     
-    func configureLayout() {
-        
-    }
+    func configureLayout() { }
     
-    func configureUI() {
-        
-    }
+    func configureUI() { }
     
 }

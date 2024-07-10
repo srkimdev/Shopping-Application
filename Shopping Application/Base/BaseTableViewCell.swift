@@ -18,17 +18,11 @@ class BaseTableViewCell: UITableViewCell {
         
     }
     
-    func configureHierarchy() {
-        
-    }
+    func configureHierarchy() { }
     
-    func configureLayout() {
-        
-    }
+    func configureLayout() { }
     
-    func configureUI() {
-        
-    }
+    func configureUI() { }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {

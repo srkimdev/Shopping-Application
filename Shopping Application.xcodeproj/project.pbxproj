@@ -140,7 +140,7 @@
 				DC487D162C1AE4DC006B7AAF /* LaunchScreen.storyboard */,
 				DC487D192C1AE4DC006B7AAF /* Info.plist */,
 				DC67AD292C2BDED200A5129F /* Base */,
-				DCA841C92C201D4C00B21AF2 /* stuff */,
+				DCA841C92C201D4C00B21AF2 /* Stuff */,
 				DC0CFA912C3021D800E80424 /* OnBoarding */,
 				DCA841C72C20187700B21AF2 /* Profile */,
 				DC487D362C1C29B8006B7AAF /* TabBarController.swift */,
@@ -196,7 +196,7 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		DCA841C92C201D4C00B21AF2 /* stuff */ = {
+		DCA841C92C201D4C00B21AF2 /* Stuff */ = {
 			isa = PBXGroup;
 			children = (
 				DCA841CE2C201F3500B21AF2 /* APIkey.swift */,
@@ -207,7 +207,7 @@
 				DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */,
 				DC2CA9462C3D357700B31A98 /* Observable.swift */,
 			);
-			path = stuff;
+			path = Stuff;
 			sourceTree = "<group>";
 		};
 		DCFBF7472C3A5A38007DA893 /* Save */ = {

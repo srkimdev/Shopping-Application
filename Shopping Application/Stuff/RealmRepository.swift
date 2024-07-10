@@ -46,10 +46,6 @@ final class RealmRepository {
         
     }
     
-    // -> [aTable]
-    // let value = ealm.objects(aTable.self).sorted(byKeyPath: "price", ascending: false)
-    // return Array(value)
-    
     func readAllItem() -> Results<DBTable> {
         return realm.objects(DBTable.self).sorted(byKeyPath: "price", ascending: false)
     }

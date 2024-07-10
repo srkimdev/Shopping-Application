@@ -64,10 +64,3 @@ struct ConstantTable {
     }
 }
 
-struct WebViewInfo {
-    
-    let text: String
-    let titlelabel: String
-    let key: String
-    
-}

@@ -19,16 +19,10 @@ class BaseViewController: UIViewController {
         
     }
     
-    func configureHierarchy() {
-        
-    }
+    func configureHierarchy() { }
     
-    func configureLayout() {
-        
-    }
+    func configureLayout() { }
     
-    func configureUI() {
-        
-    }
+    func configureUI() { }
     
 }
