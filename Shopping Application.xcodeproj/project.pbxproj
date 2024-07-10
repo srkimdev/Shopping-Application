@@ -37,6 +37,7 @@
 		DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */; };
 		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
 		DC9099DF2C3E5B30001A5326 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */; };
+		DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -82,6 +83,7 @@
 		DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				DC487D142C1AE4DC006B7AAF /* Assets.xcassets */,
 				DC487D162C1AE4DC006B7AAF /* LaunchScreen.storyboard */,
 				DC487D192C1AE4DC006B7AAF /* Info.plist */,
+				DC9099E02C3E627A001A5326 /* Extension */,
 				DC67AD292C2BDED200A5129F /* Base */,
 				DCA841C92C201D4C00B21AF2 /* Stuff */,
 				DC0CFA912C3021D800E80424 /* OnBoarding */,
@@ -160,6 +163,14 @@
 				DC0CFA8F2C30215C00E80424 /* BaseView.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		DC9099E02C3E627A001A5326 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		DCA841C62C20185F00B21AF2 /* Setting */ = {
@@ -308,6 +319,7 @@
 				DC487D372C1C29B8006B7AAF /* TabBarController.swift in Sources */,
 				DC487D2F2C1C0700006B7AAF /* ReusableProtocol.swift in Sources */,
 				DC487D392C1C2A2C006B7AAF /* MainSettingViewController.swift in Sources */,
+				DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */,
 				DCFBF7462C3A5A2E007DA893 /* SearchSaveViewController.swift in Sources */,
 				DCFBF7492C3A5F3E007DA893 /* DBTable.swift in Sources */,
 				DC67AD2B2C2BDF0100A5129F /* BaseViewController.swift in Sources */,

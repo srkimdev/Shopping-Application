@@ -15,12 +15,11 @@ class ProfileSettingViewModel {
     var allowed = Observable(false)
     
     init() {
-        inputText.bind { _ in
+        inputText.bind { value in
             self.validation()
         }
     }
     
-    // check textfield condition and set allowed
     private func validation() {
         
         guard let inputText = inputText.value else { return }
@@ -49,10 +48,8 @@ class ProfileSettingViewModel {
         }
     }
     
-    // check textfield has number or not
     private func isDigit(input: String) -> Bool {
         let decimalCharacters = CharacterSet.decimalDigits
         return input.rangeOfCharacter(from: decimalCharacters) != nil
     }
-    
 }

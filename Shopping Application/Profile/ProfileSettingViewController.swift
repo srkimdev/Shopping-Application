@@ -25,11 +25,6 @@ final class ProfileSettingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        clearButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
-        nicknameTextField.addTarget(self, action: #selector(nicknameChanged), for: .editingChanged)
-        profileImageButton.addTarget(self, action: #selector(profileImageButtonClicked), for: .touchUpInside)
-        
         bindData()
     }
     
@@ -44,6 +39,11 @@ final class ProfileSettingViewController: BaseViewController {
             profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
         }
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+        cameraImageView.layer.cornerRadius = 10
     }
     
     override func configureHierarchy() {
@@ -62,20 +62,18 @@ final class ProfileSettingViewController: BaseViewController {
         profileImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalTo(view.self)
-            make.height.equalTo(100)
-            make.width.equalTo(100)
+            make.height.width.equalTo(100)
         }
         
         profileImageButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalTo(view.self)
-            make.height.equalTo(100)
-            make.width.equalTo(100)
+            make.height.width.equalTo(100)
         }
         
         cameraImageView.snp.makeConstraints { make in
-            make.trailing.equalTo(profileImage.snp.trailing).offset(-4)
-            make.bottom.equalTo(profileImage.snp.bottom).offset(-12)
+            make.trailing.equalTo(profileImage.snp.trailing).inset(4)
+            make.bottom.equalTo(profileImage.snp.bottom).inset(12)
             make.height.width.equalTo(20)
         }
         
@@ -111,7 +109,6 @@ final class ProfileSettingViewController: BaseViewController {
     
     override func configureUI() {
         
-        // mode check
         if UserDefaults.standard.string(forKey: "mode") == "edit"{
             navigationItem.title = "EDIT PROFILE"
             let item = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
@@ -124,12 +121,8 @@ final class ProfileSettingViewController: BaseViewController {
             navigationItem.title = "PROFILE SETTING"
             randomImage()
         }
-        
-        let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
-        item.tintColor = CustomDesign.itemTintColor
-        navigationItem.leftBarButtonItem = item
-        
-        view.backgroundColor = CustomDesign.viewBackgoundColor
+    
+        BackButton()
         
         profileImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         profileImage.layer.borderColor = CustomDesign.orange.cgColor
@@ -147,99 +140,79 @@ final class ProfileSettingViewController: BaseViewController {
         
         textFieldLine.backgroundColor = .systemGray4
         
-        nicknameStatusLable.text = "2글자 이상 10글자 미만으로 입력해주세요."
         nicknameStatusLable.textColor = CustomDesign.orange
         nicknameStatusLable.font = .boldSystemFont(ofSize: 13)
         
         clearButton.setTitle("완료", for: .normal)
         clearButton.setTitleColor(.white, for: .normal)
         clearButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        clearButton.backgroundColor = CustomDesign.orange
         clearButton.layer.masksToBounds = true
         clearButton.layer.cornerRadius = 20
-        
     }
     
-    override func viewDidLayoutSubviews() {
-        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
-        cameraImageView.layer.cornerRadius = 10
+    override func configureAction() {
+        clearButton.addTarget(self, action: #selector(clearButtonClicked), for: .touchUpInside)
+        nicknameTextField.addTarget(self, action: #selector(nicknameChanged), for: .editingChanged)
+        profileImageButton.addTarget(self, action: #selector(profileImageButtonClicked), for: .touchUpInside)
     }
     
     @objc func clearButtonClicked() {
-        
-        // you can go to next page and user information will be saved when allowed is true
         if allowed {
-            
-            // save - userName, mode, initial screen, joinDate, profileNumber
             UserDefaultsManager.userName = nicknameTextField.text!
             UserDefaultsManager.goToSearch = true
             UserDefaultsManager.joinDate = joinDate()
             UserDefaultsManager.profileNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
             
             UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
-            
-            // go to TabBarController
+
             let vc = TabBarController()
             vc.modalPresentationStyle = .overFullScreen
             vc.modalTransitionStyle = .crossDissolve
             present(vc, animated: true)
         }
-    
-    }
-    
-    // go back
-    @objc func backButtonClicked() {
-        navigationController?.popViewController(animated: true)
     }
 
-    // nickname change observer
     @objc func nicknameChanged() {
         viewModel.inputText.value = nicknameTextField.text
     }
-    
-    // go to profileSelecting when you click the profileImage
+
     @objc func profileImageButtonClicked() {
         let vc = ProfileSelectingViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    // savebutton in edit mode
+
     @objc func saveButtonClicked() {
         if allowed {
             UserDefaultsManager.userName = nicknameTextField.text!
             UserDefaultsManager.profileNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
         }
     }
-
 }
 
 extension ProfileSettingViewController {
-    
-    // show randomImage
+
     private func randomImage() {
         let randomNumber: Int = .random(in: 0...ConstantTable.profileImageNumber.count - 1)
         profileImage.image = UIImage(named: "profile_\(randomNumber)")
         UserDefaults.standard.set(randomNumber, forKey: "profileNumberTemp")
     }
-    
-    // create joinDate
+
     private func joinDate() -> String {
-        let currentDate = Date()
         let dateFormatter = DateFormatter()
 
         dateFormatter.dateFormat = "yyyy.MM.dd"
-        return dateFormatter.string(from: currentDate)
+        return dateFormatter.string(from: Date())
     }
     
-    func bindData() {
+    private func bindData() {
+        // 후행 클로저 생략
         viewModel.outputText.bind { value in
             self.nicknameStatusLable.text = value
         }
         
         viewModel.allowed.bind { value in
-            print(value)
             self.allowed = value
+            self.clearButton.backgroundColor = value ? CustomDesign.orange : .systemGray4
         }
     }
-    
 }

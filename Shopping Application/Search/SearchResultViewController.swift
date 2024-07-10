@@ -162,9 +162,9 @@ final class SearchResultViewController: BaseViewController {
     }
     
     // go back
-    @objc func backButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
+//    @objc func backButtonClicked() {
+//        navigationController?.popViewController(animated: true)
+//    }
     
     @objc func arrayButtonClicked(sender: UIButton) {
         

@@ -25,7 +25,6 @@ final class ProfileSelectingViewController: BaseViewController {
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
         imageCollectionView.register(ProfileSelectingCollectionViewCell.self, forCellWithReuseIdentifier: ProfileSelectingCollectionViewCell.identifier)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,14 +104,7 @@ final class ProfileSelectingViewController: BaseViewController {
         cameraImageView.backgroundColor = CustomDesign.orange
         cameraImage.tintColor = .white
         cameraImage.image = UIImage(systemName: "camera.fill")
-        
     }
-    
-    // go back
-    @objc func backButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
-    
 }
 
 extension ProfileSelectingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
