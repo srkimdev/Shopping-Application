@@ -32,6 +32,7 @@ final class SearchWebViewController: BaseViewController {
     
     override func configureUI() {
         navigationItem.title = data.productName.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        BackButton()
         
         if UserDefaults.standard.bool(forKey: data.productId) {
             let item = UIBarButtonItem(image: CustomDesign.likeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
@@ -44,7 +45,6 @@ final class SearchWebViewController: BaseViewController {
     
     @objc func likeButtonClicked() {
         
-        // same with searchResultViewController.likeButtonClicked
         var like: Bool = UserDefaults.standard.bool(forKey: data.productId)
         like.toggle()
         
@@ -57,7 +57,6 @@ final class SearchWebViewController: BaseViewController {
                 ConstantTable.likeCount += 1
             }
             
-            
         } else {
             
             let filterProduct = realm.objects(DBTable.self).where {
@@ -68,7 +67,6 @@ final class SearchWebViewController: BaseViewController {
                 realm.delete(filterProduct)
                 ConstantTable.likeCount -= 1
             }
-            
         }
         
         UserDefaultsManager.totalLike = ConstantTable.likeCount

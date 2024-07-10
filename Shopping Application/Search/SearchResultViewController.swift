@@ -41,10 +41,6 @@ final class SearchResultViewController: BaseViewController {
 
         productCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
         
-        accurateButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
-        dateButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
-        priceUpButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
-        priceDownButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,11 +110,8 @@ final class SearchResultViewController: BaseViewController {
     
     override func configureUI() {
         
-        view.backgroundColor = CustomDesign.viewBackgoundColor
         navigationItem.title = data
-        let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
-        item.tintColor = CustomDesign.itemTintColor
-        navigationItem.leftBarButtonItem = item
+        BackButton()
         
         line.backgroundColor = CustomDesign.lineColor
         
@@ -134,7 +127,13 @@ final class SearchResultViewController: BaseViewController {
         
         accurateButton.backgroundColor = .black
         accurateButton.setTitleColor(.white, for: .normal)
-        
+    }
+    
+    override func configureAction() {
+        accurateButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
+        dateButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
+        priceUpButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
+        priceDownButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
     }
     
     private func callRequest(text: String, completionHandler: @escaping (SearchResult) -> Void) {
@@ -146,67 +145,51 @@ final class SearchResultViewController: BaseViewController {
             "X-Naver-Client-Secret": APIkey.Secret
         ]
         
-        // api communication with url, header
         AF.request(url, method: .get, headers: header).responseDecodable(of: SearchResult.self) { response in
             switch response.result {
                 
             case .success(let value):
-
                 completionHandler(value)
                 
             case .failure(let error):
                 print(error)
             }
         }
-        
     }
-    
-    // go back
-//    @objc func backButtonClicked() {
-//        navigationController?.popViewController(animated: true)
-//    }
     
     @objc func arrayButtonClicked(sender: UIButton) {
         
-        // sort by arraybutton, page is set to 1
         start = 1
         ConstantTable.sortOption = sender.tag
 
         callRequest(text: data!) { value in
             self.alamofireDesign(value: value)
         }
-        
-        // button view change
+
         [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
             button.backgroundColor = .white
             button.setTitleColor(.black, for: .normal)
         }
         sender.backgroundColor = .black
         sender.setTitleColor(.white, for: .normal)
-            
     }
     
     @objc func likeButtonClicked(sender: UIButton) {
         
-        // check product has like or not, and reverse
         var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
         like.toggle()
     
-        // count total like
         ConstantTable.likeCount = UserDefaultsManager.totalLike
         
         let task = DBTable(productId: list[sender.tag].productId, productImage: list[sender.tag].image, productCompany: list[sender.tag].mallName, productName: list[sender.tag].title, productPrice: list[sender.tag].lprice, productLink: list[sender.tag].link)
         
         if like {
-            
             var folder: Folder?
             let list = realm.objects(Folder.self)
+            
             if task.productCompany == "네이버" {
-                
                 folder = list[1]
-                
             } else {
-                
                 folder = list[2]
             }
             
@@ -224,19 +207,15 @@ final class SearchResultViewController: BaseViewController {
             try! realm.write {
                 realm.delete(filterProduct)
             }
-            
         }
-        
-        // save total like, isLike
+
         UserDefaultsManager.totalLike = ConstantTable.likeCount
         UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         
         UIView.performWithoutAnimation {
             productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
         }
-        
     }
-
 }
 
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -260,22 +239,15 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].image, productCompany: list[indexPath.row].mallName, productName: list[indexPath.row].title, productPrice: list[indexPath.row].lprice, productLink: list[indexPath.row].link)
-        
-        // go to webview
-        let item = UIBarButtonItem(title: "")
-        navigationItem.backBarButtonItem = item
-        item.tintColor = .black
-        
+
         let vc = SearchWebViewController()
         vc.data = data
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     
-    // custom collectionViewCell
     func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 68
@@ -288,12 +260,10 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
         
         return layout
     }
-    
 }
 
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     
-    // pagenation
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
         for item in indexPaths {
@@ -306,12 +276,12 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
                 }
             }
         }
+        
     }
 }
 
 extension SearchResultViewController {
     
-    // custom array buttons
     private func buttonDesign(button: UIButton, buttonName: String) {
         
         button.setTitle(buttonName, for: .normal)
@@ -321,7 +291,6 @@ extension SearchResultViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.cornerRadius = 15
-        
     }
     
     private func alamofireDesign(value: SearchResult) {
@@ -340,19 +309,16 @@ extension SearchResultViewController {
             self.list = filteredList
             
         } else {
-            
-            // pagenation
+
             for item in value.items {
                 filteredList.append(item)
             }
             
             self.list.append(contentsOf: filteredList)
-            
         }
         
         self.productCollectionView.reloadData()
         
-        // scroll to top
         if self.start == 1 {
             self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }

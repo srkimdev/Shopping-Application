@@ -20,11 +20,9 @@ final class MainSearchTableViewCell: BaseTableViewCell {
     }
     
     override func configureHierarchy() {
-        
         contentView.addSubview(timeImage)
         contentView.addSubview(productLabel)
         contentView.addSubview(deleteButton)
-        
     }
     
     override func configureLayout() {
@@ -45,7 +43,6 @@ final class MainSearchTableViewCell: BaseTableViewCell {
             make.width.equalTo(deleteButton.snp.height).multipliedBy(1.0)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-8)
         }
-        
     }
     
     override func configureUI() {
@@ -57,11 +54,9 @@ final class MainSearchTableViewCell: BaseTableViewCell {
         
         deleteButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         deleteButton.tintColor = CustomDesign.itemTintColor
-        
     }
     
     func designCell(transition: String) {
         productLabel.text = transition
     }
-
 }
