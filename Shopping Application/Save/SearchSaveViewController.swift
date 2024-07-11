@@ -58,7 +58,6 @@ class SearchSaveViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
     }
     
     override func configureUI() {
@@ -71,14 +70,11 @@ class SearchSaveViewController: BaseViewController {
     
     @objc func likeButtonClicked(sender: UIButton) {
     
-        // count total like
         ConstantTable.likeCount = UserDefaultsManager.totalLike
         
         let filterProduct = realm.objects(DBTable.self).where {
             $0.productId == self.list[sender.tag].productId
         }
-        
-        print(filterProduct, "here")
         
         try! realm.write {
             UserDefaults.standard.set(false, forKey: list[sender.tag].productId)
@@ -86,16 +82,12 @@ class SearchSaveViewController: BaseViewController {
             ConstantTable.likeCount -= 1
         }
         
-        // save total like, isLike
         UserDefaultsManager.totalLike = ConstantTable.likeCount
         
         UIView.performWithoutAnimation {
-//            list = realm.objects(DBTable.self).sorted(byKeyPath: "id", ascending: true)
             productCollectionView.reloadData()
         }
-        
     }
-
 }
 
 extension SearchSaveViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -118,24 +110,16 @@ extension SearchSaveViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        // data transtion - itemTitle, link, productId
         let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].productImage, productCompany: list[indexPath.row].productCompany, productName: list[indexPath.row].productName, productPrice: list[indexPath.row].productPrice, productLink: list[indexPath.row].productLink)
-        
-        // go to webview
-        let item = UIBarButtonItem(title: "")
-        navigationItem.backBarButtonItem = item
-        item.tintColor = .black
-        
+
         let vc = SearchWebViewController()
         vc.data = data
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 extension SearchSaveViewController: UICollectionViewDelegateFlowLayout {
     
-    // custom collectionViewCell
     func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 68
@@ -148,5 +132,4 @@ extension SearchSaveViewController: UICollectionViewDelegateFlowLayout {
         
         return layout
     }
-    
 }

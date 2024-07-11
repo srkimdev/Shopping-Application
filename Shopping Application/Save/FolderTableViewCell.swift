@@ -40,5 +40,4 @@ class FolderTableViewCell: BaseTableViewCell {
         frontImage.image = UIImage(systemName: "heart.fill")
         frontImage.tintColor = .red
     }
-    
 }

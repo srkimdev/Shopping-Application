@@ -29,7 +29,6 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         contentView.addSubview(companyLabel)
         contentView.addSubview(productLabel)
         contentView.addSubview(priceLabel)
-        
     }
     
     override func configureLayout() {
@@ -43,7 +42,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         goodButton.snp.makeConstraints { make in
             make.trailing.equalTo(productImage.snp.trailing).inset(12)
             make.bottom.equalTo(productImage.snp.bottom).inset(12)
-            make.height.width.equalTo(24)
+            make.size.equalTo(24)
         }
         
         companyLabel.snp.makeConstraints { make in
@@ -62,7 +61,6 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.height.equalTo(16)
         }
-        
     }
     
     override func configureUI() {
@@ -83,7 +81,6 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         productLabel.numberOfLines = 2
         
         priceLabel.font = .boldSystemFont(ofSize: 14)
-        
     }
     
     func designCell(transition: SearchResultDetail) {
@@ -97,18 +94,14 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         
         let key = transition.productId
         
-        // change button image
         if UserDefaults.standard.bool(forKey: key) {
             goodButton.backgroundColor = .white
             goodButton.alpha = 1
             goodButton.setImage(CustomDesign.likeImage, for: .normal)
-            
         } else {
             goodButton.backgroundColor = .black
             goodButton.alpha = 0.3
             goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
         }
-        
     }
-
 }

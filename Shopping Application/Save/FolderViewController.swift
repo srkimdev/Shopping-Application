@@ -26,7 +26,7 @@ class FolderViewController: BaseViewController {
         folderTableView.rowHeight = 50
         
         list = repository.fetchFolder()
-        print(list)
+        
         repository.detectRealmURL()
     }
     
@@ -44,7 +44,6 @@ class FolderViewController: BaseViewController {
     override func configureUI() {
         navigationItem.title = "내 폴더"
     }
-    
 }
 
 extension FolderViewController: UITableViewDelegate, UITableViewDataSource {
@@ -70,7 +69,5 @@ extension FolderViewController: UITableViewDelegate, UITableViewDataSource {
         vc.folder = list[indexPath.row]
         
         navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
 }

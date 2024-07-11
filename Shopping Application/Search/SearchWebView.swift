@@ -27,9 +27,4 @@ final class SearchWebView: BaseView {
             make.edges.equalTo(safeAreaLayoutGuide)
         }
     }
-
-    override func configureUI() {
-        backgroundColor = CustomDesign.viewBackgoundColor
-    }
-    
 }

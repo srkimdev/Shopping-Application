@@ -19,4 +19,22 @@ extension UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    func showAlert(title: String, message: String, completionHandler: @escaping () -> Void) {
+        
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert)
+            
+        let check = UIAlertAction(title: "확인", style: .default) { _ in
+            completionHandler()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+            
+        alert.addAction(cancel)
+        alert.addAction(check)
+            
+        present(alert, animated: true)
+    }
 }

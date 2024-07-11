@@ -31,7 +31,6 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
         contentView.addSubview(profileName)
         contentView.addSubview(joinDate)
         contentView.addSubview(nextButton)
-        
     }
     
     override func configureLayout() {
@@ -39,20 +38,20 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
         profileImage.snp.makeConstraints { make in
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(24)
-            make.width.equalTo(profileImage.snp.height).multipliedBy(1.0)
+            make.width.equalTo(profileImage.snp.height)
         }
         
         profileName.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(40)
             make.leading.equalTo(profileImage.snp.trailing).offset(20)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(20)
         }
         
         joinDate.snp.makeConstraints { make in
             make.top.equalTo(profileName.snp.bottom).offset(8)
             make.leading.equalTo(profileImage.snp.trailing).offset(20)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(12)
         }
         
@@ -76,8 +75,6 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
         
         nextButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         nextButton.tintColor = .gray
-        
     }
-    
 }
 

@@ -15,6 +15,7 @@ class BaseView: UIView {
         configureHierarchy()
         configureLayout()
         configureUI()
+        backgroundColor = .white
     }
     
     @available(*, unavailable)

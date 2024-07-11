@@ -30,17 +30,16 @@ final class SearchResultViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        callRequest(text: data!) { value in
-            self.alamofireDesign(value: value)
-        }
         
         productCollectionView.delegate = self
         productCollectionView.dataSource = self
         productCollectionView.prefetchDataSource = self
 
         productCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
-        
+
+        callRequest(text: data!) { value in
+            self.alamofireDesign(value: value)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +104,6 @@ final class SearchResultViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
     }
     
     override func configureUI() {

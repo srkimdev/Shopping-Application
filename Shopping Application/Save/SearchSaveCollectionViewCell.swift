@@ -29,7 +29,6 @@ class SearchSaveCollectionViewCell: BaseCollectionViewCell {
         contentView.addSubview(companyLabel)
         contentView.addSubview(productLabel)
         contentView.addSubview(priceLabel)
-        
     }
     
     override func configureLayout() {
@@ -43,7 +42,7 @@ class SearchSaveCollectionViewCell: BaseCollectionViewCell {
         goodButton.snp.makeConstraints { make in
             make.trailing.equalTo(productImage.snp.trailing).inset(12)
             make.bottom.equalTo(productImage.snp.bottom).inset(12)
-            make.height.width.equalTo(24)
+            make.size.equalTo(24)
         }
         
         companyLabel.snp.makeConstraints { make in
@@ -62,7 +61,6 @@ class SearchSaveCollectionViewCell: BaseCollectionViewCell {
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.height.equalTo(16)
         }
-        
     }
     
     override func configureUI() {
@@ -84,7 +82,6 @@ class SearchSaveCollectionViewCell: BaseCollectionViewCell {
         productLabel.numberOfLines = 2
         
         priceLabel.font = .boldSystemFont(ofSize: 14)
-        
     }
     
     func designCell(transition: DBTable) {
@@ -95,7 +92,5 @@ class SearchSaveCollectionViewCell: BaseCollectionViewCell {
         companyLabel.text = transition.productCompany
         productLabel.text = transition.productName.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.productPrice)!))원"
-        
     }
-    
 }

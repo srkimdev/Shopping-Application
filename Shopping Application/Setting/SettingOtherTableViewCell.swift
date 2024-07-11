@@ -24,26 +24,24 @@ final class SettingOtherTableViewCell: BaseTableViewCell {
         contentView.addSubview(listLabel)
         contentView.addSubview(saveImage)
         contentView.addSubview(countLabel)
-        
     }
     
     override func configureLayout() {
         
         listLabel.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
-            make.leading.equalTo(20)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(20)
         }
         
         countLabel.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
-            make.trailing.equalTo(-20)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(20)
         }
         
         saveImage.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(10)
             make.trailing.equalTo(countLabel.snp.leading).offset(-4)
         }
-        
     }
     
     override func configureUI() {
@@ -54,5 +52,4 @@ final class SettingOtherTableViewCell: BaseTableViewCell {
     func designCell(transition: String) {
         listLabel.text = transition
     }
-    
 }
