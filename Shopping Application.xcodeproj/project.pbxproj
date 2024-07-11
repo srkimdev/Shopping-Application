@@ -39,6 +39,7 @@
 		DC9099DF2C3E5B30001A5326 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */; };
 		DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */; };
 		DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */; };
+		DC9099FE2C3FFA3A001A5326 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FD2C3FFA3A001A5326 /* Singleton.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -86,6 +87,7 @@
 		DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
+		DC9099FD2C3FFA3A001A5326 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				DCFBF7482C3A5F3E007DA893 /* DBTable.swift */,
 				DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */,
 				DC2CA9462C3D357700B31A98 /* Observable.swift */,
+				DC9099FD2C3FFA3A001A5326 /* Singleton.swift */,
 			);
 			path = Stuff;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
 				DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
+				DC9099FE2C3FFA3A001A5326 /* Singleton.swift in Sources */,
 				DC487D472C1DBE5D006B7AAF /* SearchWebViewController.swift in Sources */,
 				DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */,
 				DC2CA9492C3D361300B31A98 /* ProfileSettingViewModel.swift in Sources */,

@@ -12,13 +12,10 @@ final class MainSearchViewController: BaseViewController {
 
     let searchBar = UISearchBar()
     let searchBarLine = UIView()
-    
     let noRecentImage = UIImageView()
     let noRecentLabel = UILabel()
-    
     let recentLabel = UILabel()
     let deleteAllButton = UIButton()
-    
     let searchListTableView = UITableView()
     
     var searchList: [String] = [] {
@@ -30,6 +27,7 @@ final class MainSearchViewController: BaseViewController {
     }
     
     let viewModel = MainSearchViewModel()
+    let userInfo = UserInformation.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +40,6 @@ final class MainSearchViewController: BaseViewController {
         searchList = loadRecentSearches()
         
         bindData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "\(UserDefaultsManager.userName)'s MEANING OUT"
     }
 
     override func configureHierarchy() {
@@ -104,6 +98,8 @@ final class MainSearchViewController: BaseViewController {
     }
     
     override func configureUI() {
+        
+        navigationItem.title = "\(userInfo.getUserName())'s MEANING OUT"
         
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchBar.searchBarStyle = .minimal

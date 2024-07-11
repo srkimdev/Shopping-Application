@@ -20,10 +20,10 @@ final class ProfileSettingViewController: BaseViewController {
     let clearButton = UIButton()
 
     let viewModel = ProfileSettingViewModel()
+    let userInfo = UserInformation.shared
     
     var allowed: Bool = false
     
-    // curren Image number
     var profileImageNumber: Int = 0
     
     override func viewDidLoad() {
@@ -163,10 +163,11 @@ final class ProfileSettingViewController: BaseViewController {
     
     @objc func clearButtonClicked() {
         if allowed {
-            UserDefaultsManager.userName = nicknameTextField.text!
+            userInfo.updateUserName(nicknameTextField.text!)
+            userInfo.updateProfileNumber(profileImageNumber)
+            
             UserDefaultsManager.goToSearch = true
             UserDefaultsManager.joinDate = joinDate()
-            UserDefaultsManager.profileNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
             
             UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
 
@@ -196,8 +197,8 @@ final class ProfileSettingViewController: BaseViewController {
 
     @objc func saveButtonClicked() {
         if allowed {
-            UserDefaultsManager.userName = nicknameTextField.text!
-            UserDefaultsManager.profileNumber = UserDefaults.standard.integer(forKey: "profileNumberTemp")
+            userInfo.updateUserName(nicknameTextField.text!)
+            userInfo.updateProfileNumber(profileImageNumber)
         }
     }
 }

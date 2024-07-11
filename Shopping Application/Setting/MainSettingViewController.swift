@@ -12,6 +12,8 @@ final class MainSettingViewController: BaseViewController {
 
     let settingTableView = UITableView()
     
+    let userInfo = UserInformation.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,9 +55,8 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row == 0 {
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
             
-            cell.profileImage.image = UIImage(named: "profile_\(UserDefaultsManager.profileNumber)")
-            
-            cell.profileName.text = UserDefaultsManager.userName
+            cell.profileImage.image = UIImage(named: "profile_\(userInfo.getProfileNumber())")
+            cell.profileName.text = userInfo.getUserName()
             
             return cell
 
