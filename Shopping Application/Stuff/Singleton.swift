@@ -14,10 +14,14 @@ class UserInformation {
     private init() { 
         userName = UserDefaults.standard.string(forKey: "userName") ?? "DefaultUser"
         profileNumber = UserDefaults.standard.integer(forKey: "profileNumber")
+        joinDate = Date()
+        recentSearchText = ""
     }
     
     private var userName: String
     private var profileNumber: Int
+    private var joinDate: Date
+    private var recentSearchText: String
     
     func getUserName() -> String {
         return userName
@@ -36,14 +40,20 @@ class UserInformation {
         profileNumber = number
         UserDefaults.standard.setValue(profileNumber, forKey: "profileNumber")
     }
-}
-
-class Mode {
     
-    static let shared = Mode.init()
+    func getJoinDate() -> Date {
+        return joinDate
+    }
     
-    private init() { }
+    func updateJoinDate(_ date: Date) {
+        joinDate = date
+    }
     
+    func getRecentSearchText() -> String {
+        return recentSearchText
+    }
     
-    
+    func updateRecentSearchText(_ text: String) {
+        recentSearchText = text
+    }
 }

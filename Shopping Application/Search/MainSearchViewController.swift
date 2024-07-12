@@ -145,12 +145,14 @@ extension MainSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         guard let text = searchBar.text else { return }
+        searchBar.text = nil
         
         topToRecentSearch(search: text)
-        searchBar.text = nil
+        userInfo.updateRecentSearchText(text)
 
         let vc = SearchResultViewController()
-        vc.data = text
+        vc.data = userInfo.getRecentSearchText()
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -174,11 +176,11 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let temp = searchList[indexPath.row]
-        topToRecentSearch(search: temp)
+        userInfo.updateRecentSearchText(searchList[indexPath.row])
+        topToRecentSearch(search: userInfo.getRecentSearchText())
         
         let vc = SearchResultViewController()
-        vc.data = temp
+        vc.data = userInfo.getRecentSearchText()
         navigationController?.pushViewController(vc, animated: true)
     }
 }

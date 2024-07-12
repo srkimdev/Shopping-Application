@@ -24,9 +24,8 @@ final class SearchResultViewController: BaseViewController {
     let realmrepository = RealmRepository()
     let realm = try! Realm()
     var data: String?
-    var list: [SearchResultDetail] = []
-    var totalPage = 0
-    var start = 1
+    
+    let viewModel = SearchResultViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +36,12 @@ final class SearchResultViewController: BaseViewController {
 
         productCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
 
-        callRequest(text: data!) { value in
-            self.alamofireDesign(value: value)
-        }
+        guard let data = data else { return }
+        viewModel.inputText.value = data
+        
+        bindData()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        productCollectionView.reloadData()
-    }
-    
+
     override func configureHierarchy() {
         
         view.addSubview(line)
@@ -134,35 +130,9 @@ final class SearchResultViewController: BaseViewController {
         priceDownButton.addTarget(self, action: #selector(arrayButtonClicked), for: .touchUpInside)
     }
     
-    private func callRequest(text: String, completionHandler: @escaping (SearchResult) -> Void) {
+    @objc func arrayButtonClicked(_ sender: UIButton) {
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[ConstantTable.sortOption])"
-        
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": APIkey.Id,
-            "X-Naver-Client-Secret": APIkey.Secret
-        ]
-        
-        AF.request(url, method: .get, headers: header).responseDecodable(of: SearchResult.self) { response in
-            switch response.result {
-                
-            case .success(let value):
-                completionHandler(value)
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    @objc func arrayButtonClicked(sender: UIButton) {
-        
-        start = 1
-        ConstantTable.sortOption = sender.tag
-
-        callRequest(text: data!) { value in
-            self.alamofireDesign(value: value)
-        }
+        viewModel.inputButton.value = sender.tag
 
         [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
             button.backgroundColor = .white
@@ -174,44 +144,55 @@ final class SearchResultViewController: BaseViewController {
     
     @objc func likeButtonClicked(sender: UIButton) {
         
-        var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
-        like.toggle()
+//        var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
+//        like.toggle()
+//    
+//        ConstantTable.likeCount = UserDefaultsManager.totalLike
+//        
+//        let task = DBTable(productId: list[sender.tag].productId, productImage: list[sender.tag].image, productCompany: list[sender.tag].mallName, productName: list[sender.tag].title, productPrice: list[sender.tag].lprice, productLink: list[sender.tag].link)
+//        
+//        if like {
+//            var folder: Folder?
+//            let list = realm.objects(Folder.self)
+//            
+//            if task.productCompany == "네이버" {
+//                folder = list[1]
+//            } else {
+//                folder = list[2]
+//            }
+//            
+//            realmrepository.createItem(task, folder: folder ?? list[0])
+//            ConstantTable.likeCount += 1
+//            
+//        } else {
+//            
+//            ConstantTable.likeCount -= 1
+//            
+//            let filterProduct = realm.objects(DBTable.self).filter {
+//                $0.productId == self.list[sender.tag].productId
+//            }
+//            
+//            try! realm.write {
+//                realm.delete(filterProduct)
+//            }
+//        }
+//
+//        UserDefaultsManager.totalLike = ConstantTable.likeCount
+//        UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
+//        
+//        UIView.performWithoutAnimation {
+//            productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
+//        }
+    }
     
-        ConstantTable.likeCount = UserDefaultsManager.totalLike
+    func bindData() {
         
-        let task = DBTable(productId: list[sender.tag].productId, productImage: list[sender.tag].image, productCompany: list[sender.tag].mallName, productName: list[sender.tag].title, productPrice: list[sender.tag].lprice, productLink: list[sender.tag].link)
-        
-        if like {
-            var folder: Folder?
-            let list = realm.objects(Folder.self)
-            
-            if task.productCompany == "네이버" {
-                folder = list[1]
-            } else {
-                folder = list[2]
-            }
-            
-            realmrepository.createItem(task, folder: folder ?? list[0])
-            ConstantTable.likeCount += 1
-            
-        } else {
-            
-            ConstantTable.likeCount -= 1
-            
-            let filterProduct = realm.objects(DBTable.self).filter {
-                $0.productId == self.list[sender.tag].productId
-            }
-            
-            try! realm.write {
-                realm.delete(filterProduct)
-            }
+        viewModel.outputCount.bind { value in
+            self.totalLabel.text = "\(value)"
         }
-
-        UserDefaultsManager.totalLike = ConstantTable.likeCount
-        UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
         
-        UIView.performWithoutAnimation {
-            productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
+        viewModel.outputList.bind { _ in
+            self.productCollectionView.reloadData()
         }
     }
 }
@@ -219,14 +200,14 @@ final class SearchResultViewController: BaseViewController {
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+        return viewModel.outputList.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as? SearchResultCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.designCell(transition: list[indexPath.row])
+        cell.designCell(transition: viewModel.outputList.value[indexPath.row])
         
         cell.goodButton.tag = indexPath.row
         cell.goodButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
@@ -234,14 +215,14 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].image, productCompany: list[indexPath.row].mallName, productName: list[indexPath.row].title, productPrice: list[indexPath.row].lprice, productLink: list[indexPath.row].link)
-
-        let vc = SearchWebViewController()
-        vc.data = data
-        navigationController?.pushViewController(vc, animated: true)
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        
+//        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].image, productCompany: list[indexPath.row].mallName, productName: list[indexPath.row].title, productPrice: list[indexPath.row].lprice, productLink: list[indexPath.row].link)
+//
+//        let vc = SearchWebViewController()
+//        vc.data = data
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
 }
 
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
@@ -265,16 +246,10 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
         for item in indexPaths {
-            if list.count - 4 == item.row {
-                start += 30
-                if totalPage != start {
-                    callRequest(text: data!) { value in
-                        self.alamofireDesign(value: value)
-                    }
-                }
+            if viewModel.outputList.value.count - 4 == item.row {
+                viewModel.inputPage.value = ()
             }
         }
-        
     }
 }
 
@@ -289,36 +264,5 @@ extension SearchResultViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.cornerRadius = 15
-    }
-    
-    private func alamofireDesign(value: SearchResult) {
-        
-        let totalCount = value.total
-        self.totalLabel.text = "\(ConstantTable.formatNumberString(number: totalCount))개의 검색 결과"
-        
-        var filteredList = [SearchResultDetail]()
-        
-        if self.start == 1 {
-            
-            for item in value.items {
-                filteredList.append(item)
-            }
-            
-            self.list = filteredList
-            
-        } else {
-
-            for item in value.items {
-                filteredList.append(item)
-            }
-            
-            self.list.append(contentsOf: filteredList)
-        }
-        
-        self.productCollectionView.reloadData()
-        
-        if self.start == 1 {
-            self.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
     }
 }

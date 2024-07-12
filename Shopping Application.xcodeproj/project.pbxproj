@@ -40,6 +40,8 @@
 		DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */; };
 		DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */; };
 		DC9099FE2C3FFA3A001A5326 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FD2C3FFA3A001A5326 /* Singleton.swift */; };
+		DC909A002C40DC47001A5326 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */; };
+		DC909A032C40FA7A001A5326 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC909A022C40FA7A001A5326 /* APIManager.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -88,6 +90,8 @@
 		DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
 		DC9099FD2C3FFA3A001A5326 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
+		DC909A022C40FA7A001A5326 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				DC9099E02C3E627A001A5326 /* Extension */,
 				DC67AD292C2BDED200A5129F /* Base */,
 				DCA841C92C201D4C00B21AF2 /* Stuff */,
+				DC909A012C40FA63001A5326 /* Network */,
 				DC0CFA912C3021D800E80424 /* OnBoarding */,
 				DCA841C72C20187700B21AF2 /* Profile */,
 				DC487D362C1C29B8006B7AAF /* TabBarController.swift */,
@@ -175,6 +180,14 @@
 				DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		DC909A012C40FA63001A5326 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DC909A022C40FA7A001A5326 /* APIManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		DCA841C62C20185F00B21AF2 /* Setting */ = {
@@ -205,6 +218,7 @@
 				DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */,
 				DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */,
 				DC487D3A2C1C2CA9006B7AAF /* SearchResultViewController.swift */,
+				DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */,
 				DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */,
 				DC487D462C1DBE5D006B7AAF /* SearchWebViewController.swift */,
 				DC0CFAA02C314F7000E80424 /* SearchWebView.swift */,
@@ -323,6 +337,7 @@
 			files = (
 				DC487D312C1C07B6006B7AAF /* ProfileSelectingCollectionViewCell.swift in Sources */,
 				DC487D372C1C29B8006B7AAF /* TabBarController.swift in Sources */,
+				DC909A002C40DC47001A5326 /* SearchResultViewModel.swift in Sources */,
 				DC487D2F2C1C0700006B7AAF /* ReusableProtocol.swift in Sources */,
 				DC487D392C1C2A2C006B7AAF /* MainSettingViewController.swift in Sources */,
 				DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */,
@@ -340,6 +355,7 @@
 				DC2CA9492C3D361300B31A98 /* ProfileSettingViewModel.swift in Sources */,
 				DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */,
 				DCA841CF2C201F3500B21AF2 /* APIkey.swift in Sources */,
+				DC909A032C40FA7A001A5326 /* APIManager.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
 				DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */,
 				DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */,
