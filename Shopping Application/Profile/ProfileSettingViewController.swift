@@ -20,7 +20,6 @@ final class ProfileSettingViewController: BaseViewController {
     let clearButton = UIButton()
 
     let viewModel = ProfileSettingViewModel()
-    let userInfo = UserInformation.shared
     
     var allowed: Bool = false
     
@@ -163,11 +162,11 @@ final class ProfileSettingViewController: BaseViewController {
     
     @objc func clearButtonClicked() {
         if allowed {
-            userInfo.updateUserName(nicknameTextField.text!)
-            userInfo.updateProfileNumber(profileImageNumber)
+            UserInfo.shared.userName = nicknameTextField.text!
+            UserInfo.shared.profileNumber = profileImageNumber
+            UserInfo.shared.joinDate = DateFormatterManager.shared.today(Date())
             
             UserDefaultsManager.goToSearch = true
-            UserDefaultsManager.joinDate = joinDate()
             
             UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
 
@@ -197,8 +196,8 @@ final class ProfileSettingViewController: BaseViewController {
 
     @objc func saveButtonClicked() {
         if allowed {
-            userInfo.updateUserName(nicknameTextField.text!)
-            userInfo.updateProfileNumber(profileImageNumber)
+            UserInfo.shared.userName = nicknameTextField.text!
+            UserInfo.shared.profileNumber = profileImageNumber
         }
     }
 }

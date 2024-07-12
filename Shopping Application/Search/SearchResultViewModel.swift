@@ -19,7 +19,6 @@ final class SearchResultViewModel {
     var outputScrollToTop: Observable<Void?> = Observable(nil)
     var outputPagination: Observable<Void?> = Observable(nil)
     
-    var userInfo = UserInformation.shared
     var buttonTag: Int = 0
     var totalPage = 0
     var start = 1
@@ -37,7 +36,7 @@ final class SearchResultViewModel {
         
         inputButton.bind { [weak self] value in
             guard let buttonTag = value else { return }
-            self?.fetchData(text: self?.userInfo.getRecentSearchText() ?? "", buttonTag: buttonTag, start: 1)
+            self?.fetchData(text: UserInfo.shared.recentSearchText, buttonTag: buttonTag, start: 1)
         }
         
         inputPage.bind { [weak self] value in
@@ -69,7 +68,7 @@ final class SearchResultViewModel {
         start += 30
         guard totalPage != start else { return }
         
-        APIManager.shared.callRequest(text: userInfo.getRecentSearchText(), start: start, buttonTag: buttonTag) { [weak self] value in
+        APIManager.shared.callRequest(text: UserInfo.shared.recentSearchText, start: start, buttonTag: buttonTag) { [weak self] value in
             self?.outputList.value.append(contentsOf: value.items)
         }
     }

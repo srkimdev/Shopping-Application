@@ -7,57 +7,49 @@
 
 import UIKit
 
-class UserInformation {
+class UserInfo {
     
-    static let shared = UserInformation.init()
+    static let shared = UserInfo.init()
     
-    private init() { 
-        userName = UserDefaults.standard.string(forKey: "userName") ?? "DefaultUser"
-        profileNumber = UserDefaults.standard.integer(forKey: "profileNumber")
-        joinDate = ""
-        recentSearchText = ""
+    let userDefault = UserDefaults.standard
+    
+    private init() { }
+    
+    var userName: String {
+        get {
+            return userDefault.string(forKey: "userName") ?? "DefaultUser"
+        }
+        set {
+            userDefault.set(newValue, forKey: "userName")
+        }
     }
     
-    private var userName: String
-    private var profileNumber: Int
-    private var joinDate: String
-    private var recentSearchText: String
-    
-    func getUserName() -> String {
-        return userName
+    var profileNumber: Int {
+        get {
+            return userDefault.integer(forKey: "profileNumber")
+        }
+        set {
+            userDefault.set(newValue, forKey: "profileNumber")
+        }
     }
     
-    func updateUserName(_ name: String) {
-        userName = name
-        UserDefaults.standard.setValue(userName, forKey: "userName")
+    var joinDate: String {
+        get {
+            return userDefault.string(forKey: "joinDate") ?? ""
+        }
+        set {
+            userDefault.set(newValue, forKey: "joinDate")
+        }
     }
     
-    func getProfileNumber() -> Int {
-        return profileNumber
+    var recentSearchText: String {
+        get {
+            return userDefault.string(forKey: "recentSearchText") ?? ""
+        }
+        set {
+            userDefault.set(newValue, forKey: "recentSearchText")
+        }
     }
-    
-    func updateProfileNumber(_ number: Int) {
-        profileNumber = number
-        UserDefaults.standard.setValue(profileNumber, forKey: "profileNumber")
-    }
-    
-    func getJoinDate() -> String {
-        return joinDate
-    }
-    
-    func updateJoinDate(_ date: Date) {
-        joinDate = DateFormatterManager.shared.today(date)
-        UserDefaults.standard.setValue(joinDate, forKey: "joinDate")
-    }
-    
-    func getRecentSearchText() -> String {
-        return recentSearchText
-    }
-    
-    func updateRecentSearchText(_ text: String) {
-        recentSearchText = text
-    }
-    
 }
 
 class DateFormatterManager {
@@ -72,5 +64,21 @@ class DateFormatterManager {
         
         return format.string(from: date)
     }
+}
+
+class NumberFormatterManager {
     
+    static let shared = NumberFormatterManager()
+    
+    private init() { }
+    
+    func Comma(_ number: Int) -> String {
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        
+        let result = format.string(for: number)
+        guard let decimalNumber = result else { return ""}
+        
+        return decimalNumber
+    }
 }

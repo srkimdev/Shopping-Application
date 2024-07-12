@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Alamofire
 import RealmSwift
 
 final class SearchResultViewController: BaseViewController {
@@ -188,7 +187,7 @@ final class SearchResultViewController: BaseViewController {
     func bindData() {
         
         viewModel.outputCount.bind { [weak self] value in
-            self?.totalLabel.text = "\(value)"
+            self?.totalLabel.text = NumberFormatterManager.shared.Comma(value)
         }
     
         viewModel.outputScrollToTop.bind { [weak self] value in

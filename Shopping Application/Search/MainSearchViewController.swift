@@ -27,7 +27,6 @@ final class MainSearchViewController: BaseViewController {
     }
     
     let viewModel = MainSearchViewModel()
-    let userInfo = UserInformation.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +98,7 @@ final class MainSearchViewController: BaseViewController {
     
     override func configureUI() {
         
-        navigationItem.title = "\(userInfo.getUserName())'s MEANING OUT"
+        navigationItem.title = "\(UserInfo.shared.userName)'s MEANING OUT"
         
         searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchBar.searchBarStyle = .minimal
@@ -148,10 +147,10 @@ extension MainSearchViewController: UISearchBarDelegate {
         searchBar.text = nil
         
         topToRecentSearch(search: text)
-        userInfo.updateRecentSearchText(text)
-
+        UserInfo.shared.recentSearchText = text
+        
         let vc = SearchResultViewController()
-        vc.data = userInfo.getRecentSearchText()
+        vc.data = UserInfo.shared.recentSearchText
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -176,11 +175,11 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        userInfo.updateRecentSearchText(searchList[indexPath.row])
-        topToRecentSearch(search: userInfo.getRecentSearchText())
-        
+        UserInfo.shared.recentSearchText = searchList[indexPath.row]
+        topToRecentSearch(search: UserInfo.shared.recentSearchText)
+
         let vc = SearchResultViewController()
-        vc.data = userInfo.getRecentSearchText()
+        vc.data = UserInfo.shared.recentSearchText
         navigationController?.pushViewController(vc, animated: true)
     }
 }
