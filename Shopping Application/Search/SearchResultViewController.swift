@@ -187,11 +187,18 @@ final class SearchResultViewController: BaseViewController {
     
     func bindData() {
         
-        viewModel.outputCount.bind { value in
-            self.totalLabel.text = "\(value)"
+        viewModel.outputCount.bind { [weak self] value in
+            self?.totalLabel.text = "\(value)"
+        }
+    
+        viewModel.outputScrollToTop.bind { [weak self] value in
+            guard let value else { return }
+            self?.productCollectionView.reloadData()
+            self?.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
         
-        viewModel.outputList.bind { _ in
+        viewModel.outputPagination.bind { value in
+            guard let value else { return }
             self.productCollectionView.reloadData()
         }
     }
