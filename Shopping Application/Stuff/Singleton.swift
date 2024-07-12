@@ -14,13 +14,13 @@ class UserInformation {
     private init() { 
         userName = UserDefaults.standard.string(forKey: "userName") ?? "DefaultUser"
         profileNumber = UserDefaults.standard.integer(forKey: "profileNumber")
-        joinDate = Date()
+        joinDate = ""
         recentSearchText = ""
     }
     
     private var userName: String
     private var profileNumber: Int
-    private var joinDate: Date
+    private var joinDate: String
     private var recentSearchText: String
     
     func getUserName() -> String {
@@ -41,12 +41,13 @@ class UserInformation {
         UserDefaults.standard.setValue(profileNumber, forKey: "profileNumber")
     }
     
-    func getJoinDate() -> Date {
+    func getJoinDate() -> String {
         return joinDate
     }
     
     func updateJoinDate(_ date: Date) {
-        joinDate = date
+        joinDate = DateFormatterManager.shared.today(date)
+        UserDefaults.standard.setValue(joinDate, forKey: "joinDate")
     }
     
     func getRecentSearchText() -> String {
@@ -56,4 +57,20 @@ class UserInformation {
     func updateRecentSearchText(_ text: String) {
         recentSearchText = text
     }
+    
+}
+
+class DateFormatterManager {
+    
+    static let shared = DateFormatterManager()
+    
+    private init() { }
+    
+    func today(_ date: Date) -> String {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy.MM.dd"
+        
+        return format.string(from: date)
+    }
+    
 }
