@@ -175,7 +175,8 @@ final class SearchResultViewController: BaseViewController {
         UIView.performWithoutAnimation {
             productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
         }
-
+        
+        NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil, userInfo: nil)
     }
     
     func bindData() {

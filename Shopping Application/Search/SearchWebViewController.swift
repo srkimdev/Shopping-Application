@@ -88,6 +88,7 @@ final class SearchWebViewController: BaseViewController {
         UserDefaults.standard.set(like, forKey: data.productId)
         
         likeChange?()
+        NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil, userInfo: nil)
     }
 }
 

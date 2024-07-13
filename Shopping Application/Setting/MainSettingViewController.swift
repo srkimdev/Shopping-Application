@@ -21,11 +21,8 @@ final class MainSettingViewController: BaseViewController {
         settingTableView.dataSource = self
         settingTableView.register(SettingProfileTableViewCell.self, forCellReuseIdentifier: SettingProfileTableViewCell.identifier)
         settingTableView.register(SettingOtherTableViewCell.self, forCellReuseIdentifier: SettingOtherTableViewCell.identifier)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-//        UserDefaultsManager.fromWhere = true
-        settingTableView.reloadData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(categoryReceivedNotification), name: NSNotification.Name("update"), object: nil)
     }
     
     override func configureHierarchy() {
@@ -41,7 +38,10 @@ final class MainSettingViewController: BaseViewController {
     override func configureUI() {
         navigationItem.title = "SETTING"
     }
-
+    
+    @objc func categoryReceivedNotification(notification: NSNotification) {
+        settingTableView.reloadData()
+    }
 }
 
 extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource {
