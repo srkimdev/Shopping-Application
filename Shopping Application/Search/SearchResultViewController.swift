@@ -40,6 +40,11 @@ final class SearchResultViewController: BaseViewController {
         
         bindData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        productCollectionView.reloadData()
+    }
 
     override func configureHierarchy() {
         
@@ -180,7 +185,7 @@ final class SearchResultViewController: BaseViewController {
     func bindData() {
         
         viewModel.outputCount.bind { [weak self] value in
-            self?.totalLabel.text = NumberFormatterManager.shared.Comma(value)
+            self?.totalLabel.text = "\(NumberFormatterManager.shared.Comma(value))개의 검색 결과"
         }
     
         viewModel.outputScrollToTop.bind { [weak self] value in

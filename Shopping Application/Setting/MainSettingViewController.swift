@@ -7,10 +7,12 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 final class MainSettingViewController: BaseViewController {
 
     let settingTableView = UITableView()
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,7 @@ final class MainSettingViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UserDefaultsManager.fromWhere = true
+//        UserDefaultsManager.fromWhere = true
         settingTableView.reloadData()
     }
     
@@ -62,9 +64,11 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
             
             let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingOtherTableViewCell.identifier, for: indexPath) as! SettingOtherTableViewCell
             
+            var task: Results<DBTable> = realm.objects(DBTable.self)
+            
             if indexPath.row == 1 {
                 cell.saveImage.image = CustomDesign.likeImage
-                cell.countLabel.text = "\(UserDefaultsManager.totalLike)개의 상품"
+                cell.countLabel.text = "\(task.count)개의 상품"
             } else {
                 cell.saveImage.image = nil
                 cell.countLabel.text = nil
