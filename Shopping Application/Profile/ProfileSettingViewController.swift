@@ -119,15 +119,16 @@ final class ProfileSettingViewController: BaseViewController {
             navigationItem.rightBarButtonItem = item
             
             clearButton.isHidden = true
+            profileImage.image = UIImage(named: "profile_\(UserInfo.shared.profileNumber)")
 
         } else {
             navigationItem.title = "PROFILE SETTING"
             randomImage()
+            profileImage.image = UIImage(named: "profile_\(profileImageNumber)")
         }
     
         BackButton()
         
-        profileImage.image = UIImage(named: "profile_\(profileImageNumber)")
         profileImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         profileImage.layer.borderColor = CustomDesign.orange.cgColor
         profileImage.layer.masksToBounds = true

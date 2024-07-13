@@ -82,13 +82,14 @@ final class ProfileSelectingViewController: BaseViewController {
         // mode check
         if UserDefaults.standard.string(forKey: "mode") == "edit" {
             navigationItem.title = "EDIT PROFILE"
+            selectedImage.image = UIImage(named: "profile_\(UserInfo.shared.profileNumber)")
         } else {
             navigationItem.title = "PROFILE SETTING"
+            selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
         }
         
         BackButton()
 
-        selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
         selectedImage.layer.masksToBounds = true
         selectedImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         selectedImage.layer.borderColor = CustomDesign.orange.cgColor
@@ -111,7 +112,13 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
         
         guard let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as? ProfileSelectingCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.designCell(transition: indexPath.row, num: profileImageNumber!)
+        var number = profileImageNumber
+        
+        if UserDefaults.standard.string(forKey: "mode") == "edit" {
+            number = UserInfo.shared.profileNumber
+        }
+        
+        cell.designCell(transition: indexPath.row, num: number!)
         
         return cell
     }
