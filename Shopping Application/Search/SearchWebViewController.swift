@@ -13,6 +13,7 @@ import RealmSwift
 final class SearchWebViewController: BaseViewController {
 
     var data: DBTable!
+    var likeChange: (() -> Void)?
     
     let mainView = SearchWebView()
     
@@ -21,7 +22,10 @@ final class SearchWebViewController: BaseViewController {
     override func loadView() {
         view = mainView
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        likeChange?()
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +48,7 @@ final class SearchWebViewController: BaseViewController {
     }
     
     @objc func likeButtonClicked() {
-        
+        print(#function)
         var like = UserDefaults.standard.bool(forKey: data.productId)
         like.toggle()
         
@@ -82,6 +86,8 @@ final class SearchWebViewController: BaseViewController {
         }
         
         UserDefaults.standard.set(like, forKey: data.productId)
+        
+        likeChange?()
     }
 }
 

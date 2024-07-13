@@ -91,7 +91,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         
         companyLabel.text = transition.mallName
         productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-        priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.lprice)!))원"
+        priceLabel.text = "\(NumberFormatterManager.shared.Comma(Int(transition.lprice) ?? 0))원"
         
         let key = transition.productId
         

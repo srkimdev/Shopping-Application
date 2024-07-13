@@ -169,7 +169,7 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = searchListTableView.dequeueReusableCell(withIdentifier: MainSearchTableViewCell.identifier, for: indexPath) as! MainSearchTableViewCell
+        guard let cell = searchListTableView.dequeueReusableCell(withIdentifier: MainSearchTableViewCell.identifier, for: indexPath) as? MainSearchTableViewCell else { return UITableViewCell() }
         
         cell.designCell(transition: searchList[indexPath.row])
         cell.deleteButton.tag = indexPath.row

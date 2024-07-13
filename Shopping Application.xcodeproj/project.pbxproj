@@ -42,6 +42,7 @@
 		DC9099FE2C3FFA3A001A5326 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FD2C3FFA3A001A5326 /* Singleton.swift */; };
 		DC909A002C40DC47001A5326 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */; };
 		DC909A032C40FA7A001A5326 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC909A022C40FA7A001A5326 /* APIManager.swift */; };
+		DC909A042C429EA0001A5326 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = DCFBF74B2C3A5FFB007DA893 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -53,6 +54,20 @@
 		DCFBF74C2C3A5FFB007DA893 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBF74B2C3A5FFB007DA893 /* RealmSwift */; };
 		DCFBF74E2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DC909A052C429EA0001A5326 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DC909A042C429EA0001A5326 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DC0CFA8F2C30215C00E80424 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -262,6 +277,7 @@
 				DC487D042C1AE4DA006B7AAF /* Sources */,
 				DC487D052C1AE4DA006B7AAF /* Frameworks */,
 				DC487D062C1AE4DA006B7AAF /* Resources */,
+				DC909A052C429EA0001A5326 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

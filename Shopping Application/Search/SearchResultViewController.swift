@@ -40,11 +40,6 @@ final class SearchResultViewController: BaseViewController {
         
         bindData()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        productCollectionView.reloadData()
-    }
 
     override func configureHierarchy() {
         
@@ -180,6 +175,7 @@ final class SearchResultViewController: BaseViewController {
         UIView.performWithoutAnimation {
             productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
         }
+
     }
     
     func bindData() {
@@ -221,10 +217,14 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let data = viewModel.outputList.value[indexPath.row]
+        let data = viewModel.outputList.value[indexPath.item]
         let transition = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
 
         let vc = SearchWebViewController()
+        vc.likeChange = { () in
+            self.productCollectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
+        }
+        
         vc.data = transition
         navigationController?.pushViewController(vc, animated: true)
     }

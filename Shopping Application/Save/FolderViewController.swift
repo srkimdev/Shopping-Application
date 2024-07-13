@@ -54,7 +54,7 @@ extension FolderViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = folderTableView.dequeueReusableCell(withIdentifier: FolderTableViewCell.identifier, for: indexPath) as! FolderTableViewCell
+        guard let cell = folderTableView.dequeueReusableCell(withIdentifier: FolderTableViewCell.identifier, for: indexPath) as? FolderTableViewCell else { return UITableViewCell() }
         
         let data = list[indexPath.row]
         

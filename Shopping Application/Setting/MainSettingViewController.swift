@@ -53,7 +53,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
+            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as? SettingProfileTableViewCell else { return UITableViewCell() }
             
             cell.profileImage.image = UIImage(named: "profile_\(UserInfo.shared.profileNumber)")
             cell.profileName.text = UserInfo.shared.userName
@@ -62,7 +62,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
 
         } else {
             
-            let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingOtherTableViewCell.identifier, for: indexPath) as! SettingOtherTableViewCell
+            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingOtherTableViewCell.identifier, for: indexPath) as? SettingOtherTableViewCell else { return UITableViewCell() }
             
             var task: Results<DBTable> = realm.objects(DBTable.self)
             
