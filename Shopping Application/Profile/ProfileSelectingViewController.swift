@@ -99,7 +99,6 @@ final class ProfileSelectingViewController: BaseViewController {
         cameraImage.tintColor = .white
         cameraImage.image = UIImage(systemName: "camera.fill")
     }
-    
 }
 
 extension ProfileSelectingViewController: UICollectionViewDelegate, UICollectionViewDataSource {

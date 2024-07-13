@@ -42,6 +42,8 @@ class ProfileSettingViewModel {
         } else if isDigit(input: inputText) {
             outputText.value = "닉네임에 숫자는 포함할 수 없어요."
             allowed.value = false
+        } else if inputText.contains(" ") {
+            outputText.value = "닉네임에 공백은 포함할 수 없어요."
         } else {
             outputText.value = "사용할 수 있는 닉네임이에요"
             allowed.value = true

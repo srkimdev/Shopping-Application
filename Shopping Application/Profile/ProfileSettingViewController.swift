@@ -31,19 +31,6 @@ final class ProfileSettingViewController: BaseViewController {
         bindData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        // from setting
-//        if UserDefaults.standard.bool(forKey: "fromWhere") {
-//            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumber"))")
-//            nicknameTextField.text = UserDefaults.standard.string(forKey: "userName")
-//        } else {
-//        // from onboarding
-//            profileImage.image = UIImage(named: "profile_\(UserDefaults.standard.integer(forKey: "profileNumberTemp"))")
-//        }
-
-    }
-    
     override func viewDidLayoutSubviews() {
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         cameraImageView.layer.cornerRadius = 10

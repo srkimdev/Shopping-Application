@@ -37,4 +37,17 @@ extension UIViewController {
             
         present(alert, animated: true)
     }
+    
+    func showAlertOnlyForCheck(title: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: "",
+            preferredStyle: .alert)
+            
+        let check = UIAlertAction(title: "확인", style: .default)
+
+        alert.addAction(check)
+            
+        present(alert, animated: true)
+    }
 }
