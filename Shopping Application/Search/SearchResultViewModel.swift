@@ -35,8 +35,11 @@ final class SearchResultViewModel {
         }
         
         inputButton.bind { [weak self] value in
-            guard let buttonTag = value else { return }
-            self?.fetchData(text: UserInfo.shared.recentSearchText, buttonTag: buttonTag, start: 1)
+            if value == self?.buttonTag { return }
+            guard let value else { return }
+            
+            self?.buttonTag = value
+            self?.fetchData(text: UserInfo.shared.recentSearchText, buttonTag: value, start: 1)
         }
         
         inputPage.bind { [weak self] value in

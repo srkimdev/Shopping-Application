@@ -143,7 +143,7 @@ extension MainSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        guard let text = searchBar.text, !text.contains(" ") else {
+        guard let text = searchBar.text/*, !text.contains(" ")*/ else {
             showAlertOnlyForCheck(title: "검색어를 입력해주세요.")
             searchBar.text = nil
             return

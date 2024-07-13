@@ -85,8 +85,9 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     func designCell(transition: SearchResultDetail) {
         
+        let placeholderImage = UIImage(systemName: "star")
         let url = URL(string: transition.image)
-        productImage.kf.setImage(with: url)
+        productImage.kf.setImage(with: url, placeholder: placeholderImage)
         
         companyLabel.text = transition.mallName
         productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
