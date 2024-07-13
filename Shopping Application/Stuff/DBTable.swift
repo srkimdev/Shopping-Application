@@ -12,22 +12,22 @@ class DBTable: Object {
     
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var productId: String
-    @Persisted var productImage: String
-    @Persisted var productCompany: String
-    @Persisted var productName: String
-    @Persisted var productPrice: String
-    @Persisted var productLike: Bool
-    @Persisted var productLink: String
+    @Persisted var image: String
+    @Persisted var mallName: String
+    @Persisted var title: String
+    @Persisted var lprice: String
+    @Persisted var link: String
+    @Persisted var like: Bool
     
-    convenience init(productId: String, productImage: String, productCompany: String, productName: String, productPrice: String, productLink: String) {
+    convenience init(productId: String, image: String, mallName: String, title: String, lprice: String, link: String) {
         self.init()
         self.productId = productId
-        self.productImage = productImage
-        self.productCompany = productCompany
-        self.productName = productName
-        self.productPrice = productPrice
-        self.productLink = productLink
-        self.productLike = true
+        self.image = image
+        self.mallName = mallName
+        self.title = title
+        self.lprice = lprice
+        self.link = link
+        self.like = true
     }
 }
 

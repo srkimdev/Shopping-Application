@@ -86,11 +86,11 @@ class SearchSaveCollectionViewCell: BaseCollectionViewCell {
     
     func designCell(transition: DBTable) {
         
-        let url = URL(string: transition.productImage)
+        let url = URL(string: transition.image)
         productImage.kf.setImage(with: url)
         
-        companyLabel.text = transition.productCompany
-        productLabel.text = transition.productName.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-        priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.productPrice)!))원"
+        companyLabel.text = transition.mallName
+        productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        priceLabel.text = "\(ConstantTable.formatNumberString(number: Int(transition.lprice)!))원"
     }
 }

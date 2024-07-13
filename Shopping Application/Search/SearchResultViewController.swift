@@ -143,45 +143,38 @@ final class SearchResultViewController: BaseViewController {
     
     @objc func likeButtonClicked(sender: UIButton) {
         
-//        var like: Bool = UserDefaults.standard.bool(forKey: list[sender.tag].productId)
-//        like.toggle()
-//    
-//        ConstantTable.likeCount = UserDefaultsManager.totalLike
-//        
-//        let task = DBTable(productId: list[sender.tag].productId, productImage: list[sender.tag].image, productCompany: list[sender.tag].mallName, productName: list[sender.tag].title, productPrice: list[sender.tag].lprice, productLink: list[sender.tag].link)
-//        
-//        if like {
-//            var folder: Folder?
-//            let list = realm.objects(Folder.self)
-//            
-//            if task.productCompany == "네이버" {
-//                folder = list[1]
-//            } else {
-//                folder = list[2]
-//            }
-//            
-//            realmrepository.createItem(task, folder: folder ?? list[0])
-//            ConstantTable.likeCount += 1
-//            
-//        } else {
-//            
-//            ConstantTable.likeCount -= 1
-//            
-//            let filterProduct = realm.objects(DBTable.self).filter {
-//                $0.productId == self.list[sender.tag].productId
-//            }
-//            
-//            try! realm.write {
-//                realm.delete(filterProduct)
-//            }
-//        }
-//
-//        UserDefaultsManager.totalLike = ConstantTable.likeCount
-//        UserDefaults.standard.set(like, forKey: list[sender.tag].productId)
-//        
-//        UIView.performWithoutAnimation {
-//            productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
-//        }
+        let data = viewModel.outputList.value[sender.tag]
+        var like = UserDefaults.standard.bool(forKey: data.productId)
+        like.toggle()
+        
+        let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
+        
+        if like {
+            try! realm.write {
+                realm.add(task)
+                
+                UserDefaults.standard.set(true, forKey: data.productId)
+                
+                print("Realm Add Succeed")
+            }
+        } else {
+            
+            let filter = realm.objects(DBTable.self).where{
+                $0.productId == self.viewModel.outputList.value[sender.tag].productId
+            }
+            
+            try! realm.write {
+                realm.delete(filter)
+                
+                UserDefaults.standard.set(false, forKey: data.productId)
+                
+                print("Realm Delete Succeed")
+            }
+        }
+        
+        UIView.performWithoutAnimation {
+            productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
+        }
     }
     
     func bindData() {
@@ -221,14 +214,15 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        
-//        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].image, productCompany: list[indexPath.row].mallName, productName: list[indexPath.row].title, productPrice: list[indexPath.row].lprice, productLink: list[indexPath.row].link)
-//
-//        let vc = SearchWebViewController()
-//        vc.data = data
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let data = viewModel.outputList.value[indexPath.row]
+        let transition = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
+
+        let vc = SearchWebViewController()
+        vc.data = transition
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {

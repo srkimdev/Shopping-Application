@@ -110,10 +110,10 @@ extension SearchSaveViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].productImage, productCompany: list[indexPath.row].productCompany, productName: list[indexPath.row].productName, productPrice: list[indexPath.row].productPrice, productLink: list[indexPath.row].productLink)
+//        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].productImage, productCompany: list[indexPath.row].productCompany, productName: list[indexPath.row].productName, productPrice: list[indexPath.row].productPrice, productLink: list[indexPath.row].productLink)
 
         let vc = SearchWebViewController()
-        vc.data = data
+//        vc.data = data
         navigationController?.pushViewController(vc, animated: true)
     }
 }
