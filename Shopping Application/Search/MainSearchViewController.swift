@@ -143,6 +143,13 @@ extension MainSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        if !NetworkManager.shared.isNetworkAvailable() {
+            view.endEditing(true)
+            searchBar.text = nil
+            NetworkManager.shared.showToast(message: "인터넷에 연결되지 않았습니다.\n연결 확인 후 다시 시도해 주세요.")
+            return
+        }
+        
         guard let text = searchBar.text/*, !text.contains(" ")*/ else {
             showAlertOnlyForCheck(title: "검색어를 입력해주세요.")
             searchBar.text = nil
@@ -179,6 +186,11 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if !NetworkManager.shared.isNetworkAvailable() {
+            NetworkManager.shared.showToast(message: "인터넷에 연결되지 않았습니다.\n연결 확인 후 다시 시도해 주세요.")
+            return
+        }
         
         UserInfo.shared.recentSearchText = searchList[indexPath.row]
         topToRecentSearch(search: UserInfo.shared.recentSearchText)

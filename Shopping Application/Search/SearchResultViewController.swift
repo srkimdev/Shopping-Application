@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import RealmSwift
+import Toast
 
 final class SearchResultViewController: BaseViewController {
 
@@ -38,6 +39,7 @@ final class SearchResultViewController: BaseViewController {
         guard let data = data else { return }
         viewModel.inputText.value = data
         
+        view.makeToastActivity(.center)
         bindData()
     }
 
@@ -183,6 +185,7 @@ final class SearchResultViewController: BaseViewController {
         
         viewModel.outputCount.bind { [weak self] value in
             self?.totalLabel.text = "\(NumberFormatterManager.shared.Comma(value))개의 검색 결과"
+            self?.view.hideToastActivity()
         }
     
         viewModel.outputScrollToTop.bind { [weak self] value in

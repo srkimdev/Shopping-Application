@@ -10,25 +10,33 @@ import WebKit
 import SnapKit
 import RealmSwift
 
-final class SearchWebViewController: BaseViewController {
+final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
 
     var data: DBTable!
     var likeChange: (() -> Void)?
     
-    let mainView = SearchWebView()
-    
+    var webview = WKWebView()
     let realm = try! Realm()
-    
-    override func loadView() {
-        view = mainView
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let url = URL(string: data.link)!
         let request = URLRequest(url: url)
-        mainView.website.load(request)
+        
+        print(url)
+        webview.load(request)
+        webview.navigationDelegate = self
+    }
+    
+    override func configureHierarchy() {
+        view.addSubview(webview)
+    }
+    
+    override func configureLayout() {
+        webview.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     override func configureUI() {
@@ -78,6 +86,10 @@ final class SearchWebViewController: BaseViewController {
         
         likeChange?()
         NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil, userInfo: nil)
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("웹 페이지 로딩 오류: \(error.localizedDescription)")
     }
 }
 

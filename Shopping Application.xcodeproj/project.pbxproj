@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0CFA8F2C30215C00E80424 /* BaseView.swift */; };
-		DC0CFAA12C314F7000E80424 /* SearchWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0CFAA02C314F7000E80424 /* SearchWebView.swift */; };
 		DC2CA9472C3D357700B31A98 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CA9462C3D357700B31A98 /* Observable.swift */; };
 		DC2CA9492C3D361300B31A98 /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */; };
 		DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D0B2C1AE4DA006B7AAF /* AppDelegate.swift */; };
@@ -35,6 +34,9 @@
 		DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */; };
 		DC7DDD872C438AE40039CA1D /* HTMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD862C438AE40039CA1D /* HTMLManager.swift */; };
 		DC7DDD892C4390F40039CA1D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD882C4390F40039CA1D /* NetworkError.swift */; };
+		DC7DDD8C2C43BA8D0039CA1D /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = DC7DDD8B2C43BA8D0039CA1D /* Reachability */; };
+		DC7DDD8E2C43BBBB0039CA1D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD8D2C43BBBB0039CA1D /* NetworkManager.swift */; };
+		DC7DDD912C43BD160039CA1D /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DC7DDD902C43BD160039CA1D /* Toast */; };
 		DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */; };
 		DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */; };
 		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
@@ -75,7 +77,6 @@
 
 /* Begin PBXFileReference section */
 		DC0CFA8F2C30215C00E80424 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		DC0CFAA02C314F7000E80424 /* SearchWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWebView.swift; sourceTree = "<group>"; };
 		DC2CA9462C3D357700B31A98 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
 		DC487D082C1AE4DA006B7AAF /* Shopping Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping Application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +105,7 @@
 		DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC7DDD862C438AE40039CA1D /* HTMLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLManager.swift; sourceTree = "<group>"; };
 		DC7DDD882C4390F40039CA1D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DC7DDD8D2C43BBBB0039CA1D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
@@ -128,8 +130,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC7DDD912C43BD160039CA1D /* Toast in Frameworks */,
 				DCFBF74C2C3A5FFB007DA893 /* RealmSwift in Frameworks */,
 				DCA841C52C1FFB0600B21AF2 /* Alamofire in Frameworks */,
+				DC7DDD8C2C43BA8D0039CA1D /* Reachability in Frameworks */,
 				DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */,
 				DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */,
 			);
@@ -211,6 +215,7 @@
 			children = (
 				DC909A022C40FA7A001A5326 /* APIManager.swift */,
 				DC7DDD882C4390F40039CA1D /* NetworkError.swift */,
+				DC7DDD8D2C43BBBB0039CA1D /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -257,7 +262,6 @@
 				DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */,
 				DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */,
 				DC487D462C1DBE5D006B7AAF /* SearchWebViewController.swift */,
-				DC0CFAA02C314F7000E80424 /* SearchWebView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -309,6 +313,8 @@
 				DCA841C12C1FFAFB00B21AF2 /* SnapKit */,
 				DCA841C42C1FFB0600B21AF2 /* Alamofire */,
 				DCFBF74B2C3A5FFB007DA893 /* RealmSwift */,
+				DC7DDD8B2C43BA8D0039CA1D /* Reachability */,
+				DC7DDD902C43BD160039CA1D /* Toast */,
 			);
 			productName = "Shopping Application";
 			productReference = DC487D082C1AE4DA006B7AAF /* Shopping Application.app */;
@@ -343,6 +349,8 @@
 				DCA841C02C1FFAFB00B21AF2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DCA841C32C1FFB0600B21AF2 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				DCFBF74A2C3A5FFB007DA893 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				DC7DDD8A2C43BA8D0039CA1D /* XCRemoteSwiftPackageReference "Reachability.swift" */,
+				DC7DDD8F2C43BD160039CA1D /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = DC487D092C1AE4DA006B7AAF /* Products */;
 			projectDirPath = "";
@@ -381,7 +389,6 @@
 				DCFBF7492C3A5F3E007DA893 /* DBTable.swift in Sources */,
 				DC67AD2B2C2BDF0100A5129F /* BaseViewController.swift in Sources */,
 				DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */,
-				DC0CFAA12C314F7000E80424 /* SearchWebView.swift in Sources */,
 				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
 				DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
@@ -400,6 +407,7 @@
 				DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */,
 				DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */,
 				DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */,
+				DC7DDD8E2C43BBBB0039CA1D /* NetworkManager.swift in Sources */,
 				DC2CA9472C3D357700B31A98 /* Observable.swift in Sources */,
 				DCFBF74E2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift in Sources */,
 				DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */,
@@ -639,6 +647,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DC7DDD8A2C43BA8D0039CA1D /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.0;
+			};
+		};
+		DC7DDD8F2C43BD160039CA1D /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		DCA841BD2C1FFAF100B21AF2 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -674,6 +698,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DC7DDD8B2C43BA8D0039CA1D /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC7DDD8A2C43BA8D0039CA1D /* XCRemoteSwiftPackageReference "Reachability.swift" */;
+			productName = Reachability;
+		};
+		DC7DDD902C43BD160039CA1D /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC7DDD8F2C43BD160039CA1D /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		DCA841BE2C1FFAF100B21AF2 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DCA841BD2C1FFAF100B21AF2 /* XCRemoteSwiftPackageReference "Kingfisher" */;

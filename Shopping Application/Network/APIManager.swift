@@ -5,12 +5,14 @@
 //  Created by 김성률 on 7/12/24.
 //
 
-import Foundation
+import UIKit
 import Alamofire
+import Toast
 
 final class APIManager {
     
     static let shared = APIManager()
+    let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     private init() { }
     
