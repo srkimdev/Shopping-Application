@@ -238,6 +238,6 @@ extension MainSearchViewController {
     }
     
     private func loadRecentSearches() -> [String] {
-        return UserDefaults.standard.stringArray(forKey: "RecentSearches") ?? []
+        return UserDefaultsManager.searchList
     }
 }

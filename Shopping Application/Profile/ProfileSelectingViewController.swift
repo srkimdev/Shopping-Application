@@ -75,8 +75,7 @@ final class ProfileSelectingViewController: BaseViewController {
     
     override func configureUI() {
         
-        // mode check
-        if UserDefaults.standard.string(forKey: "mode") == "edit" {
+        if UserDefaultsManager.mode == ProfileMode.edit.rawValue {
             navigationItem.title = "EDIT PROFILE"
         } else {
             navigationItem.title = "PROFILE SETTING"

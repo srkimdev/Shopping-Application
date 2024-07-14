@@ -99,7 +99,7 @@ final class ProfileSettingViewController: BaseViewController {
     
     override func configureUI() {
         
-        if UserDefaults.standard.string(forKey: "mode") == "edit"{
+        if UserDefaults.standard.string(forKey: "mode") == ProfileMode.edit.rawValue {
             navigationItem.title = "EDIT PROFILE"
             let item = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
             item.tintColor = CustomDesign.itemTintColor
@@ -107,16 +107,14 @@ final class ProfileSettingViewController: BaseViewController {
             
             clearButton.isHidden = true
             profileImageNumber = UserInfo.shared.profileNumber
-            profileImage.image = UIImage(named: "profile_\(profileImageNumber)")
-
         } else {
             navigationItem.title = "PROFILE SETTING"
             randomImage()
-            profileImage.image = UIImage(named: "profile_\(profileImageNumber)")
         }
-    
+        
         BackButton()
         
+        profileImage.image = UIImage(named: "profile_\(profileImageNumber)")
         profileImage.layer.borderWidth = CustomDesign.profileBorderWidth3
         profileImage.layer.borderColor = CustomDesign.orange.cgColor
         profileImage.layer.masksToBounds = true
@@ -156,8 +154,7 @@ final class ProfileSettingViewController: BaseViewController {
             UserInfo.shared.joinDate = DateFormatterManager.shared.today(Date())
             
             UserDefaultsManager.goToSearch = true
-            
-            UserDefaults.standard.set(ProfileMode.edit.rawValue, forKey: "mode")
+            UserDefaultsManager.mode = ProfileMode.edit.rawValue
 
             let vc = TabBarController()
             vc.modalPresentationStyle = .overFullScreen

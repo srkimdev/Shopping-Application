@@ -28,10 +28,8 @@ struct SearchResultDetail: Decodable {
 
 // this is for reusing ProfileSettingViewController
 enum ProfileMode: String {
-    
-    case setup = "setup"
-    case edit = "edit"
-    
+    case setup
+    case edit
 }
 
 enum CustomDesign {

@@ -85,8 +85,6 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
         let item = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(likeButtonClicked))
         navigationItem.rightBarButtonItem = item
         
-        UserInfo.shared.setLikeProduct(isLike: like, forkey: data.productId)
-        
         likeChange?()
         NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil, userInfo: nil)
     }
