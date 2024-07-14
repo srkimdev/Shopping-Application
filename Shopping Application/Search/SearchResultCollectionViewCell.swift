@@ -90,7 +90,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         productImage.kf.setImage(with: url, placeholder: placeholderImage)
         
         companyLabel.text = transition.mallName
-        productLabel.text = transition.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        productLabel.text = HTMLManager.shared.changeHTML(text: transition.title)
         priceLabel.text = "\(NumberFormatterManager.shared.Comma(Int(transition.lprice) ?? 0))원"
         
         let key = transition.productId

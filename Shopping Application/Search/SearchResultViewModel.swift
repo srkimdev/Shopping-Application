@@ -60,7 +60,13 @@ final class SearchResultViewModel {
         self.buttonTag = buttonTag
         self.start = start
         
-        APIManager.shared.callRequest(text: text, start: start, buttonTag: buttonTag) { [weak self] value in
+        APIManager.shared.callRequest(text: text, start: start, buttonTag: buttonTag) { [weak self] value, error in
+            if let error = error {
+                print(error)
+            }
+            
+            guard let value else { return }
+            
             self?.outputList.value = value.items
             self?.outputCount.value = value.total
             self?.totalPage = value.total
@@ -71,7 +77,14 @@ final class SearchResultViewModel {
         start += 30
         guard totalPage != start else { return }
         
-        APIManager.shared.callRequest(text: UserInfo.shared.recentSearchText, start: start, buttonTag: buttonTag) { [weak self] value in
+        APIManager.shared.callRequest(text: UserInfo.shared.recentSearchText, start: start, buttonTag: buttonTag) { [weak self] value, error in
+            
+            if let error = error {
+                print(error)
+            }
+            
+            guard let value else { return }
+            
             self?.outputList.value.append(contentsOf: value.items)
         }
     }

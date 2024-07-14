@@ -32,7 +32,7 @@ final class SearchWebViewController: BaseViewController {
     }
     
     override func configureUI() {
-        navigationItem.title = data.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        navigationItem.title = HTMLManager.shared.changeHTML(text: data.title)
         BackButton()
         
         let image = UserInfo.shared.getLikeProduct(forkey: data.productId) ? CustomDesign.likeImage : CustomDesign.unlikeImage

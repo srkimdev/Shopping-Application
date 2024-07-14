@@ -33,6 +33,8 @@
 		DC67AD2B2C2BDF0100A5129F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2A2C2BDF0100A5129F /* BaseViewController.swift */; };
 		DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2C2C2BDF9B00A5129F /* BaseTableViewCell.swift */; };
 		DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */; };
+		DC7DDD872C438AE40039CA1D /* HTMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD862C438AE40039CA1D /* HTMLManager.swift */; };
+		DC7DDD892C4390F40039CA1D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD882C4390F40039CA1D /* NetworkError.swift */; };
 		DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */; };
 		DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */; };
 		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
@@ -100,6 +102,8 @@
 		DC67AD2A2C2BDF0100A5129F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DC67AD2C2C2BDF9B00A5129F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		DC67AD2E2C2BE06F00A5129F /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC7DDD862C438AE40039CA1D /* HTMLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLManager.swift; sourceTree = "<group>"; };
+		DC7DDD882C4390F40039CA1D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				DC909A022C40FA7A001A5326 /* APIManager.swift */,
+				DC7DDD882C4390F40039CA1D /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 				DC9099FD2C3FFA3A001A5326 /* UserInfo.swift */,
 				DC909A072C42B552001A5326 /* DateFormatterManager.swift */,
 				DC909A092C42B57B001A5326 /* NumberFormatterManager.swift */,
+				DC7DDD862C438AE40039CA1D /* HTMLManager.swift */,
 			);
 			path = Singleton;
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 				DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */,
 				DCA841CF2C201F3500B21AF2 /* APIkey.swift in Sources */,
 				DC909A032C40FA7A001A5326 /* APIManager.swift in Sources */,
+				DC7DDD872C438AE40039CA1D /* HTMLManager.swift in Sources */,
 				DC487D292C1AE767006B7AAF /* OnBoardingViewController.swift in Sources */,
 				DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */,
 				DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */,
@@ -405,6 +412,7 @@
 				DC487D452C1D6E10006B7AAF /* MainSearchTableViewCell.swift in Sources */,
 				DC487D3B2C1C2CA9006B7AAF /* SearchResultViewController.swift in Sources */,
 				DC487D352C1C25BC006B7AAF /* MainSearchViewController.swift in Sources */,
+				DC7DDD892C4390F40039CA1D /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@ final class APIManager {
     
     private init() { }
     
-    func callRequest(text: String, start: Int, buttonTag: Int, completionHandler: @escaping (SearchResult) -> Void) {
+    func callRequest(text: String, start: Int, buttonTag: Int, completionHandler: @escaping (SearchResult?, String?) -> Void) {
         
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[buttonTag])"
         
@@ -24,13 +24,21 @@ final class APIManager {
         ]
         
         AF.request(url, method: .get, headers: header).responseDecodable(of: SearchResult.self) { response in
+            
             switch response.result {
                 
             case .success(let value):
-                completionHandler(value)
+                completionHandler(value, nil)
                 
-            case .failure(let error):
-                print(error)
+            case .failure:
+                if let data = response.data,
+                   let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let errorCode = json["errorCode"] as? String {
+                    let apiError = APIError.from(errorCode: errorCode)
+                    completionHandler(nil, apiError.description)
+                } else {
+                    completionHandler(nil, "statusCode: \(response.response?.statusCode)")
+                }
             }
         }
     }
