@@ -85,7 +85,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     func designCell(transition: SearchResultDetail) {
         
-        let placeholderImage = UIImage(systemName: "star")
+        let placeholderImage = UIImage(named: "shop-placeholder")
         let url = URL(string: transition.image)
         productImage.kf.setImage(with: url, placeholder: placeholderImage)
         
