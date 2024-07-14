@@ -9,7 +9,7 @@ import UIKit
 import Reachability
 import Toast
 
-class NetworkManager {
+final class NetworkManager {
     
     static let shared = NetworkManager()
     private let reachability = try! Reachability()

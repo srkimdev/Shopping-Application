@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserInfo {
+final class UserInfo {
     
     static let shared = UserInfo()
     

@@ -10,7 +10,7 @@ import SnapKit
 import Alamofire
 import RealmSwift
 
-class SearchSaveViewController: BaseViewController {
+final class SearchSaveViewController: BaseViewController {
 
     lazy var productCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     let line = UIView()

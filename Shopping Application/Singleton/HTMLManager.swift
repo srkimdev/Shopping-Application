@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HTMLManager {
+final class HTMLManager {
     
     static let shared = HTMLManager()
     

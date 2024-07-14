@@ -9,6 +9,7 @@ import UIKit
 import WebKit
 import SnapKit
 import RealmSwift
+import Toast
 
 final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
 
@@ -22,10 +23,11 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.makeToastActivity(.center)
+        
         let url = URL(string: data.link)!
         let request = URLRequest(url: url)
         
-        print(url)
         webview.load(request)
         webview.navigationDelegate = self
     }
@@ -92,6 +94,10 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         navigationController?.popViewController(animated: true)
         sendToast?("url이 존재하지 않습니다.")
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        view.hideToastActivity()
     }
 }
 

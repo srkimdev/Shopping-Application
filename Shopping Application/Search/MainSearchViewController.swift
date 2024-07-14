@@ -39,6 +39,8 @@ final class MainSearchViewController: BaseViewController {
         searchList = loadRecentSearches()
         
         bindData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedNotification), name: NSNotification.Name("update"), object: nil)
     }
 
     override func configureHierarchy() {
@@ -137,6 +139,10 @@ final class MainSearchViewController: BaseViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    @objc func receivedNotification(notification: NSNotification) {
+        navigationItem.title = "\(UserInfo.shared.userName)'s MEANING OUT"
+    }
 }
 
 extension MainSearchViewController: UISearchBarDelegate {
@@ -145,7 +151,6 @@ extension MainSearchViewController: UISearchBarDelegate {
         
         if !NetworkManager.shared.isNetworkAvailable() {
             view.endEditing(true)
-            searchBar.text = nil
             NetworkManager.shared.showToast(message: "인터넷에 연결되지 않았습니다.\n연결 확인 후 다시 시도해 주세요.")
             return
         }

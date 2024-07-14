@@ -22,7 +22,7 @@ final class MainSettingViewController: BaseViewController {
         settingTableView.register(SettingProfileTableViewCell.self, forCellReuseIdentifier: SettingProfileTableViewCell.identifier)
         settingTableView.register(SettingOtherTableViewCell.self, forCellReuseIdentifier: SettingOtherTableViewCell.identifier)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(categoryReceivedNotification), name: NSNotification.Name("update"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedNotification), name: NSNotification.Name("update"), object: nil)
     }
     
     override func configureHierarchy() {
@@ -39,7 +39,7 @@ final class MainSettingViewController: BaseViewController {
         navigationItem.title = "SETTING"
     }
     
-    @objc func categoryReceivedNotification(notification: NSNotification) {
+    @objc func receivedNotification(notification: NSNotification) {
         settingTableView.reloadData()
     }
 }
