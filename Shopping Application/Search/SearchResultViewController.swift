@@ -229,6 +229,10 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
             self.productCollectionView.reloadItems(at: [IndexPath(item: indexPath.item, section: 0)])
         }
         
+        vc.sendToast = { value in
+            self.view.makeToast(value, position: .bottom)
+        }
+        
         vc.data = transition
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -14,6 +14,7 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
 
     var data: DBTable!
     var likeChange: (() -> Void)?
+    var sendToast: ((String) -> Void)?
     
     var webview = WKWebView()
     let realm = try! Realm()
@@ -89,7 +90,8 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("웹 페이지 로딩 오류: \(error.localizedDescription)")
+        navigationController?.popViewController(animated: true)
+        sendToast?("url이 존재하지 않습니다.")
     }
 }
 
