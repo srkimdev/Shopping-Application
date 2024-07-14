@@ -69,8 +69,6 @@ class SearchSaveViewController: BaseViewController {
     }
     
     @objc func likeButtonClicked(sender: UIButton) {
-    
-        ConstantTable.likeCount = UserDefaultsManager.totalLike
         
         let filterProduct = realm.objects(DBTable.self).where {
             $0.productId == self.list[sender.tag].productId
@@ -79,10 +77,7 @@ class SearchSaveViewController: BaseViewController {
         try! realm.write {
             UserDefaults.standard.set(false, forKey: list[sender.tag].productId)
             realm.delete(filterProduct)
-            ConstantTable.likeCount -= 1
         }
-        
-        UserDefaultsManager.totalLike = ConstantTable.likeCount
         
         UIView.performWithoutAnimation {
             productCollectionView.reloadData()

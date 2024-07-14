@@ -70,7 +70,7 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
         
         profileName.font = .boldSystemFont(ofSize: 17)
         
-        joinDate.text = "\(UserDefaults.standard.string(forKey: "joinDate")!) 가입"
+        joinDate.text = "\(UserInfo.shared.joinDate) 가입"
         joinDate.font = .systemFont(ofSize: 12)
         
         nextButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)

@@ -95,7 +95,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         
         let key = transition.productId
         
-        if UserDefaults.standard.bool(forKey: key) {
+        if UserInfo.shared.getLikeProduct(forkey: key) {
             goodButton.backgroundColor = .white
             goodButton.alpha = 1
             goodButton.setImage(CustomDesign.likeImage, for: .normal)

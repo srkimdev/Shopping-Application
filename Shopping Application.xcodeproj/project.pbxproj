@@ -39,10 +39,12 @@
 		DC9099DF2C3E5B30001A5326 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */; };
 		DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */; };
 		DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */; };
-		DC9099FE2C3FFA3A001A5326 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FD2C3FFA3A001A5326 /* Singleton.swift */; };
+		DC9099FE2C3FFA3A001A5326 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FD2C3FFA3A001A5326 /* UserInfo.swift */; };
 		DC909A002C40DC47001A5326 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */; };
 		DC909A032C40FA7A001A5326 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC909A022C40FA7A001A5326 /* APIManager.swift */; };
 		DC909A042C429EA0001A5326 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = DCFBF74B2C3A5FFB007DA893 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DC909A082C42B552001A5326 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC909A072C42B552001A5326 /* DateFormatterManager.swift */; };
+		DC909A0A2C42B57B001A5326 /* NumberFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC909A092C42B57B001A5326 /* NumberFormatterManager.swift */; };
 		DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */; };
 		DCA841BF2C1FFAF100B21AF2 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841BE2C1FFAF100B21AF2 /* Kingfisher */; };
 		DCA841C22C1FFAFB00B21AF2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C12C1FFAFB00B21AF2 /* SnapKit */; };
@@ -104,9 +106,11 @@
 		DC9099DE2C3E5B30001A5326 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
-		DC9099FD2C3FFA3A001A5326 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		DC9099FD2C3FFA3A001A5326 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		DC909A022C40FA7A001A5326 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		DC909A072C42B552001A5326 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
+		DC909A092C42B57B001A5326 /* NumberFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterManager.swift; sourceTree = "<group>"; };
 		DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				DC9099E02C3E627A001A5326 /* Extension */,
 				DC67AD292C2BDED200A5129F /* Base */,
 				DCA841C92C201D4C00B21AF2 /* Stuff */,
+				DC909A062C42B52F001A5326 /* Singleton */,
 				DC909A012C40FA63001A5326 /* Network */,
 				DC0CFA912C3021D800E80424 /* OnBoarding */,
 				DCA841C72C20187700B21AF2 /* Profile */,
@@ -203,6 +208,16 @@
 				DC909A022C40FA7A001A5326 /* APIManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		DC909A062C42B52F001A5326 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				DC9099FD2C3FFA3A001A5326 /* UserInfo.swift */,
+				DC909A072C42B552001A5326 /* DateFormatterManager.swift */,
+				DC909A092C42B57B001A5326 /* NumberFormatterManager.swift */,
+			);
+			path = Singleton;
 			sourceTree = "<group>";
 		};
 		DCA841C62C20185F00B21AF2 /* Setting */ = {
@@ -251,7 +266,6 @@
 				DCFBF7482C3A5F3E007DA893 /* DBTable.swift */,
 				DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */,
 				DC2CA9462C3D357700B31A98 /* Observable.swift */,
-				DC9099FD2C3FFA3A001A5326 /* Singleton.swift */,
 			);
 			path = Stuff;
 			sourceTree = "<group>";
@@ -365,7 +379,8 @@
 				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
 				DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
-				DC9099FE2C3FFA3A001A5326 /* Singleton.swift in Sources */,
+				DC9099FE2C3FFA3A001A5326 /* UserInfo.swift in Sources */,
+				DC909A0A2C42B57B001A5326 /* NumberFormatterManager.swift in Sources */,
 				DC487D472C1DBE5D006B7AAF /* SearchWebViewController.swift in Sources */,
 				DC487D2B2C1AEE2C006B7AAF /* ProfileSettingViewController.swift in Sources */,
 				DC2CA9492C3D361300B31A98 /* ProfileSettingViewModel.swift in Sources */,
@@ -381,6 +396,7 @@
 				DC2CA9472C3D357700B31A98 /* Observable.swift in Sources */,
 				DCFBF74E2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift in Sources */,
 				DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */,
+				DC909A082C42B552001A5326 /* DateFormatterManager.swift in Sources */,
 				DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */,
 				DC487D3D2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift in Sources */,
 				DC9099DF2C3E5B30001A5326 /* OnBoardingView.swift in Sources */,

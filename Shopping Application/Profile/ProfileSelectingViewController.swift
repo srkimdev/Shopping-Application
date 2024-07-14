@@ -27,11 +27,7 @@ final class ProfileSelectingViewController: BaseViewController {
         imageCollectionView.dataSource = self
         imageCollectionView.register(ProfileSelectingCollectionViewCell.self, forCellWithReuseIdentifier: ProfileSelectingCollectionViewCell.identifier)
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        UserDefaultsManager.fromWhere = false
-//    }
-    
+
     override func viewDidLayoutSubviews() {
         selectedImage.layer.cornerRadius = selectedImage.frame.width / 2
         cameraImageView.layer.cornerRadius = 10
@@ -82,11 +78,10 @@ final class ProfileSelectingViewController: BaseViewController {
         // mode check
         if UserDefaults.standard.string(forKey: "mode") == "edit" {
             navigationItem.title = "EDIT PROFILE"
-            selectedImage.image = UIImage(named: "profile_\(UserInfo.shared.profileNumber)")
         } else {
             navigationItem.title = "PROFILE SETTING"
-            selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
         }
+        selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
         
         BackButton()
 
@@ -112,10 +107,6 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
         guard let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as? ProfileSelectingCollectionViewCell else { return UICollectionViewCell() }
         
         var number = profileImageNumber
-        
-        if UserDefaults.standard.string(forKey: "mode") == "edit" {
-            number = UserInfo.shared.profileNumber
-        }
         
         cell.designCell(transition: indexPath.row, num: number!)
         

@@ -9,7 +9,7 @@ import UIKit
 
 class UserInfo {
     
-    static let shared = UserInfo.init()
+    static let shared = UserInfo()
     
     let userDefault = UserDefaults.standard
     
@@ -50,35 +50,13 @@ class UserInfo {
             userDefault.set(newValue, forKey: "recentSearchText")
         }
     }
-}
-
-class DateFormatterManager {
     
-    static let shared = DateFormatterManager()
+    func getLikeProduct(forkey: String) -> Bool {
+        return userDefault.bool(forKey: forkey)
+    }
     
-    private init() { }
-    
-    func today(_ date: Date) -> String {
-        let format = DateFormatter()
-        format.dateFormat = "yyyy.MM.dd"
-        
-        return format.string(from: date)
+    func setLikeProduct(isLike: Bool, forkey: String) {
+        userDefault.set(isLike, forKey: forkey)
     }
 }
 
-class NumberFormatterManager {
-    
-    static let shared = NumberFormatterManager()
-    
-    private init() { }
-    
-    func Comma(_ number: Int) -> String {
-        let format = NumberFormatter()
-        format.numberStyle = .decimal
-        
-        let result = format.string(for: number)
-        guard let decimalNumber = result else { return ""}
-        
-        return decimalNumber
-    }
-}

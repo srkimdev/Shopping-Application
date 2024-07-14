@@ -144,7 +144,7 @@ final class SearchResultViewController: BaseViewController {
     @objc func likeButtonClicked(sender: UIButton) {
         
         let data = viewModel.outputList.value[sender.tag]
-        var like = UserDefaults.standard.bool(forKey: data.productId)
+        var like = UserInfo.shared.getLikeProduct(forkey: data.productId)
         like.toggle()
         
         let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
@@ -153,7 +153,7 @@ final class SearchResultViewController: BaseViewController {
             try! realm.write {
                 realm.add(task)
                 
-                UserDefaults.standard.set(true, forKey: data.productId)
+                UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
                 
                 print("Realm Add Succeed")
             }
@@ -166,7 +166,7 @@ final class SearchResultViewController: BaseViewController {
             try! realm.write {
                 realm.delete(filter)
                 
-                UserDefaults.standard.set(false, forKey: data.productId)
+                UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
                 
                 print("Realm Delete Succeed")
             }

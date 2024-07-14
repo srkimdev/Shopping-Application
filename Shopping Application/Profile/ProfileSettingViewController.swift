@@ -106,7 +106,8 @@ final class ProfileSettingViewController: BaseViewController {
             navigationItem.rightBarButtonItem = item
             
             clearButton.isHidden = true
-            profileImage.image = UIImage(named: "profile_\(UserInfo.shared.profileNumber)")
+            profileImageNumber = UserInfo.shared.profileNumber
+            profileImage.image = UIImage(named: "profile_\(profileImageNumber)")
 
         } else {
             navigationItem.title = "PROFILE SETTING"
@@ -186,6 +187,7 @@ final class ProfileSettingViewController: BaseViewController {
         if allowed {
             UserInfo.shared.userName = nicknameTextField.text!
             UserInfo.shared.profileNumber = profileImageNumber
+            NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil, userInfo: nil)
         }
     }
 }
@@ -203,7 +205,7 @@ extension ProfileSettingViewController {
     }
     
     private func bindData() {
-        // 후행 클로저 생략
+        
         viewModel.outputText.bind { value in
             self.nicknameStatusLable.text = value
         }

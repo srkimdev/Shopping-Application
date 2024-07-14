@@ -22,10 +22,7 @@ final class SearchWebViewController: BaseViewController {
     override func loadView() {
         view = mainView
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        likeChange?()
-        
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,18 +35,14 @@ final class SearchWebViewController: BaseViewController {
         navigationItem.title = data.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         BackButton()
         
-        if UserDefaults.standard.bool(forKey: data.productId) {
-            let item = UIBarButtonItem(image: CustomDesign.likeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
-            navigationItem.rightBarButtonItem = item
-        } else {
-            let item = UIBarButtonItem(image: CustomDesign.unlikeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
-            navigationItem.rightBarButtonItem = item
-        }
+        let image = UserInfo.shared.getLikeProduct(forkey: data.productId) ? CustomDesign.likeImage : CustomDesign.unlikeImage
+        let item = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(likeButtonClicked))
+        navigationItem.rightBarButtonItem = item
     }
     
     @objc func likeButtonClicked() {
-        print(#function)
-        var like = UserDefaults.standard.bool(forKey: data.productId)
+        
+        var like = UserInfo.shared.getLikeProduct(forkey: data.productId)
         like.toggle()
         
         let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
@@ -58,7 +51,7 @@ final class SearchWebViewController: BaseViewController {
             try! realm.write {
                 realm.add(task)
                 
-                UserDefaults.standard.set(true, forKey: data.productId)
+                UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
                 
                 print("Realm Add Succeed")
             }
@@ -71,21 +64,17 @@ final class SearchWebViewController: BaseViewController {
             try! realm.write {
                 realm.delete(filter)
                 
-                UserDefaults.standard.set(false, forKey: data.productId)
+                UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
                 
                 print("Realm Delete Succeed")
             }
         }
 
-        if like {
-            let item = UIBarButtonItem(image: CustomDesign.likeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
-            navigationItem.rightBarButtonItem = item
-        } else {
-            let item = UIBarButtonItem(image: CustomDesign.unlikeImage, style: .plain, target: self, action: #selector(likeButtonClicked))
-            navigationItem.rightBarButtonItem = item
-        }
+        let image = UserInfo.shared.getLikeProduct(forkey: data.productId) ? CustomDesign.likeImage : CustomDesign.unlikeImage
+        let item = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(likeButtonClicked))
+        navigationItem.rightBarButtonItem = item
         
-        UserDefaults.standard.set(like, forKey: data.productId)
+        UserInfo.shared.setLikeProduct(isLike: like, forkey: data.productId)
         
         likeChange?()
         NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil, userInfo: nil)
