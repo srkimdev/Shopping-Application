@@ -21,7 +21,7 @@ final class MainSearchViewController: BaseViewController {
     var searchList: [String] = [] {
         didSet {
             viewModel.inputIsText.value = searchList
-            UserDefaults.standard.set(searchList, forKey: "RecentSearches")
+            UserDefaultsManager.searchList = searchList
             searchListTableView.reloadData()
         }
     }
@@ -155,7 +155,7 @@ extension MainSearchViewController: UISearchBarDelegate {
             return
         }
         
-        guard let text = searchBar.text/*, !text.contains(" ")*/ else {
+        guard let text = searchBar.text, !text.contains(" ") else {
             showAlertOnlyForCheck(title: "검색어를 입력해주세요.")
             searchBar.text = nil
             return

@@ -12,7 +12,6 @@ import Toast
 final class APIManager {
     
     static let shared = APIManager()
-    let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     private init() { }
     

@@ -39,7 +39,9 @@ enum CustomDesign {
     static let profileBorderWidth3: CGFloat = 3
     static let profileBorderWidth1: CGFloat = 1
     static let lineColor: UIColor = .systemGray5
-    static let orange: UIColor = #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
+    
+    static let orange: UIColor = UIColor(hex: "#D499F0")
+//    #colorLiteral(red: 0.8805426955, green: 0.5620557666, blue: 0.3212787211, alpha: 1)
     static let likeImage: UIImage = UIImage(named: "like_selected")!
     static let unlikeImage: UIImage = UIImage(named: "like_unselected")!
     

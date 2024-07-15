@@ -18,7 +18,7 @@ final class OnBoardingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.set(ProfileMode.setup.rawValue, forKey: "mode")
+        UserDefaultsManager.mode = ProfileMode.setup.rawValue
     }
     
     override func configureAction() {
