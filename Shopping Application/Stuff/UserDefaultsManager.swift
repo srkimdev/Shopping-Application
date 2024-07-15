@@ -15,7 +15,7 @@ class UserDefaultsManager {
     }
 
     static var mode: String {
-        get { return UserDefaults.standard.string(forKey: "mode") ?? "setup" }
+        get { return UserDefaults.standard.string(forKey: "mode")! }
         set { UserDefaults.standard.set(newValue, forKey: "mode") }
     }
     

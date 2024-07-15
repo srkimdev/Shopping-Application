@@ -42,6 +42,12 @@ final class SearchResultViewController: BaseViewController {
         view.makeToastActivity(.center)
         bindData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        productCollectionView.reloadData()
+    }
 
     override func configureHierarchy() {
         
@@ -152,26 +158,22 @@ final class SearchResultViewController: BaseViewController {
         let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
         
         if like {
-            try! realm.write {
-                realm.add(task)
-                
-                UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
-                
-                print("Realm Add Succeed")
-            }
+            viewModel.inputLike.value = task
+            
+            UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
+            
+            print("Realm Add Succeed")
+            
         } else {
             
-            let filter = realm.objects(DBTable.self).where{
-                $0.productId == self.viewModel.outputList.value[sender.tag].productId
-            }
+            let filter = realm.objects(DBTable.self).first(where: {$0.productId == self.viewModel.outputList.value[sender.tag].productId} )
             
-            try! realm.write {
-                realm.delete(filter)
-                
-                UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
-                
-                print("Realm Delete Succeed")
-            }
+            viewModel.inputUnLike.value = filter!
+            
+            UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
+            
+            print("Realm Delete Succeed")
+            
         }
         
         UIView.performWithoutAnimation {

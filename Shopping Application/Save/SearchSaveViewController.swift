@@ -18,9 +18,8 @@ final class SearchSaveViewController: BaseViewController {
     let realm = try! Realm()
     var list: [DBTable] = []
     var folder: Folder?
-    
-    var start = 1
-    
+    let viewModel = SearchSaveViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,27 +60,24 @@ final class SearchSaveViewController: BaseViewController {
     }
     
     override func configureUI() {
-        
         if let folder = folder {
             navigationItem.title = folder.name
         }
-        
     }
     
     @objc func likeButtonClicked(sender: UIButton) {
+
+        let filter = realm.objects(DBTable.self).first(where: {$0.productId == list[sender.tag].productId} )
+        UserInfo.shared.setLikeProduct(isLike: false, forkey: list[sender.tag].productId)
         
-        let filterProduct = realm.objects(DBTable.self).where {
-            $0.productId == self.list[sender.tag].productId
-        }
-        
-        try! realm.write {
-            UserDefaults.standard.set(false, forKey: list[sender.tag].productId)
-            realm.delete(filterProduct)
-        }
-        
+        viewModel.inputUnLike.value = filter!
+        list.remove(at: sender.tag)
+
         UIView.performWithoutAnimation {
             productCollectionView.reloadData()
         }
+        
+        
     }
 }
 
@@ -95,9 +91,9 @@ extension SearchSaveViewController: UICollectionViewDelegate, UICollectionViewDa
         
         guard let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: SearchSaveCollectionViewCell.identifier, for: indexPath) as? SearchSaveCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.designCell(transition: list[indexPath.row])
+        cell.designCell(transition: list[indexPath.item])
         
-        cell.goodButton.tag = indexPath.row
+        cell.goodButton.tag = indexPath.item
         cell.goodButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         
         return cell
@@ -105,10 +101,11 @@ extension SearchSaveViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        let data = DBTable(productId: list[indexPath.row].productId, productImage: list[indexPath.row].productImage, productCompany: list[indexPath.row].productCompany, productName: list[indexPath.row].productName, productPrice: list[indexPath.row].productPrice, productLink: list[indexPath.row].productLink)
-
+        let data = list[indexPath.item]
+        let transition = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
+        
         let vc = SearchWebViewController()
-//        vc.data = data
+        vc.data = transition
         navigationController?.pushViewController(vc, animated: true)
     }
 }

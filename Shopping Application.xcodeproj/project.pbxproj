@@ -38,6 +38,7 @@
 		DC7DDD8E2C43BBBB0039CA1D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD8D2C43BBBB0039CA1D /* NetworkManager.swift */; };
 		DC7DDD912C43BD160039CA1D /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DC7DDD902C43BD160039CA1D /* Toast */; };
 		DC7DDD992C44EE800039CA1D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD982C44EE800039CA1D /* UIColor+Extension.swift */; };
+		DC7DDD9B2C4546F00039CA1D /* SearchSaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD9A2C4546F00039CA1D /* SearchSaveViewModel.swift */; };
 		DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */; };
 		DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */; };
 		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
@@ -108,6 +109,7 @@
 		DC7DDD882C4390F40039CA1D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DC7DDD8D2C43BBBB0039CA1D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DC7DDD982C44EE800039CA1D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		DC7DDD9A2C4546F00039CA1D /* SearchSaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSaveViewModel.swift; sourceTree = "<group>"; };
 		DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
@@ -286,10 +288,11 @@
 		DCFBF7472C3A5A38007DA893 /* Save */ = {
 			isa = PBXGroup;
 			children = (
-				DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */,
-				DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */,
 				DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */,
 				DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */,
+				DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */,
+				DC7DDD9A2C4546F00039CA1D /* SearchSaveViewModel.swift */,
+				DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */,
 			);
 			path = Save;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
 				DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
+				DC7DDD9B2C4546F00039CA1D /* SearchSaveViewModel.swift in Sources */,
 				DC9099FE2C3FFA3A001A5326 /* UserInfo.swift in Sources */,
 				DC909A0A2C42B57B001A5326 /* NumberFormatterManager.swift in Sources */,
 				DC487D472C1DBE5D006B7AAF /* SearchWebViewController.swift in Sources */,

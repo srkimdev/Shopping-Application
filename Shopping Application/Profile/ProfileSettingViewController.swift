@@ -99,10 +99,11 @@ final class ProfileSettingViewController: BaseViewController {
     
     override func configureUI() {
         
-        if UserDefaults.standard.string(forKey: "mode") == ProfileMode.edit.rawValue {
+        if UserDefaultsManager.mode == ProfileMode.edit.rawValue {
             navigationItem.title = "EDIT PROFILE"
+        
             let item = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
-            item.tintColor = CustomDesign.itemTintColor
+            item.tintColor = CustomDesign.orange
             navigationItem.rightBarButtonItem = item
             
             clearButton.isHidden = true

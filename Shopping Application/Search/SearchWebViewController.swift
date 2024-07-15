@@ -19,6 +19,7 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
     
     var webview = WKWebView()
     let realm = try! Realm()
+    let viewModel = SearchResultViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,26 +60,19 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
         let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
         
         if like {
-            try! realm.write {
-                realm.add(task)
-                
-                UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
-                
-                print("Realm Add Succeed")
-            }
+            viewModel.inputLike.value = task
+            UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
+            
+            print("Realm Add Succeed")
         } else {
             
-            let filter = realm.objects(DBTable.self).where{
-                $0.productId == data.productId
-            }
+            let filter = realm.objects(DBTable.self).first(where: {$0.productId == self.data.productId} )
             
-            try! realm.write {
-                realm.delete(filter)
-                
-                UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
-                
-                print("Realm Delete Succeed")
-            }
+            viewModel.inputUnLike.value = filter!
+            
+            UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
+            
+            print("Realm Delete Succeed")
         }
 
         let image = UserInfo.shared.getLikeProduct(forkey: data.productId) ? CustomDesign.likeImage : CustomDesign.unlikeImage

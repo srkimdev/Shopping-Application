@@ -10,14 +10,12 @@ import RealmSwift
 
 class DBTable: Object {
     
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var productId: String
+    @Persisted(primaryKey: true) var productId: String
     @Persisted var image: String
     @Persisted var mallName: String
     @Persisted var title: String
     @Persisted var lprice: String
     @Persisted var link: String
-    @Persisted var like: Bool
     
     convenience init(productId: String, image: String, mallName: String, title: String, lprice: String, link: String) {
         self.init()
@@ -27,7 +25,6 @@ class DBTable: Object {
         self.title = title
         self.lprice = lprice
         self.link = link
-        self.like = true
     }
 }
 
