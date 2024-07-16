@@ -23,12 +23,12 @@ final class SearchResultViewModel {
     var outputScrollToTop: Observable<Void?> = Observable(nil)
     var outputPagination: Observable<Void?> = Observable(nil)
     
+    let realm = try! Realm()
     let realmrepository = RealmRepository()
     var folderList: [Folder] = []
     var buttonTag: Int = 0
     var totalPage = 0
     var start = 1
-    let realm = try! Realm()
     
     init() {
         setupBindings()

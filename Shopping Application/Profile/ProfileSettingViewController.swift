@@ -195,22 +195,16 @@ extension ProfileSettingViewController {
     private func randomImage() {
         profileImageNumber = .random(in: 0...ConstantTable.profileImageNumber.count - 1)
     }
-
-    private func joinDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        return dateFormatter.string(from: Date())
-    }
     
     private func bindData() {
         
-        viewModel.outputText.bind { value in
-            self.nicknameStatusLable.text = value
+        viewModel.outputText.bind { [weak self] value in
+            self?.nicknameStatusLable.text = value
         }
         
-        viewModel.allowed.bind { value in
-            self.allowed = value
-            self.clearButton.backgroundColor = value ? CustomDesign.orange : .systemGray4
+        viewModel.allowed.bind { [weak self] value in
+            self?.allowed = value
+            self?.clearButton.backgroundColor = value ? CustomDesign.orange : .systemGray4
         }
     }
 }

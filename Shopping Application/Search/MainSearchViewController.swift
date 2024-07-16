@@ -212,20 +212,20 @@ extension MainSearchViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
-        viewModel.outputIsText.bind { value in
+        viewModel.outputIsText.bind { [weak self] value in
 
-            self.recentLabel.isHidden = !value
-            self.deleteAllButton.isHidden = !value
-            self.searchListTableView.isHidden = !value
+            self?.recentLabel.isHidden = !value
+            self?.deleteAllButton.isHidden = !value
+            self?.searchListTableView.isHidden = !value
             
-            self.noRecentImage.isHidden = value
-            self.noRecentLabel.isHidden = value
+            self?.noRecentImage.isHidden = value
+            self?.noRecentLabel.isHidden = value
             
             if value {
                 tapGesture.cancelsTouchesInView = !value
-                self.searchListTableView.addGestureRecognizer(tapGesture)
+                self?.searchListTableView.addGestureRecognizer(tapGesture)
             } else {
-                self.view.addGestureRecognizer(tapGesture)
+                self?.view.addGestureRecognizer(tapGesture)
             }
         }
     }

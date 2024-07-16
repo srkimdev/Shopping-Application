@@ -75,11 +75,8 @@ final class ProfileSelectingViewController: BaseViewController {
     
     override func configureUI() {
         
-        if UserDefaultsManager.mode == ProfileMode.edit.rawValue {
-            navigationItem.title = "EDIT PROFILE"
-        } else {
-            navigationItem.title = "PROFILE SETTING"
-        }
+        navigationItem.title = UserDefaultsManager.mode == ProfileMode.edit.rawValue ? "EDIT PROFILE" : "PROFILE SETTING"
+
         selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
         
         BackButton()

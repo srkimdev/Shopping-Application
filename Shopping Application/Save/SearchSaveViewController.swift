@@ -36,7 +36,7 @@ final class SearchSaveViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        productCollectionView.reloadData()
+        
     }
     
     override func configureHierarchy() {
@@ -76,8 +76,12 @@ final class SearchSaveViewController: BaseViewController {
         UIView.performWithoutAnimation {
             productCollectionView.reloadData()
         }
-        
-        
+    }
+    
+    func bindDate() {
+        viewModel.outputResult.bind { _ in
+            self.productCollectionView.reloadData()
+        }
     }
 }
 

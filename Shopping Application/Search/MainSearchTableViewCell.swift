@@ -46,7 +46,6 @@ final class MainSearchTableViewCell: BaseTableViewCell {
     }
     
     override func configureUI() {
-        
         timeImage.image = UIImage(systemName: "clock")
         timeImage.tintColor = CustomDesign.itemTintColor
         

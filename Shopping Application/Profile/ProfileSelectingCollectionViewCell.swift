@@ -20,7 +20,6 @@ final class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
-        
     }
     
     override func configureHierarchy() {
@@ -28,14 +27,12 @@ final class ProfileSelectingCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureLayout() {
-        
         profileImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
     }
     
     override func configureUI() {
-        
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderWidth = CustomDesign.profileBorderWidth1
         profileImage.contentMode = .scaleAspectFill

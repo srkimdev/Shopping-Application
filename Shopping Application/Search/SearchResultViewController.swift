@@ -173,7 +173,6 @@ final class SearchResultViewController: BaseViewController {
             UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
             
             print("Realm Delete Succeed")
-            
         }
         
         UIView.performWithoutAnimation {
@@ -196,9 +195,9 @@ final class SearchResultViewController: BaseViewController {
             self?.productCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
         
-        viewModel.outputPagination.bind { value in
+        viewModel.outputPagination.bind { [weak self] value in
             guard let value else { return }
-            self.productCollectionView.reloadData()
+            self?.productCollectionView.reloadData()
         }
     }
 }

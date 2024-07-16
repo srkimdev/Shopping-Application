@@ -12,6 +12,7 @@ class SearchSaveViewModel {
     
     var inputLike: Observable<DBTable?> = Observable(nil)
     var inputUnLike: Observable<DBTable?> = Observable(nil)
+    var outputResult: Observable<Void?> = Observable(nil)
     
     let realm = try! Realm()
     let realmrepository = RealmRepository()
@@ -31,7 +32,7 @@ class SearchSaveViewModel {
         
         inputUnLike.bind { [weak self] value in
             guard let value else { return }
-//            self?.folderList = self?.realmrepository.fetchFolder() ?? []
+            self?.outputResult.value = ()
             self?.deleteDataInFolder(data: value)
         }
     }

@@ -34,7 +34,6 @@ class Folder: Object {
     @Persisted var name: String
     
     @Persisted var detail: List<DBTable>
-    
 }
 
 
