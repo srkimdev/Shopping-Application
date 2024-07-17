@@ -17,7 +17,7 @@ final class APIManager {
     
     func callRequest(text: String, start: Int, buttonTag: Int, completionHandler: @escaping (Result<SearchResult, APIError>) -> Void) {
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(100000)&sort=\(ConstantTable.sortSelect[buttonTag])"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[buttonTag])"
         
         let header: HTTPHeaders = [
             "X-Naver-Client-Id": APIkey.Id,
