@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-enum APIError: String {
+enum APIError: String, Error {
     
     case incorrectQueryRequest = "SE01"
     case invalidDisplayValue = "SE02"
