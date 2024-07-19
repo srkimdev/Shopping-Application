@@ -167,9 +167,9 @@ final class ProfileSettingViewController: BaseViewController {
     @objc func profileImageButtonClicked() {
         let vc = ProfileSelectingViewController()
         
-        vc.selectedNumber = { value in
-            self.profileImageNumber = value
-            self.profileImage.image = UIImage(named: "profile_\(self.profileImageNumber)")
+        vc.selectedNumber = { [weak self] value in
+            self?.profileImageNumber = value
+            self?.profileImage.image = UIImage(named: "profile_\(self?.profileImageNumber)")
         }
         
         vc.profileImageNumber = profileImageNumber

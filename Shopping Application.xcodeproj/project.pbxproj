@@ -57,6 +57,7 @@
 		DCA841C52C1FFB0600B21AF2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DCA841C42C1FFB0600B21AF2 /* Alamofire */; };
 		DCA841CD2C201E3900B21AF2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DCA841CC2C201E3900B21AF2 /* .gitignore */; };
 		DCA841CF2C201F3500B21AF2 /* APIkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA841CE2C201F3500B21AF2 /* APIkey.swift */; };
+		DCBF1CEF2C4A36D3000F89CF /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCBF1CEE2C4A36D3000F89CF /* IQKeyboardManagerSwift */; };
 		DCFBF7462C3A5A2E007DA893 /* SearchSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */; };
 		DCFBF7492C3A5F3E007DA893 /* DBTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBF7482C3A5F3E007DA893 /* DBTable.swift */; };
 		DCFBF74C2C3A5FFB007DA893 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBF74B2C3A5FFB007DA893 /* RealmSwift */; };
@@ -134,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCBF1CEF2C4A36D3000F89CF /* IQKeyboardManagerSwift in Frameworks */,
 				DC7DDD912C43BD160039CA1D /* Toast in Frameworks */,
 				DCFBF74C2C3A5FFB007DA893 /* RealmSwift in Frameworks */,
 				DCA841C52C1FFB0600B21AF2 /* Alamofire in Frameworks */,
@@ -321,6 +323,7 @@
 				DCFBF74B2C3A5FFB007DA893 /* RealmSwift */,
 				DC7DDD8B2C43BA8D0039CA1D /* Reachability */,
 				DC7DDD902C43BD160039CA1D /* Toast */,
+				DCBF1CEE2C4A36D3000F89CF /* IQKeyboardManagerSwift */,
 			);
 			productName = "Shopping Application";
 			productReference = DC487D082C1AE4DA006B7AAF /* Shopping Application.app */;
@@ -357,6 +360,7 @@
 				DCFBF74A2C3A5FFB007DA893 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				DC7DDD8A2C43BA8D0039CA1D /* XCRemoteSwiftPackageReference "Reachability.swift" */,
 				DC7DDD8F2C43BD160039CA1D /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				DCBF1CED2C4A36D3000F89CF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = DC487D092C1AE4DA006B7AAF /* Products */;
 			projectDirPath = "";
@@ -695,6 +699,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		DCBF1CED2C4A36D3000F89CF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
 		DCFBF74A2C3A5FFB007DA893 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -730,6 +742,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCA841C32C1FFB0600B21AF2 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		DCBF1CEE2C4A36D3000F89CF /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCBF1CED2C4A36D3000F89CF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		DCFBF74B2C3A5FFB007DA893 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

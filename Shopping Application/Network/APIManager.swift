@@ -30,7 +30,7 @@ final class APIManager {
                 
             case .success(let value):
                 completionHandler(.success(value))
-                
+            // Custom responseSerlizier
             case .failure:
                 if let data = response.data,
                    let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],

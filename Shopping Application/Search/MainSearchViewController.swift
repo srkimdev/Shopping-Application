@@ -136,9 +136,9 @@ final class MainSearchViewController: BaseViewController {
         searchList.removeAll()
     }
 
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
     
     @objc func receivedNotification(notification: NSNotification) {
         navigationItem.title = "\(UserInfo.shared.userName)'s MEANING OUT"
@@ -210,7 +210,7 @@ extension MainSearchViewController {
     
     private func bindData() {
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
         viewModel.outputIsText.bind { [weak self] value in
 
@@ -221,12 +221,12 @@ extension MainSearchViewController {
             self?.noRecentImage.isHidden = value
             self?.noRecentLabel.isHidden = value
             
-            if value {
-                tapGesture.cancelsTouchesInView = !value
-                self?.searchListTableView.addGestureRecognizer(tapGesture)
-            } else {
-                self?.view.addGestureRecognizer(tapGesture)
-            }
+//            if value {
+//                tapGesture.cancelsTouchesInView = !value
+//                self?.searchListTableView.addGestureRecognizer(tapGesture)
+//            } else {
+//                self?.view.addGestureRecognizer(tapGesture)
+//            }
         }
     }
 
