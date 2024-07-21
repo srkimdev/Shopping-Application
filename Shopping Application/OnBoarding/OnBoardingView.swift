@@ -15,9 +15,9 @@ class OnBoardingView: BaseView {
     let startButton = UIButton()
     
     override func configureHierarchy() {
-        addSubview(titleLabel)
-        addSubview(imageLabel)
-        addSubview(startButton)
+        [titleLabel, imageLabel, startButton].forEach {
+            addSubview($0)
+        }
     }
     
     override func configureLayout() {

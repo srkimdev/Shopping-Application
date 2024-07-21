@@ -20,10 +20,9 @@ final class SettingOtherTableViewCell: BaseTableViewCell {
     }
 
     override func configureHierarchy() {
-        
-        contentView.addSubview(listLabel)
-        contentView.addSubview(saveImage)
-        contentView.addSubview(countLabel)
+        [listLabel, saveImage, countLabel].forEach {
+            contentView.addSubview($0)
+        }
     }
     
     override func configureLayout() {

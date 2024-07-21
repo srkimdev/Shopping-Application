@@ -85,7 +85,7 @@ final class SearchResultViewModel {
                 self?.outputCount.value = value.total
                 self?.totalPage = value.total
             case .failure(let error):
-                print(error)
+                print(error.description)
             }
         }
     }
@@ -99,7 +99,7 @@ final class SearchResultViewModel {
             case .success(let value):
                 self?.outputList.value.append(contentsOf: value.items)
             case .failure(let error):
-                print(error)
+                print(error.description)
             }
         }
     }

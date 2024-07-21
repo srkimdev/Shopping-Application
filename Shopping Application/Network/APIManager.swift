@@ -7,7 +7,6 @@
 
 import UIKit
 import Alamofire
-import Toast
 
 final class APIManager {
     
@@ -16,15 +15,10 @@ final class APIManager {
     private init() { }
     
     func callRequest(text: String, start: Int, buttonTag: Int, completionHandler: @escaping (Result<SearchResult, APIError>) -> Void) {
+
+        let router = RouterPattern.shopping(text: text, start: start, buttonTag: buttonTag)
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[buttonTag])"
-        
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": APIkey.Id,
-            "X-Naver-Client-Secret": APIkey.Secret
-        ]
-        
-        AF.request(url, method: .get, headers: header).responseDecodable(of: SearchResult.self) { response in
+        AF.request(router.endpoint, method: router.method, headers: router.header).responseDecodable(of: SearchResult.self) { response in
             
             switch response.result {
                 
@@ -34,11 +28,14 @@ final class APIManager {
             case .failure:
                 if let data = response.data,
                    let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let errorCode = json["errorCode"] as? String {
+                   let errorCode = json["errorCode"] as? String 
+                {
                     let apiError = APIError.from(errorCode: errorCode)
                     completionHandler(.failure(apiError))
                 } else {
-//                    completionHandler(nil, "statusCode: \(response.response?.statusCode)")
+                    let statusCode = response.response?.statusCode ?? -1
+                    let apiError = APIError.from(errorCode: "statusCode: \(statusCode)")
+                    completionHandler(.failure(apiError))
                 }
             }
         }

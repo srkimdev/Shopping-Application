@@ -20,9 +20,9 @@ final class MainSearchTableViewCell: BaseTableViewCell {
     }
     
     override func configureHierarchy() {
-        contentView.addSubview(timeImage)
-        contentView.addSubview(productLabel)
-        contentView.addSubview(deleteButton)
+        [timeImage, productLabel, deleteButton].forEach {
+            contentView.addSubview($0)
+        }
     }
     
     override func configureLayout() {

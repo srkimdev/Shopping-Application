@@ -35,7 +35,7 @@ enum APIError: String, Error {
             return "Invalid search API"
         case .systemError:
             return "System error"
-        case .unknown:
+        default:
             return "unknown error"
         }
     }

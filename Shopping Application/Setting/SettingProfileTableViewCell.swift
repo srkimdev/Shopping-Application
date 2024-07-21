@@ -26,11 +26,9 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
     }
     
     override func configureHierarchy() {
-        
-        contentView.addSubview(profileImage)
-        contentView.addSubview(profileName)
-        contentView.addSubview(joinDate)
-        contentView.addSubview(nextButton)
+        [profileImage, profileName, joinDate, nextButton].forEach {
+            contentView.addSubview($0)
+        }
     }
     
     override func configureLayout() {
