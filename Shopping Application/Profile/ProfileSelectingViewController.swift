@@ -18,7 +18,7 @@ final class ProfileSelectingViewController: BaseViewController {
     lazy var imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
     var selectedNumber: ((Int) -> Void)?
-    var profileImageNumber: Int?
+    var profileImageNumber: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,8 +76,8 @@ final class ProfileSelectingViewController: BaseViewController {
     override func configureUI() {
         
         navigationItem.title = UserDefaultsManager.mode == ProfileMode.edit.rawValue ? "EDIT PROFILE" : "PROFILE SETTING"
-
-        selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
+        
+        selectedImage.image = UIImage(named: "profile_\(profileImageNumber)")
         
         BackButton()
 
@@ -102,9 +102,7 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
         
         guard let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as? ProfileSelectingCollectionViewCell else { return UICollectionViewCell() }
         
-        var number = profileImageNumber
-        
-        cell.designCell(transition: indexPath.row, num: number!)
+        cell.designCell(transition: indexPath.row, num: profileImageNumber)
         
         return cell
     }
@@ -112,9 +110,9 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         profileImageNumber = indexPath.item
-        selectedImage.image = UIImage(named: "profile_\(profileImageNumber!)")
+        selectedImage.image = UIImage(named: "profile_\(profileImageNumber)")
         
-        selectedNumber?(profileImageNumber!)
+        selectedNumber?(profileImageNumber)
         
         imageCollectionView.reloadData()
     }

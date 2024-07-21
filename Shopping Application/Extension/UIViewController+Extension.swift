@@ -58,9 +58,7 @@ extension UIViewController {
         present(alert, animated: true)
     }
 
-    func transition<T: UIViewController>(viewController: T.Type, style: TransitionStyle) {
-        
-        let vc = T()
+    func transitionScreen<T: UIViewController>(vc: T, style: TransitionStyle) {
         
         switch style {
         case .present:

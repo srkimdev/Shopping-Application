@@ -168,12 +168,12 @@ final class ProfileSettingViewController: BaseViewController {
         
         vc.selectedNumber = { [weak self] value in
             self?.profileImageNumber = value
-            self?.profileImage.image = UIImage(named: "profile_\(self?.profileImageNumber)")
+            self?.profileImage.image = UIImage(named: "profile_\(self?.profileImageNumber ?? 0)")
         }
-        
+
         vc.profileImageNumber = profileImageNumber
         
-        transition(viewController: ProfileSelectingViewController.self, style: .push)
+        transitionScreen(vc: vc, style: .push)
     }
 
     @objc func nicknameChanged() {

@@ -68,6 +68,6 @@ extension FolderViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = SearchSaveViewController()
         vc.folder = list[indexPath.row]
         
-        navigationController?.pushViewController(vc, animated: true)
+        transitionScreen(vc: vc, style: .push)
     }
 }

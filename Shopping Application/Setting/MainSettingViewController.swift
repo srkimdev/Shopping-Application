@@ -99,7 +99,7 @@ extension MainSettingViewController: UITableViewDelegate, UITableViewDataSource 
         
         if indexPath.row == 0 {
             
-            transition(viewController: ProfileSettingViewController.self, style: .push)
+            transitionScreen(vc: ProfileSettingViewController(), style: .push)
             
         } else if indexPath.row == 5 {
             

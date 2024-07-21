@@ -235,7 +235,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         }
         
         vc.data = transition
-        navigationController?.pushViewController(vc, animated: true)
+        transitionScreen(vc: vc, style: .push)
     }
 }
 

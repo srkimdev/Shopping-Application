@@ -26,6 +26,6 @@ final class OnBoardingViewController: BaseViewController {
     }
     
     @objc func startButtonClicked() {
-        transition(viewController: ProfileSettingViewController.self, style: .push)
+        transitionScreen(vc: ProfileSettingViewController(), style: .push)
     }
 }
