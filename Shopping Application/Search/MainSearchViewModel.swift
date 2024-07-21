@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainSearchViewModel {
+final class MainSearchViewModel {
     
     var inputIsText: Observable<[String]> = Observable([])
     var outputIsText: Observable<Bool> = Observable(false)
@@ -19,7 +19,6 @@ class MainSearchViewModel {
     }
     
     private func validate() {
-        
         if inputIsText.value.count > 0 {
             self.outputIsText.value = true
         } else {

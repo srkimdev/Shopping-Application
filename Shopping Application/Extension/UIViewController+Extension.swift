@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum TransitionStyle {
+    case present
+    case presentNavigation
+    case presentFullNavigation
+    case push
+}
+
 extension UIViewController {
     
     func BackButton() {
@@ -49,5 +56,24 @@ extension UIViewController {
         alert.addAction(check)
             
         present(alert, animated: true)
+    }
+
+    func transition<T: UIViewController>(viewController: T.Type, style: TransitionStyle) {
+        
+        let vc = T()
+        
+        switch style {
+        case .present:
+            present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        case .presentFullNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProfileSettingViewModel {
+final class ProfileSettingViewModel {
     
     var inputText: Observable<String?> = Observable("")
     var outputText: Observable<String?> = Observable("")

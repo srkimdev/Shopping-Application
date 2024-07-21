@@ -165,7 +165,7 @@ extension MainSearchViewController: UISearchBarDelegate {
         let vc = SearchResultViewController()
         vc.data = UserInfo.shared.recentSearchText
         
-        navigationController?.pushViewController(vc, animated: true)
+        transition(viewController: SearchResultViewController.self, style: .push)
     }
 }
 
@@ -198,7 +198,8 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
 
         let vc = SearchResultViewController()
         vc.data = UserInfo.shared.recentSearchText
-        navigationController?.pushViewController(vc, animated: true)
+        
+        transition(viewController: SearchResultViewController.self, style: .push)
     }
 }
 

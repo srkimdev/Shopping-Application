@@ -27,7 +27,6 @@ final class ProfileSettingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         bindData()
     }
     
@@ -174,7 +173,7 @@ final class ProfileSettingViewController: BaseViewController {
         
         vc.profileImageNumber = profileImageNumber
         
-        navigationController?.pushViewController(vc, animated: true)
+        transition(viewController: ProfileSelectingViewController.self, style: .push)
     }
 
     @objc func nicknameChanged() {
@@ -197,7 +196,6 @@ extension ProfileSettingViewController {
     }
     
     private func bindData() {
-        
         viewModel.outputText.bind { [weak self] value in
             self?.nicknameStatusLable.text = value
         }

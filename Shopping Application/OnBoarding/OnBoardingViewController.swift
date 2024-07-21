@@ -26,7 +26,6 @@ final class OnBoardingViewController: BaseViewController {
     }
     
     @objc func startButtonClicked() {
-        let vc = ProfileSettingViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        transition(viewController: ProfileSettingViewController.self, style: .push)
     }
 }
