@@ -83,10 +83,12 @@
 - 해결
   - Kingfisher에 있는 DownsamplingImageProcessor로 필요한 크기만큼 이미지를 축소하여 메모리 절약
 
+  <br>
+
    <img width="426" alt="스크린샷 2024-10-19 오후 6 29 50" src="https://github.com/user-attachments/assets/3068fb33-2713-489a-b08a-79d002114de0">     
    <img width="417" alt="스크린샷 2024-10-19 오후 6 30 47" src="https://github.com/user-attachments/assets/e41fca70-2ff9-41fb-bfa3-edf34243f3f7">
    
-  <br>
+    <br>
 
      ```swift
      func setImage(_ url: String?) {
@@ -103,22 +105,30 @@
      ```
 <br>
 
-### 2. addtarget 매번 선언 문제
+### 2. 셀 안에 있는 버튼에 addTarget을 매번 선언하는 문제
 - 상황
-  - 게시물 공유 화면 진입 시 PublishSubject로 선언된 viewDidLoadTrigger를 통해 viewModel에서 네트워크 통신을 하고 받아온 게시물을 보여줌
-  - viewDidLoadTrigger가 viewModel의 Input으로 들어가고 네트워크 통신하도록 바인드 되어 있음
+  - cell안에 버튼이 있는 경우 버튼의 action을 위해서 addTarget을 cellForItemAt함수 내에서 선언해줌
  
 - 원인 분석
-  - PublishSubject는 bind를 걸어주고 난 후에 이벤트가 방출된 것을 구독하는 특징이 있음
-  - 처음에 viewDidLoadTrigger가 viewModel과 연결되어 바인드 되어있는 것은 맞지만 그 이후에 방출되는 이벤트가 없기 때문에 네트워크 통신을 하지 않음
- 
+  - 처음 한번만 선언하면 addTarget에서 설정한 action을 실행할 수 있지만 cellForItemAt에서 선언해주기 때문에 collectionView가 reload될 때 마다 매번 선언되는 문제 발생
+  
 - 해결 
-  - 시점 문제를 해결하기 위해 구독할 때 처음에 가지고 있는 값을 바로 방출해줄 수 있는 BehaviorSubject를 사용함
+  - delegate 패턴을 사용함
+  - delegate protocol을 정의하고 버튼을 눌렀을 때의 로직을 delegate를 통해 viewController로 전달함
+  - UICollectionViewCell에서 delegate protocol을 채택하여 버튼이 눌렸을 때의 로직을 구현함
+    
   <br>
     
      ```swift
-     let viewDidLoadTrigger = BehaviorSubject<Void>(value: ())
-     let input = AccomodationViewModel.Input(networkTrigger: viewDidLoadTrigger)
+     protocol SearchResultCellDelegate: AnyObject {
+         func goodButtonTapped(at index: Int)
+     }
+
+     extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, SearchResultCellDelegate {
+        func goodButtonTapped(at index: Int) {
+            print(index)
+        }
+     }
      ```
     
     
