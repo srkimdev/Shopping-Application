@@ -10,13 +10,58 @@ import SnapKit
 
 final class MainSearchViewController: BaseViewController {
 
-    let searchBar = UISearchBar()
-    let searchBarLine = UIView()
-    let noRecentImage = UIImageView()
-    let noRecentLabel = UILabel()
-    let recentLabel = UILabel()
-    let deleteAllButton = UIButton()
-    let searchListTableView = UITableView()
+    private lazy var searchBar: UISearchBar = {
+        let object = UISearchBar()
+        object.delegate = self
+        object.placeholder = "브랜드, 상품 등을 입력하세요."
+        object.searchBarStyle = .minimal
+        return object
+    }()
+    
+    private let searchBarLine: UIView = {
+        let object = UIView()
+        object.backgroundColor = CustomDesign.lineColor
+        return object
+    }()
+    
+    private let noRecentImage: UIImageView = {
+        let object = UIImageView()
+        object.image = UIImage(named: "empty")
+        return object
+    }()
+    
+    private let noRecentLabel: UILabel = {
+        let object = UILabel()
+        object.text = "최근 검색어가 없어요"
+        object.font = .boldSystemFont(ofSize: 15)
+        object.textAlignment = .center
+        return object
+    }()
+    
+    private let recentLabel: UILabel = {
+        let object = UILabel()
+        object.text = "최근 검색"
+        object.font = .boldSystemFont(ofSize: 14)
+        return object
+    }()
+    
+    private let deleteAllButton: UIButton = {
+        let object = UIButton()
+        object.setTitle("전체 삭제", for: .normal)
+        object.setTitleColor(CustomDesign.orange, for: .normal)
+        object.titleLabel?.font = .systemFont(ofSize: 14)
+        return object
+    }()
+    
+    private lazy var searchListTableView: UITableView = {
+        let object = UITableView()
+        object.delegate = self
+        object.dataSource = self
+        object.register(MainSearchTableViewCell.self, forCellReuseIdentifier: MainSearchTableViewCell.identifier)
+        object.rowHeight = 40
+        object.separatorStyle = .none
+        return object
+    }()
     
     var searchList: [String] = [] {
         didSet {
@@ -30,11 +75,6 @@ final class MainSearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchBar.delegate = self
-        searchListTableView.delegate = self
-        searchListTableView.dataSource = self
-        searchListTableView.register(MainSearchTableViewCell.self, forCellReuseIdentifier: MainSearchTableViewCell.identifier)
         
         searchList = loadRecentSearches()
         
@@ -100,29 +140,7 @@ final class MainSearchViewController: BaseViewController {
     }
     
     override func configureUI() {
-        
         navigationItem.title = "\(UserInfo.shared.userName)'s MEANING OUT"
-        
-        searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
-        searchBar.searchBarStyle = .minimal
-        
-        searchBarLine.backgroundColor = CustomDesign.lineColor
-        
-        noRecentImage.image = UIImage(named: "empty")
-        
-        noRecentLabel.text = "최근 검색어가 없어요"
-        noRecentLabel.font = .boldSystemFont(ofSize: 15)
-        noRecentLabel.textAlignment = .center
-        
-        recentLabel.text = "최근 검색"
-        recentLabel.font = .boldSystemFont(ofSize: 14)
-        
-        deleteAllButton.setTitle("전체 삭제", for: .normal)
-        deleteAllButton.setTitleColor(CustomDesign.orange, for: .normal)
-        deleteAllButton.titleLabel?.font = .systemFont(ofSize: 14)
-        
-        searchListTableView.rowHeight = 40
-        searchListTableView.separatorStyle = .none
     }
     
     override func configureAction() {
