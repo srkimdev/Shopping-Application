@@ -159,7 +159,7 @@ final class SearchResultViewController: BaseViewController {
         
         if like {
             viewModel.inputLike.value = task
-            
+             
             UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
             
             print("Realm Add Succeed")

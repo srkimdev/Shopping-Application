@@ -24,6 +24,7 @@ final class APIManager {
                 
             case .success(let value):
                 completionHandler(.success(value))
+                print(value)
             // Custom responseSerlizier
             case .failure:
                 if let data = response.data,

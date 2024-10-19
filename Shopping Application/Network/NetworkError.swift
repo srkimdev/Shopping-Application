@@ -32,7 +32,7 @@ enum APIError: String, Error {
         case .malformedEncoding:
             return "Malformed encoding."
         case .invalidSearchAPI:
-            return "Invalid search API"
+            return "Invalid search API"	
         case .systemError:
             return "System error"
         default:

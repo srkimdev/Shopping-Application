@@ -41,6 +41,7 @@ final class MainSearchViewController: BaseViewController {
         bindData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(receivedNotification), name: NSNotification.Name("update"), object: nil)
+        
     }
 
     override func configureHierarchy() {

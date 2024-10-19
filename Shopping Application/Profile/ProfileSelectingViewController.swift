@@ -102,7 +102,7 @@ extension ProfileSelectingViewController: UICollectionViewDelegate, UICollection
         
         guard let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileSelectingCollectionViewCell.identifier, for: indexPath) as? ProfileSelectingCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.designCell(transition: indexPath.row, num: profileImageNumber)
+        cell.designCell(transition: indexPath.item, num: profileImageNumber)
         
         return cell
     }

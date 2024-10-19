@@ -23,6 +23,9 @@ struct SearchResultDetail: Decodable {
     let mallName: String
     let productId: String
     let lprice: String
+    let category1: String
+    let category2: String
+    let category3: String
     
 }
 
