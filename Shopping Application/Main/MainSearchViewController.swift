@@ -63,29 +63,15 @@ final class MainSearchViewController: BaseViewController {
         return object
     }()
     
-    var searchList: [String] = [] {
-        didSet {
-//            viewModel.inputIsText.value = searchList
-//            UserDefaultsManager.searchList = searchList
-//            searchListTableView.reloadData()
-        }
-    }
-    
-    let viewModel = MainSearchViewModel()
+    private let viewModel = MainSearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchList = loadRecentSearches()
-        
-        bindData()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(receivedNotification), name: NSNotification.Name("update"), object: nil)
-        
     }
 
     override func configureHierarchy() {
-        
         view.addSubview(searchBar)
         view.addSubview(searchBarLine)
         view.addSubview(noRecentImage)
@@ -96,7 +82,6 @@ final class MainSearchViewController: BaseViewController {
     }
     
     override func configureLayout() {
-        
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(8)
@@ -139,6 +124,14 @@ final class MainSearchViewController: BaseViewController {
         }
     }
     
+    override func bind() {
+        viewModel.reloadDataTrigger
+            .bind { [weak self] _ in
+                guard let self else { return }
+                searchListTableView.reloadData()
+            }
+    }
+    
     override func configureUI() {
         navigationItem.title = "\(UserInfo.shared.userName)'s MEANING OUT"
     }
@@ -178,7 +171,6 @@ extension MainSearchViewController: UISearchBarDelegate {
         
         searchBar.text = nil
         viewModel.inputText.value = text
-//        UserInfo.shared.recentSearchText = text
         
         let vc = SearchResultViewController()
         vc.data = text
@@ -210,37 +202,9 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        UserInfo.shared.recentSearchText = searchList[indexPath.row]
-//        topToRecentSearch(search: UserInfo.shared.recentSearchText)
-
         let vc = SearchResultViewController()
-        vc.data = UserInfo.shared.recentSearchText
-        
+        vc.data = viewModel.searchList[indexPath.row]
         transitionScreen(vc: vc, style: .push)
     }
 }
 
-extension MainSearchViewController {
-    
-    private func bindData() {
-//        viewModel.outputIsText.bind { [weak self] value in
-//            self?.recentLabel.isHidden = !value
-//            self?.deleteAllButton.isHidden = !value
-//            self?.searchListTableView.isHidden = !value
-//            
-//            self?.noRecentImage.isHidden = value
-//            self?.noRecentLabel.isHidden = value
-//        }
-        viewModel.reloadDataTrigger
-            .bind { [weak self] _ in
-                guard let self else { return }
-                searchListTableView.reloadData()
-            }
-    }
-
-    
-    
-    private func loadRecentSearches() -> [String] {
-        return UserDefaultsManager.searchList
-    }
-}

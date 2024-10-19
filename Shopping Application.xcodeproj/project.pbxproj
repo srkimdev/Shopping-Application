@@ -164,6 +164,16 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		DC465B172CC39DCB00567803 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DC487D342C1C25BC006B7AAF /* MainSearchViewController.swift */,
+				DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */,
+				DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		DC487CFF2C1AE4DA006B7AAF = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +207,7 @@
 				DC0CFA912C3021D800E80424 /* OnBoarding */,
 				DCA841C72C20187700B21AF2 /* Profile */,
 				DC465B142CC37AD700567803 /* Tab */,
+				DC465B172CC39DCB00567803 /* Main */,
 				DCA841C82C20188D00B21AF2 /* Search */,
 				DCFBF7472C3A5A38007DA893 /* Save */,
 				DCA841C62C20185F00B21AF2 /* Setting */,
@@ -270,9 +281,6 @@
 		DCA841C82C20188D00B21AF2 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				DC487D342C1C25BC006B7AAF /* MainSearchViewController.swift */,
-				DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */,
-				DC487D442C1D6E10006B7AAF /* MainSearchTableViewCell.swift */,
 				DC487D3A2C1C2CA9006B7AAF /* SearchResultViewController.swift */,
 				DC9099FF2C40DC47001A5326 /* SearchResultViewModel.swift */,
 				DC487D3C2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift */,

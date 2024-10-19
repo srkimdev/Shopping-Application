@@ -16,6 +16,7 @@ class BaseViewController: UIViewController {
         configureLayout()
         configureUI()
         configureAction()
+        bind()
         
         view.backgroundColor = .white
     }
@@ -27,5 +28,7 @@ class BaseViewController: UIViewController {
     func configureUI() { }
     
     func configureAction() { }
+    
+    func bind() { }
     
 }

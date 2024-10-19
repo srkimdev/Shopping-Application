@@ -9,14 +9,15 @@ import Foundation
 
 final class MainSearchViewModel {
     
-    var searchList: [String] = []
+    var searchList: [String] = UserDefaultsManager.searchList
     
+    //MARK: Input
     var inputText: Observable<String> = Observable("")
     var deleteButtonTapped: Observable<Int> = Observable(-1)
     var deleteAllButtonTapped: Observable<Void> = Observable(())
     
+    //MARK: Output
     var reloadDataTrigger: Observable<Void> = Observable(())
-//    var outputIsText: Observable<Bool> = Observable(false)
     
     init() {
         inputText
@@ -41,18 +42,13 @@ final class MainSearchViewModel {
             }
         
     }
-    
-//    private func validate() {
-//        if inputIsText.value.count > 0 {
-//            self.outputIsText.value = true
-//        } else {
-//            self.outputIsText.value = false
-//        }
-//    }
+
     private func topToRecentSearch(search: String) {
         if searchList.contains(search) {
             searchList.removeAll { $0 == search }
         }
         searchList.insert(search, at: 0)
+        UserDefaultsManager.searchList = searchList
     }
+    
 }

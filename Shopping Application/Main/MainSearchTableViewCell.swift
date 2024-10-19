@@ -10,9 +10,25 @@ import SnapKit
 
 final class MainSearchTableViewCell: BaseTableViewCell {
 
-    let timeImage = UIImageView()
-    let productLabel = UILabel()
-    let deleteButton = UIButton()
+    private let timeImage: UIImageView = {
+        let object = UIImageView()
+        object.image = UIImage(systemName: "clock")
+        object.tintColor = CustomDesign.itemTintColor
+        return object
+    }()
+    
+    private let productLabel: UILabel = {
+        let object = UILabel()
+        object.font = .systemFont(ofSize: 13)
+        return object
+    }()
+    
+    let deleteButton: UIButton = {
+        let object = UIButton()
+        object.setImage(UIImage(systemName: "xmark"), for: .normal)
+        object.tintColor = CustomDesign.itemTintColor
+        return object
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,7 +42,6 @@ final class MainSearchTableViewCell: BaseTableViewCell {
     }
     
     override func configureLayout() {
-        
         timeImage.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(12)
             make.width.equalTo(timeImage.snp.height).multipliedBy(1.0)
@@ -44,18 +59,9 @@ final class MainSearchTableViewCell: BaseTableViewCell {
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-8)
         }
     }
-    
-    override func configureUI() {
-        timeImage.image = UIImage(systemName: "clock")
-        timeImage.tintColor = CustomDesign.itemTintColor
-        
-        productLabel.font = .systemFont(ofSize: 13)
-        
-        deleteButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        deleteButton.tintColor = CustomDesign.itemTintColor
-    }
-    
+
     func designCell(transition: String) {
         productLabel.text = transition
     }
+    
 }
