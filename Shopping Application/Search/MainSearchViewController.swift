@@ -20,9 +20,9 @@ final class MainSearchViewController: BaseViewController {
     
     var searchList: [String] = [] {
         didSet {
-            viewModel.inputIsText.value = searchList
-            UserDefaultsManager.searchList = searchList
-            searchListTableView.reloadData()
+//            viewModel.inputIsText.value = searchList
+//            UserDefaultsManager.searchList = searchList
+//            searchListTableView.reloadData()
         }
     }
     
@@ -130,11 +130,11 @@ final class MainSearchViewController: BaseViewController {
     }
 
     @objc func deleteButtonClicked(sender: UIButton) {
-        searchList.remove(at: sender.tag)
+        viewModel.deleteButtonTapped.value = sender.tag
     }
 
     @objc func deleteAllButtonClicked() {
-        searchList.removeAll()
+        viewModel.deleteAllButtonTapped.value = ()
     }
 
     @objc func receivedNotification(notification: NSNotification) {
@@ -159,13 +159,11 @@ extension MainSearchViewController: UISearchBarDelegate {
         }
         
         searchBar.text = nil
-        
-        topToRecentSearch(search: text)
-        UserInfo.shared.recentSearchText = text
+        viewModel.inputText.value = text
+//        UserInfo.shared.recentSearchText = text
         
         let vc = SearchResultViewController()
-        vc.data = UserInfo.shared.recentSearchText
-        
+        vc.data = text
         transitionScreen(vc: vc, style: .push)
     }
 }
@@ -173,14 +171,14 @@ extension MainSearchViewController: UISearchBarDelegate {
 extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchList.count
+        return viewModel.searchList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = searchListTableView.dequeueReusableCell(withIdentifier: MainSearchTableViewCell.identifier, for: indexPath) as? MainSearchTableViewCell else { return UITableViewCell() }
         
-        cell.designCell(transition: searchList[indexPath.row])
+        cell.designCell(transition: viewModel.searchList[indexPath.row])
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         
@@ -195,7 +193,7 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         UserInfo.shared.recentSearchText = searchList[indexPath.row]
-        topToRecentSearch(search: UserInfo.shared.recentSearchText)
+//        topToRecentSearch(search: UserInfo.shared.recentSearchText)
 
         let vc = SearchResultViewController()
         vc.data = UserInfo.shared.recentSearchText
@@ -207,22 +205,22 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainSearchViewController {
     
     private func bindData() {
-        viewModel.outputIsText.bind { [weak self] value in
-            self?.recentLabel.isHidden = !value
-            self?.deleteAllButton.isHidden = !value
-            self?.searchListTableView.isHidden = !value
-            
-            self?.noRecentImage.isHidden = value
-            self?.noRecentLabel.isHidden = value
-        }
+//        viewModel.outputIsText.bind { [weak self] value in
+//            self?.recentLabel.isHidden = !value
+//            self?.deleteAllButton.isHidden = !value
+//            self?.searchListTableView.isHidden = !value
+//            
+//            self?.noRecentImage.isHidden = value
+//            self?.noRecentLabel.isHidden = value
+//        }
+        viewModel.reloadDataTrigger
+            .bind { [weak self] _ in
+                guard let self else { return }
+                searchListTableView.reloadData()
+            }
     }
 
-    private func topToRecentSearch(search: String) {
-        if searchList.contains(search) {
-            searchList.removeAll { $0 == search }
-        }
-        searchList.insert(search, at: 0)
-    }
+    
     
     private func loadRecentSearches() -> [String] {
         return UserDefaultsManager.searchList
