@@ -73,26 +73,33 @@
 <br/>
 
 ## 트러블 슈팅
-### 1. Kingfisher의 ~를 가지고 메모리 성능 개선
+### 1. 상품 이미지를 불러올 때 원본 이미지를 필요한 크기만큼만 축소하여 보여줌으로써 메모리 절약
 - 상황
-  - 숙소 검색 화면에서 지역 검색 시 최근 검색어에는 검색어의 목록이 컬렉션뷰로 보여지게 되고 검색어의 길이에 따라 셀의 크기를 다르게 설정하였음
-  - 첫번째 검색어는 텍스트의 크기에 맞게 셀이 만들어졌지만 두번째 검색부터는 이전 검색어 셀과 똑같은 셀의 크기를 가지거나 잘 잡지 못함
-   
-      <img width="201" alt="스크린샷 2024-10-18 오후 7 50 04" src="https://github.com/user-attachments/assets/eb919ce7-4436-4e78-828e-92bb08db4163">
+  - 사용자가 상품을 검색하면 관련 상품을 컬렉션뷰 형태로 보여주고 각 셀에서 Kingfisher를 이용하여 이미지를 보여줌
   
 - 원인 분석
-  - 이전 셀이 가지고 있는 내용과 상태를 초기화해줄 필요가 있음
-  - UICollectionViewCell의 prepareForReuse를 호출하는 과정에서 부모 클래스의 prepareForReuse를 호출하지 않았음
+  - 네이버 쇼핑 API 응답값에서 주는 url은 원본이미지를 기반으로 보여주게 되는데 원본이미지는 크기가 매우 크므로 불러올 때 시간이 걸리고 메모리를 많이 사용
 
 - 해결
-  - super.prepareForReuse를 호출하여 부모클래스에서 prepareForReuse가 수행하는 기본동작을 실행하도록 함
+  - Kingfisher에 있는 DownsamplingImageProcessor로 필요한 크기만큼 이미지를 축소하여 메모리 절약
+
+   <img width="426" alt="스크린샷 2024-10-19 오후 6 29 50" src="https://github.com/user-attachments/assets/3068fb33-2713-489a-b08a-79d002114de0">     
+   <img width="417" alt="스크린샷 2024-10-19 오후 6 30 47" src="https://github.com/user-attachments/assets/e41fca70-2ff9-41fb-bfa3-edf34243f3f7">
+   
   <br>
 
      ```swift
-     override func prepareForReuse() {
-        super.prepareForReuse()
-        disposeBag = DisposeBag()
-     }
+     func setImage(_ url: String?) {
+        guard let url = url, let source = URL(string: url) else { return }
+        kf.setImage(with: source, placeholder: UIImage(named: "shop-placeholder"), options: [
+            .transition(.fade(1)),
+            .forceTransition,
+            .processor(DownsamplingImageProcessor(size: CGSize(width: 300, height: 400))),
+            .scaleFactor(UIScreen.main.scale),
+            .progressiveJPEG(.init(isBlur: false, isFastestScan: true, scanInterval: 0.1)),
+            .cacheOriginalImage
+        ])
+    }
      ```
 <br>
 
