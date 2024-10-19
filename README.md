@@ -19,8 +19,8 @@
     | iOS version | <img src="https://img.shields.io/badge/iOS-15.0+-black?logo=apple"/> |
     |:-:|:-:|
     | Framework | UIKit |
-    | Architecture | MVC |
-    | Reactive | X |
+    | Architecture | MVVM |
+    | Reactive | Custom Observable |
 
 <br/>
 
@@ -44,9 +44,14 @@
  
 ## 핵심 기술 구현 사항
 
+- ### Custom Observable
+  - 반응형 프로그래밍을 1st party에서 구현해보고 싶어서 RxSwift에 있는 Observable을 커스텀하여 사용
+
+<br>
+
 - ### Skeleton View 구현
   - 네트워크 통신이 오래걸릴 시 사용자에게 로딩되고 있다는 것을 보여줌
-    
+  
 
 <br>
 
@@ -91,7 +96,7 @@
      ```
 <br>
 
-### 2. 처음 화면 진입 시 trigger를 주어 네트워크 통신을 하지만 데이터를 받아오지 못하는 문제
+### 2. addtarget 매번 선언 문제
 - 상황
   - 게시물 공유 화면 진입 시 PublishSubject로 선언된 viewDidLoadTrigger를 통해 viewModel에서 네트워크 통신을 하고 받아온 게시물을 보여줌
   - viewDidLoadTrigger가 viewModel의 Input으로 들어가고 네트워크 통신하도록 바인드 되어 있음
