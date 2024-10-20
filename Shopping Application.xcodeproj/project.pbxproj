@@ -16,6 +16,7 @@
 		DC465B212CC5255700567803 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC465B202CC5255700567803 /* CategoryCollectionViewCell.swift */; };
 		DC465B232CC5290100567803 /* BrandCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC465B222CC5290100567803 /* BrandCategory.swift */; };
 		DC465B252CC52B1600567803 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC465B242CC52B1600567803 /* ProductCollectionViewCell.swift */; };
+		DC465B272CC53EEF00567803 /* RecentProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC465B262CC53EEF00567803 /* RecentProductCollectionViewCell.swift */; };
 		DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D0B2C1AE4DA006B7AAF /* AppDelegate.swift */; };
 		DC487D0E2C1AE4DA006B7AAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487D0D2C1AE4DA006B7AAF /* SceneDelegate.swift */; };
 		DC487D152C1AE4DC006B7AAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC487D142C1AE4DC006B7AAF /* Assets.xcassets */; };
@@ -94,6 +95,7 @@
 		DC465B202CC5255700567803 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC465B222CC5290100567803 /* BrandCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCategory.swift; sourceTree = "<group>"; };
 		DC465B242CC52B1600567803 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC465B262CC53EEF00567803 /* RecentProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC487D082C1AE4DA006B7AAF /* Shopping Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shopping Application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC487D0B2C1AE4DA006B7AAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC487D0D2C1AE4DA006B7AAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				DC465B1E2CC524E900567803 /* ShowShoesViewController.swift */,
 				DC465B202CC5255700567803 /* CategoryCollectionViewCell.swift */,
 				DC465B242CC52B1600567803 /* ProductCollectionViewCell.swift */,
+				DC465B262CC53EEF00567803 /* RecentProductCollectionViewCell.swift */,
 				DC465B222CC5290100567803 /* BrandCategory.swift */,
 			);
 			path = Shoes;
@@ -447,6 +450,7 @@
 				DC487D392C1C2A2C006B7AAF /* MainSettingViewController.swift in Sources */,
 				DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */,
 				DCFBF7462C3A5A2E007DA893 /* SearchSaveViewController.swift in Sources */,
+				DC465B272CC53EEF00567803 /* RecentProductCollectionViewCell.swift in Sources */,
 				DCFBF7492C3A5F3E007DA893 /* DBTable.swift in Sources */,
 				DC67AD2B2C2BDF0100A5129F /* BaseViewController.swift in Sources */,
 				DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */,

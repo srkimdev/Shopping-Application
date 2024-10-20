@@ -1,5 +1,5 @@
 //
-//  ProductCollectionViewCell.swift
+//  RecentProductCollectionViewCell.swift
 //  Shopping Application
 //
 //  Created by 김성률 on 10/20/24.
@@ -8,30 +8,31 @@
 import UIKit
 import SnapKit
 
-final class ProductCollectionViewCell: BaseCollectionViewCell {
+final class RecentProductCollectionViewCell: BaseCollectionViewCell {
     
     private let shoesImage = {
         let object = UIImageView()
+        object.backgroundColor = .orange
         object.layer.cornerRadius = 10
         return object
     }()
     
     private let productNameLabel = {
         let object = UILabel()
-        object.font = .systemFont(ofSize: 15)
-        object.numberOfLines = 2
+        object.font = .systemFont(ofSize: 14)
+        object.numberOfLines = 1
         return object
     }()
     
     private let priceLabel = {
         let object = UILabel()
-        object.font = .systemFont(ofSize: 17, weight: .bold)
+        object.font = .systemFont(ofSize: 14)
         return object
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        contentView.backgroundColor = .lightGray
     }
     
     override func configureHierarchy() {
@@ -44,13 +45,13 @@ final class ProductCollectionViewCell: BaseCollectionViewCell {
         shoesImage.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
-            make.height.equalTo(200)
+            make.height.equalTo(140)
         }
         
         productNameLabel.snp.makeConstraints { make in
             make.top.equalTo(shoesImage.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(40)
+            make.height.equalTo(20)
         }
         
         priceLabel.snp.makeConstraints { make in
@@ -60,7 +61,7 @@ final class ProductCollectionViewCell: BaseCollectionViewCell {
     }
     
     func designCell(input: String) {
-        shoesImage.image = UIImage(named: "launch")
+        shoesImage.image = UIImage(systemName: "star")
         productNameLabel.text = "Nike Air Forcedddddddddddddddddddddddddddddd"
         priceLabel.text = "250"
     }
