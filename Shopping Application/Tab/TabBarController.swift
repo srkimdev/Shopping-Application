@@ -19,15 +19,19 @@ final class TabBarController: UITabBarController {
         let nav1 = UINavigationController(rootViewController: search)
         nav1.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         
+        let shoes = ShowShoesViewController()
+        let nav2 = UINavigationController(rootViewController: shoes)
+        nav2.tabBarItem = UITabBarItem(title: "카테고리", image: UIImage(systemName: "star"), tag: 1)
+        
         let save = FolderViewController()
-        let nav2 = UINavigationController(rootViewController: save)
-        nav2.tabBarItem = UITabBarItem(title: "내 폴더", image: UIImage(systemName: "book"), tag: 1)
+        let nav3 = UINavigationController(rootViewController: save)
+        nav3.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
         let setting = MainSettingViewController()
-        let nav3 = UINavigationController(rootViewController: setting)
-        nav3.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"), tag: 2)
+        let nav4 = UINavigationController(rootViewController: setting)
+        nav4.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"), tag: 3)
         
-        setViewControllers([nav1, nav2, nav3], animated: true)
+        setViewControllers([nav1, nav2, nav3, nav4], animated: true)
     }
 }
 

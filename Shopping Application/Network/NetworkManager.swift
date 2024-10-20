@@ -1,55 +1,44 @@
 //
-//  NetworkConnect.swift
+//  APIManager.swift
 //  Shopping Application
 //
-//  Created by 김성률 on 7/14/24.
+//  Created by 김성률 on 7/12/24.
 //
 
 import UIKit
-import Reachability
-import Toast
+import Alamofire
 
 final class NetworkManager {
     
     static let shared = NetworkManager()
-    private let reachability = try! Reachability()
     
-    private init() {
-        setupReachability()
-    }
+    private init() { }
     
-    private func setupReachability() {
-        reachability.whenReachable = { reachability in
-            DispatchQueue.main.async {
-                if reachability.connection == .wifi {
-                    print("WiFi")
+    func callRequest(text: String, start: Int, buttonTag: Int, completionHandler: @escaping (Result<SearchResult, APIError>) -> Void) {
+
+        let router = RouterPattern.shopping(text: text, start: start, buttonTag: buttonTag)
+        
+        AF.request(router.endpoint, method: router.method, headers: router.header).responseDecodable(of: SearchResult.self) { response in
+            
+            switch response.result {
+                
+            case .success(let value):
+                completionHandler(.success(value))
+                print(value)
+            // Custom responseSerlizier
+            case .failure:
+                if let data = response.data,
+                   let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let errorCode = json["errorCode"] as? String 
+                {
+                    let apiError = APIError.from(errorCode: errorCode)
+                    completionHandler(.failure(apiError))
                 } else {
-                    print("Cellular")
+                    let statusCode = response.response?.statusCode ?? -1
+                    let apiError = APIError.from(errorCode: "statusCode: \(statusCode)")
+                    completionHandler(.failure(apiError))
                 }
             }
         }
-        
-        reachability.whenUnreachable = { _ in
-            DispatchQueue.main.async {
-                self.showToast(message: "not connected")
-            }
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
-    }
-    
-    // check current network status
-    func isNetworkAvailable() -> Bool {
-        return reachability.connection != .unavailable
-    }
-    
-    func showToast(message: String) {
-        guard let window = UIApplication.shared.keyWindow else { return }
-        window.makeToast(message, duration: 3.0, position: .bottom)
     }
 }
-

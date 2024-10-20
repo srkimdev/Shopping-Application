@@ -157,9 +157,9 @@ extension MainSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        if !NetworkManager.shared.isNetworkAvailable() {
+        if !NetworkConnectManager.shared.isNetworkAvailable() {
             view.endEditing(true)
-            NetworkManager.shared.showToast(message: "인터넷에 연결되지 않았습니다.\n연결 확인 후 다시 시도해 주세요.")
+            NetworkConnectManager.shared.showToast(message: "인터넷에 연결되지 않았습니다.\n연결 확인 후 다시 시도해 주세요.")
             return
         }
         
@@ -172,8 +172,7 @@ extension MainSearchViewController: UISearchBarDelegate {
         searchBar.text = nil
         viewModel.inputText.value = text
         
-        let vc = SearchResultViewController()
-        vc.data = text
+        let vc = SearchResultViewController(SearchResultViewModel(searchText: text))
         transitionScreen(vc: vc, style: .push)
     }
 }
@@ -197,13 +196,12 @@ extension MainSearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if !NetworkManager.shared.isNetworkAvailable() {
-            NetworkManager.shared.showToast(message: "인터넷에 연결되지 않았습니다.\n연결 확인 후 다시 시도해 주세요.")
+        if !NetworkConnectManager.shared.isNetworkAvailable() {
+            NetworkConnectManager.shared.showToast(message: "인터넷에 연결되지 않았습니다.\n연결 확인 후 다시 시도해 주세요.")
             return
         }
         
-        let vc = SearchResultViewController()
-        vc.data = viewModel.searchList[indexPath.row]
+        let vc = SearchResultViewController(SearchResultViewModel(searchText: viewModel.searchList[indexPath.row]))
         transitionScreen(vc: vc, style: .push)
     }
 }

@@ -17,12 +17,10 @@ enum RouterPattern {
     }
     
     var endpoint: URL {
-        
         switch self {
         case .shopping(let text, let start, let buttonTag):
             return URL(string: baseURL + "query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[buttonTag])")!
         }
-        
     }
     
     var header: HTTPHeaders {

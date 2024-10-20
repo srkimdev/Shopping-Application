@@ -10,12 +10,12 @@ import RealmSwift
 
 final class SearchResultViewModel {
     
-    var inputText: Observable<String?> = Observable(nil)
+    var callAPI: Observable<Void> = Observable(())
     var inputButton: Observable<Int?> = Observable(nil)
-    var inputPage: Observable<Void?> = Observable(nil)
+    var inputPagination: Observable<Void> = Observable(())
     
-    var inputLike: Observable<DBTable?> = Observable(nil)
-    var inputUnLike: Observable<DBTable?> = Observable(nil)
+//    var inputLike: Observable<DBTable?> = Observable(nil)
+//    var inputUnLike: Observable<DBTable?> = Observable(nil)
     
     var outputList: Observable<[SearchResultDetail]> = Observable([])
     var outputCount: Observable<Int> = Observable(0)
@@ -23,67 +23,60 @@ final class SearchResultViewModel {
     var outputScrollToTop: Observable<Void?> = Observable(nil)
     var outputPagination: Observable<Void?> = Observable(nil)
     
-    let realm = try! Realm()
-    let realmrepository = RealmRepository()
-    var folderList: [Folder] = []
+    private let realmrepository = RealmRepository()
+    
+    var searchText: String
     var buttonTag: Int = 0
-    var totalPage = 0
     var start = 1
+    var totalPage = 0
     
-    init() {
-        setupBindings()
-    }
-    
-    func setupBindings() {
+    init(searchText: String) {
+        self.searchText = searchText
         
-        inputText.bind { [weak self] text in
-            guard let text = text else { return }
-            self?.fetchData(text: text, buttonTag: 0, start: 1)
-        }
-        
-        inputButton.bind { [weak self] value in
-            if value == self?.buttonTag { return }
-            guard let value else { return }
-            
-            self?.buttonTag = value
-            self?.fetchData(text: UserInfo.shared.recentSearchText, buttonTag: value, start: 1)
-        }
-        
-        inputPage.bind { [weak self] value in
-            guard let value else { return }
-            self?.loadMoreData()
-        }
-        
-        inputLike.bind { [weak self] value in
-            guard let value else { return }
-            self?.folderList = self?.realmrepository.fetchFolder() ?? []
-            self?.addDataInFolder(data: value)
-        }
-        
-        inputUnLike.bind { [weak self] value in
-            guard let value else { return }
-            self?.deleteDataInFolder(data: value)
-        }
-        
-        outputList.bind { [weak self] value in
-            if self?.start == 1 && value.count > 0 {
-                self?.outputScrollToTop.value = ()
-            } else if self?.start ?? 1 > 1 && value.count > 0 {
-                self?.outputPagination.value = ()
+        callAPI
+            .bind { [weak self] _ in
+                guard let self else { return }
+                fetchData(text: searchText, buttonTag: buttonTag, start: start)
             }
-        }
+        
+        inputButton
+            .bind { [weak self] value in
+                if value == self?.buttonTag { return }
+                guard let value else { return }
+                
+                self?.buttonTag = value
+                self?.fetchData(text: UserInfo.shared.recentSearchText, buttonTag: value, start: 1)
+            }
+        
+        inputPagination
+            .bind { [weak self] value in
+                guard let self else { return }
+                loadMoreData()
+            }
+        
+        outputList
+            .bind { [weak self] value in
+                guard let self else { return }
+                
+                if start == 1 && value.count > 0 {
+                    outputScrollToTop.value = ()
+                } else if start > 1 && value.count > 0 {
+                    outputPagination.value = ()
+                }
+            }
+        
     }
-    
+
     private func fetchData(text: String, buttonTag: Int, start: Int) {
         self.buttonTag = buttonTag
         self.start = start
         
-        APIManager.shared.callRequest(text: text, start: start, buttonTag: buttonTag) { [weak self] response in
+        NetworkManager.shared.callRequest(text: text, start: start, buttonTag: buttonTag) { response in
             switch response {
             case .success(let value):
-                self?.outputList.value = value.items
-                self?.outputCount.value = value.total
-                self?.totalPage = value.total
+                self.outputList.value = value.items
+                self.outputCount.value = value.total
+                self.totalPage = value.total
             case .failure(let error):
                 print(error.description)
             }
@@ -94,32 +87,14 @@ final class SearchResultViewModel {
         start += 30
         guard totalPage != start else { return }
         
-        APIManager.shared.callRequest(text: UserInfo.shared.recentSearchText, start: start, buttonTag: buttonTag) { [weak self] response in
+        NetworkManager.shared.callRequest(text: searchText, start: start, buttonTag: buttonTag) { response in
             switch response {
             case .success(let value):
-                self?.outputList.value.append(contentsOf: value.items)
+                self.outputList.value.append(contentsOf: value.items)
             case .failure(let error):
                 print(error.description)
             }
         }
     }
     
-    private func addDataInFolder(data: DBTable) {
-         
-        try! realm.write {
-            if data.mallName == "네이버" {
-                folderList[0].detail.append(data)
-            } else if data.mallName == "쿠팡" {
-                folderList[1].detail.append(data)
-            } else {
-                folderList[2].detail.append(data)
-            }
-        }
-    }
-    
-    private func deleteDataInFolder(data: DBTable) {
-        try! realm.write {
-            realm.delete(data)
-        }
-    }
 }

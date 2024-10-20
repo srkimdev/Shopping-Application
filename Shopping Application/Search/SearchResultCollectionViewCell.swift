@@ -9,13 +9,51 @@ import UIKit
 import SnapKit
 import Kingfisher
 
+protocol SearchResultCellDelegate: AnyObject {
+    func goodButtonTapped(at index: Int)
+}
+
 final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
-    let productImage = UIImageView()
-    let goodButton = UIButton()
-    let companyLabel = UILabel()
-    let productLabel = UILabel()
-    let priceLabel = UILabel()
+    private let productImage: UIImageView = {
+        let object = UIImageView()
+        object.layer.masksToBounds = true
+        object.isUserInteractionEnabled = true
+        object.layer.cornerRadius = 10
+        return object
+    }()
+    
+    let goodButton: UIButton = {
+        let object = UIButton()
+        object.addTarget(self, action: #selector(goodButtonTapped), for: .touchUpInside)
+        object.setImage(CustomDesign.unlikeImage, for: .normal)
+        object.imageEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        object.layer.masksToBounds = true
+        object.layer.cornerRadius = 5
+        return object
+    }()
+    
+    private let companyLabel: UILabel = {
+        let object = UILabel()
+        object.font = .systemFont(ofSize: 11)
+        object.textColor = .lightGray
+        return object
+    }()
+    
+    private let productLabel: UILabel = {
+        let object = UILabel()
+        object.font = .systemFont(ofSize: 12)
+        object.numberOfLines = 2
+        return object
+    }()
+    
+    private let priceLabel: UILabel = {
+        let object = UILabel()
+        object.font = .boldSystemFont(ofSize: 14)
+        return object
+    }()
+    
+    weak var delegate: SearchResultCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +61,6 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureHierarchy() {
-        
         contentView.addSubview(productImage)
         productImage.addSubview(goodButton)
         contentView.addSubview(companyLabel)
@@ -32,7 +69,6 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureLayout() {
-        
         productImage.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
@@ -63,31 +99,16 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    override func configureUI() {
-        
-        productImage.layer.masksToBounds = true
-        productImage.isUserInteractionEnabled = true
-        productImage.layer.cornerRadius = 10
-        
-        goodButton.setImage(CustomDesign.unlikeImage, for: .normal)
-        goodButton.imageEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        goodButton.layer.masksToBounds = true
-        goodButton.layer.cornerRadius = 5
-        
-        companyLabel.font = .systemFont(ofSize: 11)
-        companyLabel.textColor = .lightGray
-        
-        productLabel.font = .systemFont(ofSize: 12)
-        productLabel.numberOfLines = 2
-        
-        priceLabel.font = .boldSystemFont(ofSize: 14)
+    @objc private func goodButtonTapped() {
+        if let delegate = delegate {
+            delegate.goodButtonTapped(at: goodButton.tag)
+        }
     }
     
-    func designCell(transition: SearchResultDetail) {
+    func designCell(transition: SearchResultDetail, index: Int) {
         
-        let placeholderImage = UIImage(named: "shop-placeholder")
-        let url = URL(string: transition.image)
-        productImage.kf.setImage(with: url, placeholder: placeholderImage)
+        productImage.setImage(transition.image)
+        goodButton.tag = index
         
         companyLabel.text = transition.mallName
         productLabel.text = HTMLManager.shared.changeHTML(text: transition.title)
