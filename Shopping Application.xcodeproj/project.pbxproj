@@ -66,6 +66,7 @@
 		DCE715062C4D2B370036DF06 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DCE715052C4D2B370036DF06 /* Kingfisher */; };
 		DCE715092C4D2BE90036DF06 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCE715082C4D2BE90036DF06 /* RealmSwift */; };
 		DCE7150A2C4D3CAF0036DF06 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = DCE715082C4D2BE90036DF06 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DCEE324C2CC6677F00578D16 /* MainCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE324B2CC6677F00578D16 /* MainCollectionHeaderView.swift */; };
 		DCFBF7462C3A5A2E007DA893 /* SearchSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */; };
 		DCFBF7492C3A5F3E007DA893 /* DBTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBF7482C3A5F3E007DA893 /* DBTable.swift */; };
 		DCFBF74E2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */; };
@@ -139,6 +140,7 @@
 		DCA841CC2C201E3900B21AF2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		DCA841CE2C201F3500B21AF2 /* APIkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
 		DCBF1CF22C4D0480000F89CF /* RouterPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterPattern.swift; sourceTree = "<group>"; };
+		DCEE324B2CC6677F00578D16 /* MainCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionHeaderView.swift; sourceTree = "<group>"; };
 		DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSaveViewController.swift; sourceTree = "<group>"; };
 		DCFBF7482C3A5F3E007DA893 /* DBTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTable.swift; sourceTree = "<group>"; };
 		DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSaveCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				DC465B202CC5255700567803 /* CategoryCollectionViewCell.swift */,
 				DC465B242CC52B1600567803 /* ProductCollectionViewCell.swift */,
 				DC465B262CC53EEF00567803 /* RecentProductCollectionViewCell.swift */,
+				DCEE324B2CC6677F00578D16 /* MainCollectionHeaderView.swift */,
 				DC465B222CC5290100567803 /* BrandCategory.swift */,
 			);
 			path = Shoes;
@@ -456,6 +459,7 @@
 				DC67AD2F2C2BE06F00A5129F /* BaseCollectionViewCell.swift in Sources */,
 				DC465B232CC5290100567803 /* BrandCategory.swift in Sources */,
 				DC487D332C1C2265006B7AAF /* Struct.swift in Sources */,
+				DCEE324C2CC6677F00578D16 /* MainCollectionHeaderView.swift in Sources */,
 				DCA0EA2E2C283E7900FA9960 /* UserDefaultsManager.swift in Sources */,
 				DC487D0C2C1AE4DA006B7AAF /* AppDelegate.swift in Sources */,
 				DC7DDD9B2C4546F00039CA1D /* SearchSaveViewModel.swift in Sources */,

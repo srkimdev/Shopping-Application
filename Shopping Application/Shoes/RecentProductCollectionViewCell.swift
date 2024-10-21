@@ -12,7 +12,6 @@ final class RecentProductCollectionViewCell: BaseCollectionViewCell {
     
     private let shoesImage = {
         let object = UIImageView()
-        object.backgroundColor = .orange
         object.layer.cornerRadius = 10
         return object
     }()
@@ -43,21 +42,19 @@ final class RecentProductCollectionViewCell: BaseCollectionViewCell {
     
     override func configureLayout() {
         shoesImage.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
-            make.height.equalTo(140)
+            make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
         
-        productNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(shoesImage.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
-            make.height.equalTo(20)
-        }
-        
-        priceLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
-            make.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(8)
-        }
+//        productNameLabel.snp.makeConstraints { make in
+//            make.top.equalTo(shoesImage.snp.bottom).offset(8)
+//            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
+//            make.height.equalTo(20)
+//        }
+//        
+//        priceLabel.snp.makeConstraints { make in
+//            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
+//            make.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(8)
+//        }
     }
     
     func designCell(input: String) {

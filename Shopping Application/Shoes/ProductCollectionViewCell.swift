@@ -31,7 +31,7 @@ final class ProductCollectionViewCell: BaseCollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        contentView.backgroundColor = .lightGray
     }
     
     override func configureHierarchy() {
@@ -44,7 +44,7 @@ final class ProductCollectionViewCell: BaseCollectionViewCell {
         shoesImage.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
-            make.height.equalTo(200)
+            make.height.equalTo(contentView).multipliedBy(0.7)
         }
         
         productNameLabel.snp.makeConstraints { make in
