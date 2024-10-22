@@ -11,7 +11,7 @@ import RealmSwift
 final class SearchResultViewModel {
     
     var callAPI: Observable<Void> = Observable(())
-    var inputButton: Observable<Int?> = Observable(nil)
+    var inputButton: Observable<Int> = Observable(0)
     var inputPagination: Observable<Void> = Observable(())
     
 //    var inputLike: Observable<DBTable?> = Observable(nil)
@@ -26,7 +26,7 @@ final class SearchResultViewModel {
     private let realmrepository = RealmRepository()
     
     var searchText: String
-    var buttonTag: Int = 0
+    var sort: Sorts = .sim
     var start = 1
     var totalPage = 0
     
@@ -36,16 +36,16 @@ final class SearchResultViewModel {
         callAPI
             .bind { [weak self] _ in
                 guard let self else { return }
-                fetchData(text: searchText, buttonTag: buttonTag, start: start)
+//                sort = .sim
+//                start = 1
+                fetchData()
             }
         
         inputButton
             .bind { [weak self] value in
-                if value == self?.buttonTag { return }
-                guard let value else { return }
-                
-                self?.buttonTag = value
-                self?.fetchData(text: UserInfo.shared.recentSearchText, buttonTag: value, start: 1)
+                guard let self else { return }
+                sort = Sorts.allCases[value]
+                fetchData()
             }
         
         inputPagination
@@ -67,11 +67,8 @@ final class SearchResultViewModel {
         
     }
 
-    private func fetchData(text: String, buttonTag: Int, start: Int) {
-        self.buttonTag = buttonTag
-        self.start = start
-        
-        NetworkManager.shared.callRequest(text: text, start: start, buttonTag: buttonTag) { response in
+    private func fetchData() {
+        NetworkManager.shared.callRequest(text: searchText, start: start, sort: sort) { response in
             switch response {
             case .success(let value):
                 self.outputList.value = value.items
@@ -87,7 +84,7 @@ final class SearchResultViewModel {
         start += 30
         guard totalPage != start else { return }
         
-        NetworkManager.shared.callRequest(text: searchText, start: start, buttonTag: buttonTag) { response in
+        NetworkManager.shared.callRequest(text: searchText, start: start, sort: sort) { response in
             switch response {
             case .success(let value):
                 self.outputList.value.append(contentsOf: value.items)

@@ -8,10 +8,14 @@
 import Foundation
 
 enum BrandCategory: String {
-    case Nike
-    case Adidas
-    case Puma
-    case Reebok
-    
-    
+    case nike = "Nike"
+    case adidas = "Adidas"
+    case converse = "Converse"
+    case vans = "Vans"
+    case newBalance = "New Balance"
+    case puma = "Puma"
+    case reebok = "Reebok"
+    case skechers = "Skechers"
+    case underArmour = "Under Armour"
+    case asics = "Asics"
 }

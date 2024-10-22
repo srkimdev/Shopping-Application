@@ -10,17 +10,14 @@ import Alamofire
 
 enum RouterPattern {
     
-    case shopping(text: String, start: Int, buttonTag: Int)
+    case shopping(text: String, start: Int, sort: Sorts)
     
     var baseURL: String {
-        return "https://openapi.naver.com/v1/search/shop.json?"
+        return "https://openapi.naver.com/v1/search/shop.json"
     }
     
-    var endpoint: URL {
-        switch self {
-        case .shopping(let text, let start, let buttonTag):
-            return URL(string: baseURL + "query=\(text)&display=30&start=\(start)&sort=\(ConstantTable.sortSelect[buttonTag])")!
-        }
+    var endpoint: String {
+        return baseURL
     }
     
     var header: HTTPHeaders {
@@ -34,10 +31,17 @@ enum RouterPattern {
         return .get
     }
     
-    var parameter: Parameters {
+    var parameters: Parameters {
         switch self {
-        case .shopping:
-            return ["language": "ko-KR"]
+        case .shopping(let text, let start, let sort):
+            let parameters: Parameters = [
+                "query": text,
+                "display": 30,
+                "start": start,
+                "sort": sort.rawValue
+            ]
+            return parameters
         }
     }
+
 }

@@ -15,8 +15,8 @@ struct SearchResult: Decodable {
     
 }
 
-struct SearchResultDetail: Decodable {
-    
+struct SearchResultDetail: Decodable, Hashable {
+    var id = UUID()
     let title: String
     let link: String
     let image: String
@@ -26,7 +26,6 @@ struct SearchResultDetail: Decodable {
     let category1: String
     let category2: String
     let category3: String
-    
 }
 
 // this is for reusing ProfileSettingViewController
@@ -51,12 +50,16 @@ enum CustomDesign {
 }
 
 struct ConstantTable {
-    
     static var likeCount = 0
     static var sortOption = 0
-    static let sortSelect = ["sim", "date", "dsc", "asc"]
     static let settingCell = ["나의 장바구니 목록", "자주 묻는 질문", "1:1 문의", "알림 설정", "탈퇴하기"]
     static let arrayButton = ["정확도", "날짜순", "가격높은순", "가격낮은순"]
     static let profileImageNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
 
+enum Sorts: String, CaseIterable {
+    case sim
+    case date
+    case dsc
+    case asc
+}

@@ -14,18 +14,20 @@ final class NetworkManager {
     
     private init() { }
     
-    func callRequest(text: String, start: Int, buttonTag: Int, completionHandler: @escaping (Result<SearchResult, APIError>) -> Void) {
+    func callRequest(text: String, start: Int, sort: Sorts, completionHandler: @escaping (Result<SearchResult, APIError>) -> Void) {
 
-        let router = RouterPattern.shopping(text: text, start: start, buttonTag: buttonTag)
+        let router = RouterPattern.shopping(text: text, start: start, sort: sort)
         
-        AF.request(router.endpoint, method: router.method, headers: router.header).responseDecodable(of: SearchResult.self) { response in
+        AF.request(router.endpoint, 
+                   method: router.method,
+                   parameters: router.parameters,
+                   headers: router.header)
+            .responseDecodable(of: SearchResult.self) { response in
             
             switch response.result {
-                
             case .success(let value):
                 completionHandler(.success(value))
                 print(value)
-            // Custom responseSerlizier
             case .failure:
                 if let data = response.data,
                    let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],

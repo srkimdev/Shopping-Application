@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0CFA8F2C30215C00E80424 /* BaseView.swift */; };
+		DC15A07E2CC7C43D00106911 /* ShowShoesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15A07D2CC7C43D00106911 /* ShowShoesViewModel.swift */; };
 		DC2CA9472C3D357700B31A98 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CA9462C3D357700B31A98 /* Observable.swift */; };
 		DC2CA9492C3D361300B31A98 /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */; };
 		DC465B1A2CC3A0CA00567803 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC465B192CC3A0CA00567803 /* FilterButton.swift */; };
@@ -88,6 +89,7 @@
 
 /* Begin PBXFileReference section */
 		DC0CFA8F2C30215C00E80424 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		DC15A07D2CC7C43D00106911 /* ShowShoesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowShoesViewModel.swift; sourceTree = "<group>"; };
 		DC2CA9462C3D357700B31A98 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		DC2CA9482C3D361300B31A98 /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
 		DC465B192CC3A0CA00567803 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
@@ -172,6 +174,33 @@
 			path = OnBoarding;
 			sourceTree = "<group>";
 		};
+		DC15A0792CC7C3DA00106911 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DC465B202CC5255700567803 /* CategoryCollectionViewCell.swift */,
+				DC465B242CC52B1600567803 /* ProductCollectionViewCell.swift */,
+				DC465B262CC53EEF00567803 /* RecentProductCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DC15A07A2CC7C3EC00106911 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC465B1E2CC524E900567803 /* ShowShoesViewController.swift */,
+				DCEE324B2CC6677F00578D16 /* MainCollectionHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC15A07C2CC7C41500106911 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DC15A07D2CC7C43D00106911 /* ShowShoesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DC465B142CC37AD700567803 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,11 +230,9 @@
 		DC465B1D2CC524C000567803 /* Shoes */ = {
 			isa = PBXGroup;
 			children = (
-				DC465B1E2CC524E900567803 /* ShowShoesViewController.swift */,
-				DC465B202CC5255700567803 /* CategoryCollectionViewCell.swift */,
-				DC465B242CC52B1600567803 /* ProductCollectionViewCell.swift */,
-				DC465B262CC53EEF00567803 /* RecentProductCollectionViewCell.swift */,
-				DCEE324B2CC6677F00578D16 /* MainCollectionHeaderView.swift */,
+				DC15A07A2CC7C3EC00106911 /* View */,
+				DC15A07C2CC7C41500106911 /* ViewModel */,
+				DC15A0792CC7C3DA00106911 /* Cell */,
 				DC465B222CC5290100567803 /* BrandCategory.swift */,
 			);
 			path = Shoes;
@@ -487,6 +514,7 @@
 				DC2CA9472C3D357700B31A98 /* Observable.swift in Sources */,
 				DCFBF74E2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift in Sources */,
 				DC487D2D2C1BF149006B7AAF /* ProfileSelectingViewController.swift in Sources */,
+				DC15A07E2CC7C43D00106911 /* ShowShoesViewModel.swift in Sources */,
 				DC909A082C42B552001A5326 /* DateFormatterManager.swift in Sources */,
 				DC67AD2D2C2BDF9B00A5129F /* BaseTableViewCell.swift in Sources */,
 				DC465B1A2CC3A0CA00567803 /* FilterButton.swift in Sources */,
