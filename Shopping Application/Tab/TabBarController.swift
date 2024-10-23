@@ -12,8 +12,17 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.tintColor = CustomDesign.orange
-        tabBar.unselectedItemTintColor = .lightGray
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = .black
+        
+        appearance.stackedLayoutAppearance.selected.iconColor = .white
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        appearance.stackedLayoutAppearance.normal.iconColor = .gray
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.gray]
+        
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
         
         let search = MainSearchViewController()
         let nav1 = UINavigationController(rootViewController: search)

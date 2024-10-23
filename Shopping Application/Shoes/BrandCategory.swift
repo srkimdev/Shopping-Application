@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BrandCategory: String {
+enum BrandCategory: String, CaseIterable, Hashable {
     case nike = "Nike"
     case adidas = "Adidas"
     case converse = "Converse"

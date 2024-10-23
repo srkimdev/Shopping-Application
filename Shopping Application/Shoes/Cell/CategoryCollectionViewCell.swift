@@ -12,6 +12,7 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     
     private let categoryLabel = {
         let object = UILabel()
+        object.textColor = .white
         return object
     }()
     

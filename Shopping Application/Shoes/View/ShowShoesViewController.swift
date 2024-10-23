@@ -10,105 +10,84 @@ import SnapKit
 
 final class ShowShoesViewController: BaseViewController {
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, SearchResultDetail>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
     private let viewModel = ShowShoesViewModel()
-//    struct Product: Hashable {
-//        let name: String
-//    }
-//    
-//    struct Brand: Hashable {
-//        let name: String
-//    }
-//    
-//    let product: [Product] = [
-//        Product(name: "Nike"),
-//        Product(name: "Adidas"),
-//        Product(name: "dddddddd"),
-//        Product(name: "dddd"),
-//        Product(name: "dd"),
-//        Product(name: "ddddddd"),
-//        Product(name: "ddddddddddddd"),
-//        Product(name: "ddddd")
-//    ]
-//    
-//    let brand: [Product] = [
-//        Product(name: "Nike"),
-//        Product(name: "Nikea"),
-//        Product(name: "Nikes"),
-//        Product(name: "Niked"),
-//        Product(name: "Nikef"),
-//        Product(name: "Nikeg"),
-//        Product(name: "Nikeh"),
-//        Product(name: "Nikej")
-//    ]
-//    
-//    let recent: [Product] = [
-//        Product(name: "Nikeadfdfdf"),
-//        Product(name: "Nikeas"),
-//        Product(name: "Nikesd"),
-//        Product(name: "Nikedf"),
-//        Product(name: "Nikefg"),
-//        Product(name: "Nikegh"),
-//        Product(name: "Nikehjh"),
-//        Product(name: "Nikejk")
-//    ]
     
-    private lazy var searchBar: UISearchBar = {
-        let object = UISearchBar()
-        object.delegate = self
-        object.placeholder = "브랜드, 상품 등을 입력하세요."
-        object.searchBarStyle = .minimal
+    private let backgroundBlack = {
+        let object = UIView()
+        object.backgroundColor = .black
+        object.layer.cornerRadius = 20
+        return object
+    }()
+    
+    private let mainTitle = {
+        let object = UILabel()
+        object.text = "Shoes Collection"
+        object.textColor = .white
+        object.font = .systemFont(ofSize: 35, weight: .bold)
         return object
     }()
     
     private lazy var mainCollectionView: UICollectionView = {
         let object = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout())
         object.register(MainCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainCollectionHeaderView.identifier)
+        object.backgroundColor = .clear
         return object
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.inputTrigger.value = ()
-        
+        bind()
         configureDataSource()
-        updateSnapshot()
+        viewModel.inputTrigger.value = ()
     }
     
     override func configureHierarchy() {
-        view.addSubview(searchBar)
+        view.addSubview(backgroundBlack)
+        view.addSubview(mainTitle)
         view.addSubview(mainCollectionView)
     }
     
     override func configureLayout() {
-        searchBar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
-            make.height.equalTo(44)
+        backgroundBlack.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.4)
+        }
+        
+        mainTitle.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.height.equalTo(40)
         }
 
         mainCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(16)
+            make.top.equalTo(mainTitle.snp.bottom).offset(16)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
+    override func bind() {
+        viewModel.outputComplete.bind { value in
+            self.updateSnapshot()
+        }
+    }
+    
     private func updateSnapshot() {
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, SearchResultDetail>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections(Section.allCases)
-        snapshot.appendItems([], toSection: .categories)
         
+        snapshot.appendItems(BrandCategory.allCases, toSection: .categories)
         snapshot.appendItems(viewModel.outputBrandList.value, toSection: .brands)
         snapshot.appendItems(viewModel.outputNewList.value, toSection: .recents)
         
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot)
     }
     
-    private func categoryCellRegistration() -> UICollectionView.CellRegistration<CategoryCollectionViewCell, SearchResultDetail> {
-        let result = UICollectionView.CellRegistration<CategoryCollectionViewCell, SearchResultDetail> { cell, indexPath, itemIdentifier in
-//            cell.designCell(input: itemIdentifier.name)
+    private func categoryCellRegistration() -> UICollectionView.CellRegistration<CategoryCollectionViewCell, BrandCategory> {
+        let result = UICollectionView.CellRegistration<CategoryCollectionViewCell, BrandCategory> { cell, indexPath, itemIdentifier in
+            cell.designCell(input: itemIdentifier.rawValue)
         }
         
         return result
@@ -116,7 +95,7 @@ final class ShowShoesViewController: BaseViewController {
     
     private func brandCellRegistration() -> UICollectionView.CellRegistration<ProductCollectionViewCell, SearchResultDetail> {
         let result = UICollectionView.CellRegistration<ProductCollectionViewCell, SearchResultDetail> { cell, indexPath, itemIdentifier in
-//            cell.designCell(input: itemIdentifier.name)
+            cell.designCell(item: itemIdentifier)
         }
         
         return result
@@ -124,7 +103,7 @@ final class ShowShoesViewController: BaseViewController {
     
     private func recentCellRegistration() -> UICollectionView.CellRegistration<RecentProductCollectionViewCell, SearchResultDetail> {
         let result = UICollectionView.CellRegistration<RecentProductCollectionViewCell, SearchResultDetail> { cell, indexPath, itemIdentifier in
-//            cell.designCell(input: itemIdentifier.name)
+            cell.designCell(item: itemIdentifier)
         }
         
         return result
@@ -135,16 +114,21 @@ final class ShowShoesViewController: BaseViewController {
         let brandCellRegistration = brandCellRegistration()
         let recentCellRegistration = recentCellRegistration()
         
-        dataSource = UICollectionViewDiffableDataSource<Section, SearchResultDetail>(collectionView: mainCollectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: SearchResultDetail) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(collectionView: mainCollectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, identifier: AnyHashable) -> UICollectionViewCell? in
 
-            if Section(rawValue: indexPath.section) == .categories {
-                return collectionView.dequeueConfiguredReusableCell(using: categoryCellRegistration, for: indexPath, item: identifier)
-            } else if Section(rawValue: indexPath.section) == .brands {
-                return collectionView.dequeueConfiguredReusableCell(using: brandCellRegistration, for: indexPath, item: identifier)
-            } else {
-                return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: identifier)
-            }
+            let section = Section(rawValue: indexPath.section)
+            
+            switch section {
+                case .categories:
+                return collectionView.dequeueConfiguredReusableCell(using: categoryCellRegistration, for: indexPath, item: identifier as? BrandCategory)
+                case .brands:
+                return collectionView.dequeueConfiguredReusableCell(using: brandCellRegistration, for: indexPath, item: identifier as? SearchResultDetail)
+                case .recents:
+                return collectionView.dequeueConfiguredReusableCell(using: recentCellRegistration, for: indexPath, item: identifier as? SearchResultDetail)
+                default:
+                    return nil
+                }
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -152,9 +136,7 @@ final class ShowShoesViewController: BaseViewController {
                 
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MainCollectionHeaderView.identifier, for: indexPath) as! MainCollectionHeaderView
             
-            if indexPath.section == 0 {
-                header.titleLabel.text = "브랜드 별 상품"
-            } else if indexPath.section == 2 {
+            if indexPath.section == 2 {
                 header.titleLabel.text = "신상"
             }
             
@@ -166,7 +148,8 @@ final class ShowShoesViewController: BaseViewController {
 }
 
 extension ShowShoesViewController {
-    private enum Section: Int, CaseIterable {
+    
+    enum Section: Int, CaseIterable {
         case categories
         case brands
         case recents
@@ -201,12 +184,6 @@ extension ShowShoesViewController {
         section.interGroupSpacing = 20
         section.orthogonalScrollingBehavior = .continuous
         
-        let supplementaryItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(30))
-        let supplementaryItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: supplementaryItemSize,
-                                                                            elementKind: UICollectionView.elementKindSectionHeader,
-                                                                            alignment: .top)
-        section.boundarySupplementaryItems = [supplementaryItem]
-        
         return section
     }
     
@@ -216,13 +193,19 @@ extension ShowShoesViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(3/5), heightDimension: .absolute(260))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(3.5/5), heightDimension: .fractionalWidth(3.5/5 * 1.2))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: 0, leading: 20, bottom: 0, trailing: 20)
         section.interGroupSpacing = 20
         section.orthogonalScrollingBehavior = .continuous
+        
+        let supplementaryItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(15))
+        let supplementaryItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: supplementaryItemSize,
+                                                                            elementKind: UICollectionView.elementKindSectionHeader,
+                                                                            alignment: .top)
+        section.boundarySupplementaryItems = [supplementaryItem]
         
         return section
     }
@@ -249,9 +232,5 @@ extension ShowShoesViewController {
         
         return section
     }
-    
-}
-
-extension ShowShoesViewController: UISearchBarDelegate {
     
 }

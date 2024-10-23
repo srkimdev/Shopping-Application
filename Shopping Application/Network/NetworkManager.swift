@@ -28,18 +28,21 @@ final class NetworkManager {
             case .success(let value):
                 completionHandler(.success(value))
                 print(value)
-            case .failure:
-                if let data = response.data,
-                   let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let errorCode = json["errorCode"] as? String 
-                {
-                    let apiError = APIError.from(errorCode: errorCode)
-                    completionHandler(.failure(apiError))
-                } else {
-                    let statusCode = response.response?.statusCode ?? -1
-                    let apiError = APIError.from(errorCode: "statusCode: \(statusCode)")
-                    completionHandler(.failure(apiError))
-                }
+            case .failure(let error):
+//                if let data = response.data,
+//                   let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+//                   let errorCode = json["errorCode"] as? String 
+//                {
+//                    let apiError = APIError.from(errorCode: errorCode)
+//                    print(apiError, "apiError")
+//                    completionHandler(.failure(apiError))
+//                } else {
+//                    let statusCode = response.response?.statusCode ?? -1
+//                    let apiError = APIError.from(errorCode: "statusCode: \(statusCode)")
+//                    print(statusCode, "statuscode")
+//                    completionHandler(.failure(apiError))
+//                }
+                print(error)
             }
         }
     }

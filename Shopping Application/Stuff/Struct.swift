@@ -8,15 +8,12 @@
 import UIKit
 
 struct SearchResult: Decodable {
-    
     let total: Int
     let display: Int
     let items: [SearchResultDetail]
-    
 }
 
 struct SearchResultDetail: Decodable, Hashable {
-    var id = UUID()
     let title: String
     let link: String
     let image: String

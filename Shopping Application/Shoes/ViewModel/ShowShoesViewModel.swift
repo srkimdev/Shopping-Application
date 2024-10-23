@@ -14,6 +14,7 @@ final class ShowShoesViewModel {
     
     var outputBrandList = Observable<[SearchResultDetail]>([])
     var outputNewList = Observable<[SearchResultDetail]>([])
+    var outputComplete = Observable<Void>(())
     
     init() {
         inputTrigger
@@ -30,24 +31,38 @@ final class ShowShoesViewModel {
     }
     
     private func callAPI() {
-        NetworkManager.shared.callRequest(text: BrandCategory.adidas.rawValue, start: 1, sort: Sorts.sim) { value in
-            switch value {
-            case .success(let value):
-                let temp = value.items.filter { $0.mallName == "네이버" }
-                self.outputBrandList.value = temp
-            case .failure(let error):
-                print(error)
+        let group = DispatchGroup()
+        
+        group.enter()
+        DispatchQueue.global().async {
+            NetworkManager.shared.callRequest(text: "나이키 덩크로우", start: 1, sort: Sorts.sim) { value in
+                switch value {
+                case .success(let value):
+                    let temp = value.items.filter { $0.mallName == "네이버" }
+                    self.outputBrandList.value = temp
+                    group.leave()
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
         
-        NetworkManager.shared.callRequest(text: "신발", start: 1, sort: Sorts.sim) { value in
-            switch value {
-            case .success(let value):
-                let temp = value.items.filter { $0.mallName == "네이버" }
-                self.outputNewList.value = temp
-            case .failure(let error):
-                print(error)
+        group.enter()
+        DispatchQueue.global().async {
+            NetworkManager.shared.callRequest(text: "신발", start: 1, sort: Sorts.sim) { value in
+                switch value {
+                case .success(let value):
+                    let temp = value.items.filter { $0.mallName == "네이버" }
+                    self.outputNewList.value = temp
+                    group.leave()
+                case .failure(let error):
+                    print(error)
+                }
             }
+        }
+        
+        group.notify(queue: .main) {
+            self.outputComplete.value = ()
         }
     }
     
