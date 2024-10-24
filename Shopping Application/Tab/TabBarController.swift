@@ -32,7 +32,7 @@ final class TabBarController: UITabBarController {
         let nav2 = UINavigationController(rootViewController: shoes)
         nav2.tabBarItem = UITabBarItem(title: "카테고리", image: UIImage(systemName: "star"), tag: 1)
         
-        let save = FolderViewController()
+        let save = SearchSaveViewController()
         let nav3 = UINavigationController(rootViewController: save)
         nav3.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         

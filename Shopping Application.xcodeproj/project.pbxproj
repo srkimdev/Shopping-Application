@@ -45,9 +45,7 @@
 		DC7DDD8E2C43BBBB0039CA1D /* NetworkConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD8D2C43BBBB0039CA1D /* NetworkConnectManager.swift */; };
 		DC7DDD992C44EE800039CA1D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD982C44EE800039CA1D /* UIColor+Extension.swift */; };
 		DC7DDD9B2C4546F00039CA1D /* SearchSaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DDD9A2C4546F00039CA1D /* SearchSaveViewModel.swift */; };
-		DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */; };
 		DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */; };
-		DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */; };
 		DC9099E22C3E6294001A5326 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */; };
 		DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */; };
 		DC9099FE2C3FFA3A001A5326 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9099FD2C3FFA3A001A5326 /* UserInfo.swift */; };
@@ -128,9 +126,7 @@
 		DC7DDD8D2C43BBBB0039CA1D /* NetworkConnectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectManager.swift; sourceTree = "<group>"; };
 		DC7DDD982C44EE800039CA1D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		DC7DDD9A2C4546F00039CA1D /* SearchSaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSaveViewModel.swift; sourceTree = "<group>"; };
-		DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
-		DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
 		DC9099E12C3E6294001A5326 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC9099E52C3E966A001A5326 /* MainSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchViewModel.swift; sourceTree = "<group>"; };
 		DC9099FD2C3FFA3A001A5326 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -201,6 +197,39 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		DC15A07F2CC913B900106911 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC15A0802CC913C000106911 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DC15A0812CC913C800106911 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DC7DDD9A2C4546F00039CA1D /* SearchSaveViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DC15A0822CC918CD00106911 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBF7482C3A5F3E007DA893 /* DBTable.swift */,
+				DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		DC465B142CC37AD700567803 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +298,7 @@
 				DC465B182CC3A0A900567803 /* Custom */,
 				DC909A062C42B52F001A5326 /* Singleton */,
 				DC909A012C40FA63001A5326 /* Network */,
+				DC15A0822CC918CD00106911 /* Database */,
 				DC0CFA912C3021D800E80424 /* OnBoarding */,
 				DCA841C72C20187700B21AF2 /* Profile */,
 				DC465B142CC37AD700567803 /* Tab */,
@@ -363,8 +393,6 @@
 				DC487D2E2C1C06FF006B7AAF /* ReusableProtocol.swift */,
 				DCA0EA2D2C283E7900FA9960 /* UserDefaultsManager.swift */,
 				DC487D322C1C2265006B7AAF /* Struct.swift */,
-				DCFBF7482C3A5F3E007DA893 /* DBTable.swift */,
-				DC7FAAF62C3BE4B500A43DC0 /* RealmRepository.swift */,
 				DC2CA9462C3D357700B31A98 /* Observable.swift */,
 			);
 			path = Stuff;
@@ -373,11 +401,9 @@
 		DCFBF7472C3A5A38007DA893 /* Save */ = {
 			isa = PBXGroup;
 			children = (
-				DC7FAAF42C3BE21E00A43DC0 /* FolderViewController.swift */,
-				DC7FAAF82C3BE70100A43DC0 /* FolderTableViewCell.swift */,
-				DCFBF7452C3A5A2E007DA893 /* SearchSaveViewController.swift */,
-				DC7DDD9A2C4546F00039CA1D /* SearchSaveViewModel.swift */,
-				DCFBF74D2C3A67EE007DA893 /* SearchSaveCollectionViewCell.swift */,
+				DC15A07F2CC913B900106911 /* View */,
+				DC15A0802CC913C000106911 /* Cell */,
+				DC15A0812CC913C800106911 /* ViewModel */,
 			);
 			path = Save;
 			sourceTree = "<group>";
@@ -507,7 +533,6 @@
 				DC0CFA902C30215C00E80424 /* BaseView.swift in Sources */,
 				DC9099E62C3E966A001A5326 /* MainSearchViewModel.swift in Sources */,
 				DC465B1F2CC524E900567803 /* ShowShoesViewController.swift in Sources */,
-				DC7FAAF92C3BE70100A43DC0 /* FolderTableViewCell.swift in Sources */,
 				DC487D412C1D3E4F006B7AAF /* SettingProfileTableViewCell.swift in Sources */,
 				DC7FAAF72C3BE4B500A43DC0 /* RealmRepository.swift in Sources */,
 				DC7DDD8E2C43BBBB0039CA1D /* NetworkConnectManager.swift in Sources */,
@@ -520,7 +545,6 @@
 				DC465B1A2CC3A0CA00567803 /* FilterButton.swift in Sources */,
 				DC487D3D2C1C39FB006B7AAF /* SearchResultCollectionViewCell.swift in Sources */,
 				DC487D432C1D3E61006B7AAF /* SettingOtherTableViewCell.swift in Sources */,
-				DC7FAAF52C3BE21E00A43DC0 /* FolderViewController.swift in Sources */,
 				DC487D452C1D6E10006B7AAF /* MainSearchTableViewCell.swift in Sources */,
 				DC487D3B2C1C2CA9006B7AAF /* SearchResultViewController.swift in Sources */,
 				DC487D352C1C25BC006B7AAF /* MainSearchViewController.swift in Sources */,

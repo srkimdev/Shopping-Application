@@ -8,16 +8,17 @@
 import Foundation
 import RealmSwift
 
-class DBTable: Object {
-    
-    @Persisted(primaryKey: true) var productId: String
+final class DBTable: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var productId: String
     @Persisted var image: String
     @Persisted var mallName: String
     @Persisted var title: String
     @Persisted var lprice: String
     @Persisted var link: String
+    @Persisted var category3: String
     
-    convenience init(productId: String, image: String, mallName: String, title: String, lprice: String, link: String) {
+    convenience init(productId: String, image: String, mallName: String, title: String, lprice: String, link: String, category3: String) {
         self.init()
         self.productId = productId
         self.image = image
@@ -25,15 +26,6 @@ class DBTable: Object {
         self.title = title
         self.lprice = lprice
         self.link = link
+        self.category3 = category3
     }
 }
-
-class Folder: Object {
-    
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var name: String
-    
-    @Persisted var detail: List<DBTable>
-}
-
-

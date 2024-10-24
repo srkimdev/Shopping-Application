@@ -12,32 +12,11 @@ final class RealmRepository {
     
     private let realm = try! Realm()
     
-    func fetchFolder() -> [Folder] {
-        let value = realm.objects(Folder.self)
-        return Array(value)
-    }
-    
-    func removeFolder(_ folder: Folder) {
-        
-        do {
-            try realm.write {
-                realm.delete(folder.detail)
-                realm.delete(folder)
-                print("folder remove succeed")
-            }
-            
-        } catch {
-            print("folder remove failed")
-        }
-        
-    }
-    
-    func createItem(_ data: DBTable, folder: Folder) {
+    func createItem(_ data: DBTable) {
 
         do {
             try! realm.write {
-                folder.detail.append(data)
-
+                realm.add(data)
                 print("Realm Create Succeed")
             }
         } catch {
@@ -47,7 +26,7 @@ final class RealmRepository {
     }
     
     func readAllItem() -> Results<DBTable> {
-        return realm.objects(DBTable.self).sorted(byKeyPath: "price", ascending: false)
+        return realm.objects(DBTable.self)
     }
     
     func deleteItem(_ data: DBTable) {
