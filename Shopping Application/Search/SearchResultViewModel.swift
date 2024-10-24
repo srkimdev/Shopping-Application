@@ -13,9 +13,8 @@ final class SearchResultViewModel {
     var callAPI: Observable<Void> = Observable(())
     var inputButton: Observable<Int> = Observable(0)
     var inputPagination: Observable<Void> = Observable(())
+    var inputLikeButton: Observable<SearchResultDetail?> = Observable(nil)
     
-//    var inputLike: Observable<DBTable?> = Observable(nil)
-//    var inputUnLike: Observable<DBTable?> = Observable(nil)
     
     var outputList: Observable<[SearchResultDetail]> = Observable([])
     var outputCount: Observable<Int> = Observable(0)
@@ -36,8 +35,6 @@ final class SearchResultViewModel {
         callAPI
             .bind { [weak self] _ in
                 guard let self else { return }
-//                sort = .sim
-//                start = 1
                 fetchData()
             }
         
@@ -52,6 +49,14 @@ final class SearchResultViewModel {
             .bind { [weak self] value in
                 guard let self else { return }
                 loadMoreData()
+            }
+        
+        inputLikeButton
+            .bind { [weak self] value in
+                guard let self, let value else { return }
+                let temp = DBTable(productId: value.productId, image: value.image, mallName: value.mallName, title: value.title, lprice: value.lprice, link: value.link, category3: value.category3)
+                
+                realmrepository.createItem(temp)
             }
         
         outputList

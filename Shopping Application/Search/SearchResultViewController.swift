@@ -13,7 +13,7 @@ import Toast
 final class SearchResultViewController: BaseViewController {
 
     private lazy var productCollectionView: UICollectionView = {
-        let object = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+        let object = UICollectionView(frame: .zero, collectionViewLayout: mainLayout())
         object.delegate = self
         object.dataSource = self
         object.prefetchDataSource = self
@@ -29,7 +29,6 @@ final class SearchResultViewController: BaseViewController {
     
     private let totalLabel: UILabel = {
         let object = UILabel()
-        object.textColor = CustomDesign.orange
         object.font = .boldSystemFont(ofSize: 15)
         return object
     }()
@@ -76,12 +75,6 @@ final class SearchResultViewController: BaseViewController {
         viewModel.callAPI.value = ()
         view.makeToastActivity(.center)
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        productCollectionView.reloadData()
-//    }
 
     override func configureHierarchy() {
         view.addSubview(line)
@@ -102,13 +95,13 @@ final class SearchResultViewController: BaseViewController {
         
         totalLabel.snp.makeConstraints { make in
             make.top.equalTo(line.snp.bottom).offset(12)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.height.equalTo(24)
         }
         
         accurateButton.snp.makeConstraints { make in
             make.top.equalTo(totalLabel.snp.bottom).offset(8)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.height.equalTo(28)
             make.width.equalTo(65)
         }
@@ -136,8 +129,7 @@ final class SearchResultViewController: BaseViewController {
         
         productCollectionView.snp.makeConstraints { make in
             make.top.equalTo(accurateButton.snp.bottom).offset(12)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -176,49 +168,8 @@ final class SearchResultViewController: BaseViewController {
     }
     
     @objc func arrayButtonClicked(_ sender: UIButton) {
-        
         viewModel.inputButton.value = sender.tag
-
-//        [accurateButton, dateButton, priceUpButton, priceDownButton].forEach { button in
-//            button.backgroundColor = .white
-//            button.setTitleColor(.black, for: .normal)
-//        }
-//        sender.backgroundColor = .black
-//        sender.setTitleColor(.white, for: .normal)
     }
-    
-//    @objc func likeButtonClicked(sender: UIButton) {
-//        
-//        let data = viewModel.outputList.value[sender.tag]
-//        var like = UserInfo.shared.getLikeProduct(forkey: data.productId)
-//        like.toggle()
-//        
-//        let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
-//        
-//        if like {
-//            viewModel.inputLike.value = task
-//             
-//            UserInfo.shared.setLikeProduct(isLike: true, forkey: data.productId)
-//            
-//            print("Realm Add Succeed")
-//            
-//        } else {
-//            
-//            let filter = realm.objects(DBTable.self).first(where: {$0.productId == self.viewModel.outputList.value[sender.tag].productId} )
-//            
-//            viewModel.inputUnLike.value = filter!
-//            
-//            UserInfo.shared.setLikeProduct(isLike: false, forkey: data.productId)
-//            
-//            print("Realm Delete Succeed")
-//        }
-//        
-//        UIView.performWithoutAnimation {
-//            productCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
-//        }
-//        
-//        NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil, userInfo: nil)
-//    }
 
 }
 
@@ -240,7 +191,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let data = viewModel.outputList.value[indexPath.item]
-        let transition = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
+//        let transition = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
 
         let vc = SearchWebViewController()
         vc.likeChange = { () in
@@ -251,25 +202,30 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
             self.view.makeToast(value, position: .bottom)
         }
         
-        vc.data = transition
+//        vc.data = transition
         transitionScreen(vc: vc, style: .push)
     }
     
     func goodButtonTapped(at index: Int) {
-        print(index)
+        viewModel.inputLikeButton.value = viewModel.outputList.value[index]
     }
     
 }
 
-extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
-    func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let width = UIScreen.main.bounds.width - 68
-        layout.itemSize = CGSize(width: width/2, height: 280)
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 2, left: 14, bottom: 10, right: 14)
+extension SearchResultViewController {
+    func mainLayout() -> UICollectionViewLayout {
+        let fraction: CGFloat = 1.0
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction / 3.0), heightDimension: .fractionalHeight(fraction))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.9 / 2.0))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
         return layout
     }
 }

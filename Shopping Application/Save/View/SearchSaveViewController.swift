@@ -14,26 +14,61 @@ final class SearchSaveViewController: BaseViewController {
     
     private lazy var productCollectionView: UICollectionView = {
         let object = UICollectionView(frame: .zero, collectionViewLayout: saveLayout())
+        object.delegate = self
         object.register(SearchSaveCollectionViewCell.self, forCellWithReuseIdentifier: SearchSaveCollectionViewCell.identifier)
         return object
     }()
     
-    let viewModel = SearchSaveViewModel()
+    private let totalLabel = {
+        let object = UILabel()
+        object.text = "Total"
+        object.font = .systemFont(ofSize: 20, weight: .bold)
+        return object
+    }()
+    
+    private let totalPrice = {
+        let object = UILabel()
+        object.font = .systemFont(ofSize: 20, weight: .bold)
+        return object
+    }()
+    
+    private let viewModel = SearchSaveViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureDataSource()
-        updateSnapshot()
+        bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.inputTrigger.value = ()
     }
 
     override func configureHierarchy() {
         view.addSubview(productCollectionView)
+        view.addSubview(totalLabel)
+        view.addSubview(totalPrice)
     }
     
     override func configureLayout() {
         productCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(totalLabel.snp.top)
+        }
+        
+        totalLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.height.equalTo(30)
+        }
+        
+        totalPrice.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.height.equalTo(30)
         }
     }
     
@@ -41,18 +76,18 @@ final class SearchSaveViewController: BaseViewController {
         navigationItem.title = "Cart"
     }
     
-    private func updateSnapshot() {
+    private func updateSnapshot(_ item: [SearchResultDetail]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, SearchResultDetail>()
         snapshot.appendSections(Section.allCases)
         
-        snapshot.appendItems([], toSection: .main)
+        snapshot.appendItems(item, toSection: .main)
         
         dataSource.apply(snapshot)
     }
     
     private func mainCellRegistration() -> UICollectionView.CellRegistration<SearchSaveCollectionViewCell, SearchResultDetail> {
         let result = UICollectionView.CellRegistration<SearchSaveCollectionViewCell, SearchResultDetail> { cell, indexPath, itemIdentifier in
-//            cell.designCell(input: itemIdentifier.rawValue)
+            cell.designCell(itemIdentifier)
         }
         
         return result
@@ -81,10 +116,17 @@ final class SearchSaveViewController: BaseViewController {
         }
     }
     
-    func bindDate() {
-        viewModel.outputResult.bind { _ in
-            self.productCollectionView.reloadData()
+    override func bind() {
+        viewModel.outputResult.bind { [weak self] value in
+            guard let self else { return }
+            updateSnapshot(value)
         }
+        
+        viewModel.outputPrice
+            .bind { [weak self] value in
+                guard let self else { return }
+                totalPrice.text = "₩" + NumberFormatterManager.shared.Comma(value)
+            }
     }
 }
 
@@ -99,7 +141,7 @@ extension SearchSaveViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/4))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -107,7 +149,13 @@ extension SearchSaveViewController {
         section.interGroupSpacing = 20
         
         let layout = UICollectionViewCompositionalLayout(section: section)
+        
         return layout
     }
+}
+
+extension SearchSaveViewController: UICollectionViewDelegate {
+    
+    
 }
 

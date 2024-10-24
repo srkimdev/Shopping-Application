@@ -57,7 +57,7 @@ final class SearchWebViewController: BaseViewController, WKNavigationDelegate {
         var like = UserInfo.shared.getLikeProduct(forkey: data.productId)
         like.toggle()
         
-        let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
+//        let task = DBTable(productId: data.productId, image: data.image, mallName: data.mallName, title: data.title, lprice: data.lprice, link: data.link)
         
 //        if like {
 //            viewModel.inputLike.value = task

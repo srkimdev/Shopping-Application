@@ -24,13 +24,13 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
-        let search = MainSearchViewController()
-        let nav1 = UINavigationController(rootViewController: search)
-        nav1.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
-        
         let shoes = ShowShoesViewController()
-        let nav2 = UINavigationController(rootViewController: shoes)
-        nav2.tabBarItem = UITabBarItem(title: "카테고리", image: UIImage(systemName: "star"), tag: 1)
+        let nav1 = UINavigationController(rootViewController: shoes)
+        nav1.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house"), tag: 0)
+    
+        let search = MainSearchViewController()
+        let nav2 = UINavigationController(rootViewController: search)
+        nav2.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 1)
         
         let save = SearchSaveViewController()
         let nav3 = UINavigationController(rootViewController: save)
